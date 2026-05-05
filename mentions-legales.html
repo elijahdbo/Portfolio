@@ -2,148 +2,346 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mentions légales - Portfolio." />
-  <title>Mentions légales - Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mentions légales — Elijah Dabo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ---- Styles spécifiques mentions-legales.html ---- */
 
-  <!-- Google Fonts - Orbitron pour un design spatial -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+    .mentions-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
 
-  <!-- Font Awesome pour les icônes spatiales -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    /* Sommaire latéral */
+    .mentions-nav {
+      position: sticky;
+      top: calc(var(--nav-h) + 32px);
+    }
 
-  <!-- Fichier CSS principal -->
-  <link rel="stylesheet" href="css/styles.css" />
+    .mentions-nav-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .mentions-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .mentions-nav-list a {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      color: var(--ink-3);
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all .15s;
+      border-left: 2px solid transparent;
+    }
+
+    .mentions-nav-list a:hover {
+      color: var(--accent);
+      background: var(--accent-dim);
+      border-left-color: var(--accent);
+    }
+
+    /* Contenu principal */
+    .mentions-content {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .mentions-block {
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .mentions-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .mentions-block-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+      color: var(--ink);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mentions-block-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .mentions-block p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink-2);
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+    .mentions-block p:last-child { margin-bottom: 0; }
+
+    .mentions-block strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .mentions-block a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity .15s;
+    }
+    .mentions-block a:hover { opacity: .7; }
+
+    /* Info table */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+    }
+
+    .info-table tr {
+      border-bottom: 1px solid var(--rule);
+    }
+    .info-table tr:last-child { border-bottom: none; }
+
+    .info-table td {
+      padding: 12px 0;
+      font-size: 14px;
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    .info-table td:first-child {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      width: 160px;
+      padding-right: 24px;
+      padding-top: 14px;
+    }
+
+    .info-table td:last-child {
+      font-weight: 300;
+      color: var(--ink-2);
+    }
+
+    @media (max-width: 900px) {
+      .mentions-layout { grid-template-columns: 1fr; }
+      .mentions-nav { position: static; margin-bottom: 8px; }
+      .mentions-nav-list { flex-direction: row; flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Étoiles de fond dynamiques (canvas) -->
-  <canvas id="space-canvas"></canvas>
 
-  <!-- Planètes décoratives -->
-  <div class="planet planet-1"></div>
-
-  <!-- Loader -->
-  <div id="loader">
-    <div class="loader-container">
-      <div class="loader-rocket">
-        <i class="fas fa-rocket"></i>
-      </div>
-      <div class="loader-text">Initialisation du système...</div>
-      <div class="loader-progress">
-        <div class="loader-progress-bar"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation principale -->
-  <header>
-    <nav>
-      <div class="logo">
-        <a href="index.html">
-          <span class="logo-text">Elijah<span class="highlight">Dabo</span></span>
-        </a>
-      </div>
-      <div class="nav-toggle" aria-label="Ouvrir la navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Elijah<span>Dabo</span></a>
       <ul class="nav-links">
-        <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
-        <li><a href="entreprise.html"><i class="fas fa-building"></i> Entreprise</a></li>
-        <li><a href="realisations.html"><i class="fas fa-rocket"></i> Réalisations</a></li>
-        <li><a href="veille.html"><i class="fas fa-satellite"></i> Veille</a></li>
-        <li><a href="bilan.html"><i class="fas fa-flag-checkered"></i> Bilan</a></li>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="entreprise.html">Entreprise</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="veille.html">Veille</a></li>
+        <li><a href="bilan.html">Bilan</a></li>
       </ul>
-      <button id="dark-mode-toggle" aria-label="Activer ou désactiver le mode sombre">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-      </button>
-    </nav>
-  </header>
+    </div>
+  </nav>
 
-  <main>
-    <!-- Section Hero -->
-    <section class="hero section">
-      <div class="hero-content">
-        <h1 class="glitch-text">Mentions légales</h1>
-        <p class="hero-description">Informations légales concernant ce site web</p>
-      </div>
-    </section>
+  <!-- ============================================================
+       PAGE HERO
+  ============================================================ -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <span class="section-label" style="margin-bottom:16px;">Informations légales</span>
+      <h1 class="page-hero-title">
+        Mentions<br>
+        <span class="accent">légales</span>
+      </h1>
+      <p class="page-hero-sub">
+        Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique.
+      </p>
+    </div>
+  </section>
 
-    <!-- Section Mentions Légales -->
-    <section class="section">
-      <div class="content-section">
-        <h2>1. Édition du site</h2>
-        <p>Le présent site, accessible à l'URL <span class="highlight">www.portfolio.elijahdabo.com</span>, est édité par :</p>
-        
-        <p><strong>Usman Elijah Dabo</strong>, résidant de Saint-Gratien, de nationalité française, né(e) le 12/05/03,</p>
-        
-        <p><strong>Le Site</strong> est hébergé par :<br>
-          GitHub Pages, service édité par GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis.</p>
-        
-        <h2>2. Directeur de publication</h2>
-        <p>Le Directeur de la publication du Site est <strong>Usman Elijah Dabo</strong>.</p>
-        
-        <h2>3. Me contacter</h2>
-        <ul>
-          <li>Par email : <span class="highlight">elijahdabopro@gmail.com</span></li>
-          <li>Par formulaire de contact : disponible sur la page <a href="index.html#contact">Me Contacter</a></li>
-        </ul>
-        
-        <h2>4. Données personnelles</h2>
-        <p>Le traitement de vos données à caractère personnel est régi par notre Charte du respect de la vie privée, disponible depuis la section « Charte de Protection des Données Personnelles », accessible sur demande via email.</p>
-        
-        <h2>5. Propriété intellectuelle</h2>
-        <p>Le design, l'interface, les informations, la présentation et le contenu du Site dans son ensemble sont protégés par le droit d'auteur, le droit des marques, et le droit des bases de données. Ils ne peuvent être copiés, reproduits, modifiés, publiés, transmis ou distribués sans l'autorisation écrite préalable de l'éditeur du Site.</p>
-        
-        <p>Les contenus sont disponibles pour un usage strictement personnel et non commercial. Vous êtes autorisé à les télécharger et à les imprimer uniquement pour votre usage personnel.</p>
-        
-        <h2>6. Liens hypertextes</h2>
-        <p>Le Site peut contenir des liens hypertextes vers d'autres sites présents sur le réseau Internet. Les liens vers ces autres ressources vous font quitter le Site. Ces liens sont proposés à titre informatif. L'éditeur n'est pas responsable du contenu de ces sites et ressources externes.</p>
-        
-        <h2>7. Droit applicable et juridiction compétente</h2>
-        <p>Les présentes mentions légales sont régies par la loi française. En cas de différend et à défaut d'accord amiable, le litige sera porté devant les tribunaux français compétents.</p>
-        
-        <h2>8. Crédits</h2>
-        <p>Le site a été réalisé par <strong>Usman Elijah Dabo</strong>.</p>
-        <p>Les icônes utilisées sur ce site proviennent de <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>.</p>
-        <p>Les polices d'écriture utilisées sur ce site proviennent de <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>.</p>
-        <p>Ce site a été partiellement assisté par des outils d’intelligence artificielle (IA) pour l’optimisation des contenus du code et des mentions légales, sous la supervision de l’auteur.</p>
-      </div>
-    </section>
-  </main>
+  <!-- ============================================================
+       CONTENU
+  ============================================================ -->
+  <section class="section" id="mentions">
+    <div class="container">
+      <div class="mentions-layout">
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-col">
-        <h3>Navigation</h3>
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="entreprise.html">Entreprise</a></li>
-          <li><a href="realisations.html">Réalisations</a></li>
-          <li><a href="veille.html">Veille</a></li>
-          <li><a href="bilan.html">Bilan</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Contact</h3>
-        <p><i class="fas fa-envelope"></i> elijahdabopro@gmail.com</p>
-        <div class="social-links">
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <!-- Sommaire -->
+        <aside class="mentions-nav">
+          <span class="mentions-nav-label">Sommaire</span>
+          <ul class="mentions-nav-list">
+            <li><a href="#editeur">Éditeur du site</a></li>
+            <li><a href="#hebergement">Hébergement</a></li>
+            <li><a href="#propriete">Propriété intellectuelle</a></li>
+            <li><a href="#donnees">Données personnelles</a></li>
+            <li><a href="#cookies">Cookies</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </aside>
+
+        <!-- Blocs de contenu -->
+        <div class="mentions-content">
+
+          <!-- Éditeur -->
+          <div class="mentions-block" id="editeur">
+            <h2 class="mentions-block-title">Éditeur du site</h2>
+            <table class="info-table">
+              <tr>
+                <td>Nom</td>
+                <td><strong>Elijah Dabo</strong></td>
+              </tr>
+              <tr>
+                <td>Statut</td>
+                <td>Étudiant en BTS SIO option SLAM — ESIEE-IT, Pontoise</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td><a href="mailto:elijahdabopro@gmail.com">elijahdabopro@gmail.com</a></td>
+              </tr>
+              <tr>
+                <td>LinkedIn</td>
+                <td><a href="https://www.linkedin.com/in/elijah-dabo" target="_blank" rel="noopener">linkedin.com/in/elijah-dabo</a></td>
+              </tr>
+              <tr>
+                <td>GitHub</td>
+                <td><a href="https://github.com/elijahdabo" target="_blank" rel="noopener">github.com/elijahdabo</a></td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Hébergement -->
+          <div class="mentions-block" id="hebergement">
+            <h2 class="mentions-block-title">Hébergement</h2>
+            <p>
+              Ce site est un portfolio statique développé dans le cadre du BTS SIO (Services Informatiques aux Organisations) option SLAM à l'ESIEE-IT. Il est destiné à être présenté lors de l'épreuve de soutenance de BTS.
+            </p>
+            <p>
+              En cas de mise en ligne, l'hébergement serait assuré par un prestataire tiers. Les informations relatives à l'hébergeur seraient alors précisées ici conformément aux obligations légales.
+            </p>
+          </div>
+
+          <!-- Propriété intellectuelle -->
+          <div class="mentions-block" id="propriete">
+            <h2 class="mentions-block-title">Propriété intellectuelle</h2>
+            <p>
+              L'ensemble du contenu de ce site — textes, design, code source, structure et organisation — est la propriété exclusive d'<strong>Elijah Dabo</strong>, sauf mention contraire explicite.
+            </p>
+            <p>
+              Les contenus liés aux projets scolaires (JojoLegion, Nimbus Railway, GestEPI, etc.) ont été produits dans un cadre pédagogique, en collaboration avec d'autres étudiants le cas échéant. Les projets professionnels réalisés chez Flex sont présentés avec l'autorisation de l'entreprise dans le cadre de la soutenance de BTS.
+            </p>
+            <p>
+              Toute reproduction, représentation, modification ou exploitation non autorisée de tout ou partie des éléments de ce site est strictement interdite et pourrait donner lieu à des poursuites judiciaires.
+            </p>
+          </div>
+
+          <!-- Données personnelles -->
+          <div class="mentions-block" id="donnees">
+            <h2 class="mentions-block-title">Données personnelles</h2>
+            <p>
+              Ce site ne collecte <strong>aucune donnée personnelle</strong> à l'insu des visiteurs. Aucun formulaire de collecte de données n'est présent, aucun cookie de traçage ou de publicité n'est utilisé.
+            </p>
+            <p>
+              Les informations de contact visibles sur ce site (adresse email, profils LinkedIn et GitHub) sont mises à disposition volontairement par l'éditeur à des fins de prise de contact professionnelle.
+            </p>
+            <p>
+              Conformément au Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et d'opposition aux données vous concernant. Pour exercer ce droit, contactez : <a href="mailto:elijahdabopro@gmail.com">elijahdabopro@gmail.com</a>.
+            </p>
+          </div>
+
+          <!-- Cookies -->
+          <div class="mentions-block" id="cookies">
+            <h2 class="mentions-block-title">Cookies</h2>
+            <p>
+              Ce site n'utilise <strong>aucun cookie</strong> de traçage, de publicité ou d'analyse d'audience. Aucun outil d'analytics tiers (Google Analytics, Matomo, etc.) n'est intégré.
+            </p>
+            <p>
+              Les seules ressources externes chargées sont les polices Google Fonts (Barlow Condensed, Barlow, JetBrains Mono), nécessaires à l'affichage du site. Ces requêtes sont gérées par Google selon leur propre politique de confidentialité.
+            </p>
+          </div>
+
+          <!-- Contact -->
+          <div class="mentions-block" id="contact">
+            <h2 class="mentions-block-title">Contact</h2>
+            <p>
+              Pour toute question relative au contenu de ce site ou pour signaler un problème, vous pouvez me contacter directement :
+            </p>
+            <table class="info-table">
+              <tr>
+                <td>Email</td>
+                <td><a href="mailto:elijahdabopro@gmail.com">elijahdabopro@gmail.com</a></td>
+              </tr>
+              <tr>
+                <td>LinkedIn</td>
+                <td><a href="https://www.linkedin.com/in/elijah-dabo" target="_blank" rel="noopener">linkedin.com/in/elijah-dabo</a></td>
+              </tr>
+            </table>
+            <p style="margin-top: 20px; font-size: 13px; color: var(--ink-3);">
+              Dernière mise à jour : mai 2025
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Dabo Elijah. Tous droits réservés.</p>
-      <a href="mentions-legales.html" class="active">Mentions légales</a>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">Elijah<span>Dabo</span></div>
+      <ul class="footer-nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="entreprise.html">Entreprise</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="veille.html">Veille</a></li>
+        <li><a href="bilan.html">Bilan</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+      </ul>
+      <div class="footer-copy">© 2025 Elijah Dabo</div>
     </div>
   </footer>
 
-  <!-- Script principal -->
-  <script src="js/main.js"></script>
-  <script src="js/image-handler.js"></script>
 </body>
 </html>

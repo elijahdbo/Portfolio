@@ -2,256 +2,337 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio premium, immersif et futuriste - Thème galaxie." />
-  <title>Portfolio Elijah Dabo</title>
-
-  <!-- Google Fonts - Orbitron pour un design spatial -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome pour les icônes spatiales -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Fichier CSS principal -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elijah Dabo — Développeur Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  
-  <body onload="setTimeout(function() { document.getElementById('loader').style.display = 'none'; }, 3000);"></body>
-  
-  <!-- Étoiles de fond dynamiques (canvas) -->
-  <canvas id="space-canvas"></canvas>
 
-  <!-- Planètes décoratives -->
-  <div class="planet planet-1"></div>
-  <div class="planet planet-2"></div>
-  <div class="planet planet-3"></div>
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Elijah<span>Dabo</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="entreprise.html">Entreprise</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="veille.html">Veille</a></li>
+        <li><a href="bilan.html">Bilan</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <!-- Loader -->
-  <div id="loader">
-    <div class="loader-container">
-      <div class="loader-rocket">
-        <i class="fas fa-rocket"></i>
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="section-label">BTS SIO — Option SLAM</span>
+        </div>
+        <h1 class="hero-title">
+          Elijah<br>
+          <span class="accent">Dabo</span>
+        </h1>
+        <p class="hero-sub">
+          Développeur web apprenti, passionné par la conception d'interfaces et le développement d'applications. Je conçois, je développe, j'itère.
+        </p>
+        <div class="hero-ctas">
+          <a href="realisations.html" class="btn btn-primary">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Voir mes projets
+          </a>
+          <a href="assets/documents/images/elijah-cv.jpg" download class="btn btn-ghost">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 11h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Télécharger CV
+          </a>
+        </div>
       </div>
-      <div class="loader-text">Initialisation du système...</div>
-      <div class="loader-progress">
-        <div class="loader-progress-bar"></div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">2<span>ans</span></div>
+          <div class="stat-label">En alternance</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">11</div>
+          <div class="stat-label">Projets réalisés</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">7<span>+</span></div>
+          <div class="stat-label">Technologies maîtrisées</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-band">
+      <div class="ticker-track">
+        <!-- Set 1 -->
+        <div class="ticker-set">
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">HTML5</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">CSS3</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">JavaScript</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">TypeScript</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Python</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Django</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">React</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">SQL</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Java</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">C#</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Figma</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">GitHub</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">VS Code</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Agile / SCRUM</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">UX / UI Design</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Merise</span></div>
+        </div>
+        <!-- Set 2 — copie exacte pour la boucle infinie -->
+        <div class="ticker-set">
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">HTML5</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">CSS3</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">JavaScript</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">TypeScript</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Python</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Django</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">React</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">SQL</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Java</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">C#</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Figma</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">GitHub</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">VS Code</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Agile / SCRUM</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">UX / UI Design</span></div>
+          <div class="ticker-item"><span class="ticker-dot"></span><span class="ticker-item-name">Merise</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       01 — PROFIL
+  ============================================================ -->
+  <section class="section" id="profil">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div class="section-title-block">
+          <span class="section-label" style="margin-bottom:8px;">Qui suis-je</span>
+          <h2 class="section-title">Profil</h2>
+        </div>
+      </div>
+
+      <div class="profil-grid">
+        <div class="profil-text">
+          <p>
+            Après un Baccalauréat STMG, j'ai intégré le monde du travail, ce qui m'a permis de mieux comprendre mes aspirations et de me réorienter vers l'informatique — un domaine qui m'a toujours attiré.
+          </p>
+          <p>
+            Passionné par l'exploration des technologies, c'est le développement qui m'a particulièrement captivé. Aujourd'hui, cette passion m'a conduit à poursuivre mes études à l'ESIEE-IT pour approfondir mes compétences et m'épanouir dans ce secteur en constante évolution.
+          </p>
+          <p>
+            J'ai une attirance particulière pour le côté artistique du développement : concevoir des interfaces modernes et interactives, en soignant chaque détail visuel pour offrir une expérience utilisateur fluide.
+          </p>
+          <div class="highlight-box">
+            <p>Ma mission : concevoir, développer et maintenir des solutions logicielles adaptées aux besoins des entreprises, tout en assurant la sécurité et la qualité des applications.</p>
+          </div>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon">🎯</div>
+          <h3>Mission</h3>
+          <p>
+            En tant qu'étudiant en BTS SIO option SLAM, ma mission est de concevoir, développer et maintenir des solutions logicielles adaptées aux besoins des entreprises, tout en assurant la sécurité et la qualité des applications.
+          </p>
+          <div class="checklist">
+            <div class="checklist-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Conception d'interfaces utilisateurs
+            </div>
+            <div class="checklist-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Développement frontend & backend
+            </div>
+            <div class="checklist-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Automatisation de processus
+            </div>
+            <div class="checklist-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Qualité & sécurité applicative
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       02 — STACK TECHNIQUE
+  ============================================================ -->
+  <section class="section section-alt" id="stack">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div class="section-title-block">
+          <span class="section-label" style="margin-bottom:8px;">Outils & Langages</span>
+          <h2 class="section-title">Stack Technique</h2>
+        </div>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-category">
+          <span class="stack-cat-label">Code</span>
+          <ul class="tech-list">
+            <li class="tech-tag"><span class="dot"></span>HTML5</li>
+            <li class="tech-tag"><span class="dot"></span>CSS3</li>
+            <li class="tech-tag"><span class="dot"></span>JavaScript</li>
+            <li class="tech-tag"><span class="dot"></span>Python</li>
+            <li class="tech-tag"><span class="dot"></span>Java</li>
+            <li class="tech-tag"><span class="dot"></span>C#</li>
+            <li class="tech-tag"><span class="dot"></span>SQL</li>
+            <li class="tech-tag"><span class="dot"></span>React / TypeScript</li>
+            <li class="tech-tag"><span class="dot"></span>Django</li>
+          </ul>
+        </div>
+        <div class="stack-category">
+          <span class="stack-cat-label">Outils</span>
+          <ul class="tech-list">
+            <li class="tech-tag"><span class="dot"></span>GitHub</li>
+            <li class="tech-tag"><span class="dot"></span>VS Code</li>
+            <li class="tech-tag"><span class="dot"></span>IntelliJ</li>
+            <li class="tech-tag"><span class="dot"></span>Visual Studio</li>
+            <li class="tech-tag"><span class="dot"></span>WAMP</li>
+            <li class="tech-tag"><span class="dot"></span>Postman</li>
+            <li class="tech-tag"><span class="dot"></span>Terminal</li>
+            <li class="tech-tag"><span class="dot"></span>Notion</li>
+          </ul>
+        </div>
+        <div class="stack-category">
+          <span class="stack-cat-label">Design & Méthodes</span>
+          <ul class="tech-list">
+            <li class="tech-tag"><span class="dot"></span>Figma</li>
+            <li class="tech-tag"><span class="dot"></span>Canva</li>
+            <li class="tech-tag"><span class="dot"></span>Agile / SCRUM</li>
+            <li class="tech-tag"><span class="dot"></span>Code Review</li>
+            <li class="tech-tag"><span class="dot"></span>UX / UI Design</li>
+            <li class="tech-tag"><span class="dot"></span>Merise</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       03 — PARCOURS
+  ============================================================ -->
+  <section class="section section-alt" id="parcours">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <div class="section-title-block">
+          <span class="section-label" style="margin-bottom:8px;">Formation</span>
+          <h2 class="section-title">Parcours</h2>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">22</div>
+          <div class="timeline-period">2022 — 2023</div>
+          <div class="timeline-title-item">L'avant ESIEE-IT</div>
+          <p class="timeline-body">
+            Après le bac STMG, intégration du monde professionnel. Cette expérience m'a permis de comprendre mes aspirations et de me réorienter vers l'informatique. Rigueur, autonomie, prise d'initiative.
+          </p>
+          <div class="timeline-skills">
+            <span class="skill-pill">Rigueur</span>
+            <span class="skill-pill">Autonomie</span>
+            <span class="skill-pill">Réorientation</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">23</div>
+          <div class="timeline-period">2023 — 2024</div>
+          <div class="timeline-title-item">Première Année</div>
+          <p class="timeline-body">
+            Attirance pour le côté artistique du dev. Refonte d'une application mobile en entreprise, apportant une identité visuelle moderne. Création de maquettes, conception centrée utilisateur.
+          </p>
+          <div class="timeline-skills">
+            <span class="skill-pill">UX/UI</span>
+            <span class="skill-pill">Maquettage</span>
+            <span class="skill-pill">HTML/CSS</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">24</div>
+          <div class="timeline-period">2024 — 2025</div>
+          <div class="timeline-title-item">Deuxième Année</div>
+          <p class="timeline-body">
+            Amélioration en HTML, CSS, JavaScript et Python. Fort appétit pour les interfaces modernes et interactives. Projets complexes : JojoLegion, JO Ticket, Nimbus Railway.
+          </p>
+          <div class="timeline-skills">
+            <span class="skill-pill">Django</span>
+            <span class="skill-pill">React</span>
+            <span class="skill-pill">TypeScript</span>
+            <span class="skill-pill">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT STRIP
+  ============================================================ -->
+  <div class="contact-strip">
+    <div class="contact-inner">
+      <h2 class="contact-title">
+        Mes<br>
+        <span class="accent">contact</span>
+      </h2>
+      <div class="contact-links">
+        <a href="mailto:elijahdabopro@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5.5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          elijahdabopro@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/elijah-dabo" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7v3.5M5.5 5.5v.01M8 7v3.5M8 8.5c0-1 .5-1.5 1.5-1.5s1.5.5 1.5 1.5v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          LinkedIn — Elijah Dabo
+        </a>
+        <a href="https://github.com/elijahdabo" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 00-1.897 11.693c.3.055.41-.13.41-.29v-1.02c-1.668.363-2.018-.805-2.018-.805-.272-.692-.665-.876-.665-.876-.544-.372.041-.365.041-.365.602.042.919.619.919.619.535.917 1.403.652 1.745.498.054-.387.209-.652.38-.802-1.332-.152-2.731-.666-2.731-2.962 0-.654.234-1.19.617-1.608-.062-.152-.268-.761.059-1.587 0 0 .503-.161 1.647.614A5.74 5.74 0 018 5.89a5.74 5.74 0 011.498.202c1.144-.775 1.647-.614 1.647-.614.327.826.121 1.435.059 1.587.384.419.617.954.617 1.608 0 2.303-1.402 2.809-2.737 2.957.215.185.407.55.407 1.11v1.644c0 .161.109.347.413.289A6 6 0 008 2z" fill="currentColor"/></svg>
+          GitHub — elijahdabo
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Navigation principale -->
-  <header>
-    <nav>
-      <div class="logo">
-        <a href="index.html">
-          <span class="logo-text">Elijah<span class="highlight">Dabo</span></span>
-        </a>
-      </div>
-      <div class="nav-toggle" aria-label="Ouvrir la navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a></li>
-        <li><a href="entreprise.html"><i class="fas fa-building"></i> Entreprise</a></li>
-        <li><a href="realisations.html"><i class="fas fa-rocket"></i> Réalisations</a></li>
-        <li><a href="veille.html"><i class="fas fa-satellite"></i> Veille</a></li>
-        <li><a href="bilan.html"><i class="fas fa-flag-checkered"></i> Bilan</a></li>
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">Port<span>folio</span></div>
+      <ul class="footer-nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="entreprise.html">Entreprise</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="veille.html">Veille</a></li>
+        <li><a href="bilan.html">Bilan</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
       </ul>
-      <button id="dark-mode-toggle" aria-label="Activer ou désactiver le mode sombre">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-      </button>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Section Hero -->
-    <section class="hero section" id="accueil">
-      <div class="hero-content">
-        <h1 class="glitch-text">Bienvenue sur mon Portfolio</h1>
-        <div class="hero-subtitle">BTS SIO option SLAM</div>
-        <p class="hero-description">"Je suis Elijah Dabo, étudiant en informatique. Explorer mon Portfolio pour découvrir mes projets, mes expériences et mes découvertes !</p>
-        <div class="hero-cta">
-          <a href="realisations.html" class="btn-primary">Voir mes projets <i class="fas fa-arrow-right"></i></a>
-          <a href="#about" class="btn-secondary">En savoir plus</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="orbit-container">
-          <div class="orbit">
-            <div class="satellite html-icon"><i class="fab fa-html5"></i></div>
-          </div>
-          <div class="orbit">
-            <div class="satellite css-icon"><i class="fab fa-css3-alt"></i></div>
-          </div>
-          <div class="orbit">
-            <div class="satellite js-icon"><i class="fab fa-js"></i></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section À propos -->
-    <section class="section about-section" id="about">
-      <div class="section-header">
-        <h2>À Propos</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="about-content">
-        <div class="about-text">
-          <p>Après avoir obtenu un Baccalauréat STMG, où j'ai acquis des notions en CEJM, j'ai intégré le monde du travail. Cette expérience m'a permis de mieux comprendre mes aspirations et de prendre la décision de me réorienter vers un domaine qui m'a toujours attiré : l'informatique.</p>
-          <p>Passionné par l'exploration des technologies, c'est le développement qui m'a particulièrement captivé. Aujourd'hui, cette passion m'a conduit à poursuivre mes études à l'ESIEE-IT pour approfondir mes compétences et m'épanouir dans ce secteur en constante évolution.</p>
-          
-          <div class="cv-download">
-            <a href="assets/documents/images/elijah-cv.jpg" class="btn-primary btn-download" download>
-              <i class="fas fa-file-download"></i> Télécharger mon CV
-            </a>
-          </div>
-        </div>
-        <div class="about-visual">
-          <div class="about-card">
-            <div class="card-icon">
-              <i class="fas fa-user-astronaut"></i>
-            </div>
-            <h3>Mission</h3>
-            <p>En tant qu'étudiant en BTS SIO option SLAM, ma mission est de concevoir, développer et maintenir des solutions logicielles adaptées aux besoins des entreprises, tout en assurant la sécurité et la qualité des applications.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section Langages de programmation -->
-    <section class="section languages-section">
-      <div class="section-header">
-        <h2>Langages de programmation</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="skills-container">
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-html5"></i></div>
-          <h3>HTML5</h3>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
-          <h3>CSS3</h3>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-js"></i></div>
-          <h3>JavaScript</h3>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-python"></i></div>
-          <h3>Python</h3>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fas fa-database"></i></div>
-          <h3>SQL</h3>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-java"></i></div>
-          <h3>Java</h3>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon"><i class="fab fa-microsoft"></i></div>
-          <h3>C#</h3>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section Outils utilisés -->
-    <section class="section tools-section">
-      <div class="section-header">
-        <h2>Outils utilisés</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="tools-container">
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fab fa-github"></i></div>
-          <h3>GitHub</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-server"></i></div>
-          <h3>WAMP</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-code"></i></div>
-          <h3>VS Code</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fab fa-figma"></i></div>
-          <h3>Figma</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-terminal"></i></div>
-          <h3>Terminal</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-paper-plane"></i></div>
-          <h3>Postman</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-code-branch"></i></div>
-          <h3>IntelliJ</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fab fa-microsoft"></i></div>
-          <h3>Visual Studio</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="far fa-sticky-note"></i></div>
-          <h3>Notion</h3>
-        </div>
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fab fa-python"></i></div>
-          <h3>Django</h3>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-col">
-        <h3>Navigation Rapide</h3>
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="entreprise.html">Entreprise</a></li>
-          <li><a href="realisations.html">Réalisations</a></li>
-          <li><a href="veille.html">Veille</a></li>
-          <li><a href="bilan.html">Bilan</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Me Contacter</h3>
-        <p><i class="fas fa-envelope"></i> elijahdabopro@gmail.com</p>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/elijah-dabo" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://github.com/elijahdabo" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Elijah Dabo. Tous droits réservés.</p>
-      <a href="mentions-legales.html">Mentions légales</a>
+      <div class="footer-copy">© 2025 Elijah Dabo</div>
     </div>
   </footer>
 
-  <!-- Script principal -->
   <script src="js/main.js"></script>
-  <script src="js/image-handler.js"></script>
-
-<!-- Pop-up pour les images -->
-<div id="image-popup-overlay" class="image-popup-overlay">
-  <div class="image-popup-container">
-    <span class="image-popup-close">&times;</span>
-    <img class="image-popup-content" id="popup-image">
-    <div class="image-popup-caption" id="popup-caption"></div>
-  </div>
-</div>
-
 </body>
 </html>

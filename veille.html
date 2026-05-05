@@ -2,754 +2,835 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ma veille technologique sur le Cloud Computing - Portfolio Galaxie." />
-  <title>Veille Technologique - Portfolio</title>
-
-  <!-- Google Fonts - Orbitron pour un design spatial -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome pour les icônes spatiales -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Fichier CSS principal -->
-  <link rel="stylesheet" href="css/styles.css" />
-  
-  <!-- Styles spécifiques à la page veille -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Veille technologique — Elijah Dabo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* Amélioration du dimensionnement des cartes d'articles de veille */
+    /* ---- Styles spécifiques veille.html ---- */
 
-    /* 1. Correction de la grille pour un alignement uniforme */
-    .veille-articles {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+    /* Sujet banner */
+    .sujet-banner {
+      background: var(--ink);
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
-    /* 2. Dimensions fixes pour les cartes */
-    .veille-card {
-      position: relative;
+    .sujet-banner-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
       display: flex;
-      flex-direction: column;
-      height: 450px; /* Hauteur fixe pour toutes les cartes */
-      border-radius: 15px;
-      overflow: hidden;
-      background: rgba(10, 17, 40, 0.5);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(92, 107, 192, 0.2);
-      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-    }
-
-    /* 3. Dimensionnement de l'en-tête */
-    .veille-card-header {
-      padding: 1.25rem;
-      background: linear-gradient(45deg, rgba(28, 34, 71, 0.9), rgba(11, 12, 35, 0.9));
-      border-bottom: 2px solid rgba(92, 107, 192, 0.3);
-    }
-
-    /* 4. Titre avec hauteur fixe */
-    .veille-card-title {
-      font-weight: 700;
-      color: var(--text-light);
-      margin-bottom: 0.8rem;
-      font-size: 1.2rem;
-      letter-spacing: 0.5px;
-      line-height: 1.4;
-      height: 3.4em; /* Hauteur fixe pour 2-3 lignes */
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-
-    /* 5. Contenu principal de la carte */
-    .veille-card-content {
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      background: linear-gradient(to bottom, rgba(10, 17, 40, 0.7), rgba(15, 23, 42, 0.9));
-    }
-
-    /* 6. Résumé avec hauteur contrôlée */
-    .veille-card-summary {
-      flex: 1;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-      color: var(--text-light);
-      height: 9.6em; /* Hauteur fixe pour environ 6 lignes */
-      overflow: hidden;
-      position: relative;
-      opacity: 0.9;
-      text-align: justify;
-    }
-
-    /* 7. Effet de fondu en bas du résumé */
-    .veille-card-summary::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2em;
-      background: linear-gradient(to bottom, rgba(15, 23, 42, 0), rgba(15, 23, 42, 0.9));
-      pointer-events: none;
-    }
-
-    /* 8. Footer de la carte optimisé */
-    .veille-card-footer {
-      display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: auto; /* Pousse le footer vers le bas */
-    }
-
-    /* 9. Métadonnées de l'article */
-    .veille-card-meta {
-      display: flex;
+      gap: 40px;
       flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-bottom: 0.5rem;
     }
 
-    .veille-card-date, 
-    .veille-card-source {
+    .sujet-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .sujet-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(28px, 3vw, 40px);
+      text-transform: uppercase;
+      letter-spacing: -.01em;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .sujet-tools {
       display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      color: rgba(224, 224, 224, 0.8);
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    /* 10. Bouton "En savoir plus" */
-    .veille-card-btn {
+    .sujet-tool {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--secondary-light);
-      background: rgba(0, 188, 212, 0.1);
-      border: 1px solid var(--secondary-light);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      white-space: nowrap;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 8px 14px;
+      border-radius: 4px;
     }
 
-    /* 11. Animation au survol plus subtile */
-    .veille-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-      z-index: 2;
-    }
-
-    /* 12. Responsive design amélioré */
-    @media (max-width: 1200px) {
-      .veille-articles {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      }
-      
-      .veille-card {
-        height: 430px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .veille-articles {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-      
-      .veille-card {
-        height: 400px;
-      }
-      
-      .veille-card-summary {
-        height: 8em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .veille-articles {
-        grid-template-columns: 1fr;
-      }
-      
-      .veille-card {
-        height: auto;
-        min-height: 380px;
-      }
-    }
-
-    /* Styles pour les étoiles scintillantes */
-    .twinkling-star {
-      position: absolute;
-      background: white;
+    .sujet-tool-dot {
+      width: 6px; height: 6px;
       border-radius: 50%;
-      opacity: 0;
-      z-index: -1;
-      box-shadow: 0 0 4px #fff, 0 0 8px #fff;
-      animation: twinkle 5s infinite ease-in-out;
+      background: var(--accent);
+      opacity: .8;
+      flex-shrink: 0;
     }
-    
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 0.8; transform: scale(1); }
+
+    /* Filter + period info */
+    .veille-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--rule);
+      background: transparent;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all .18s;
+    }
+    .filter-btn:hover {
+      border-color: var(--ink-4);
+      color: var(--ink);
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .veille-period {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+    }
+
+    /* Articles grid */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* Article card */
+    .article-card {
+      background: var(--white);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: background .18s;
+      cursor: default;
+      position: relative;
+    }
+    .article-card:hover { background: var(--paper); }
+    .article-card.hidden { display: none; }
+
+    .article-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .article-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 56px;
+      line-height: 1;
+      color: var(--rule);
+      letter-spacing: -.03em;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .article-meta-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .article-year-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--rule);
+      color: var(--ink-3);
+      background: var(--paper-2);
+    }
+    .article-year-badge.y2025 {
+      background: #EEF2FF;
+      border-color: #C7D2FE;
+      color: #4F46E5;
+    }
+    .article-year-badge.y2024 {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+      color: #16A34A;
+    }
+    .article-year-badge.y2023 {
+      background: #FFF7ED;
+      border-color: #FED7AA;
+      color: #C2410C;
+    }
+
+    .article-date {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink-4);
+      letter-spacing: .06em;
+      margin-top: 4px;
+    }
+
+    .article-source {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .article-body {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-2);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .article-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+      margin-top: auto;
+    }
+
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .article-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink-3);
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: gap .15s;
+    }
+    .article-link:hover { gap: 10px; }
+
+    /* Synthèse section */
+    .synthese-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .synthese-cell {
+      background: var(--white);
+      padding: 36px 32px;
+    }
+
+    .synthese-cell.full {
+      grid-column: 1 / -1;
+    }
+
+    .synthese-cell h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      color: var(--ink);
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .synthese-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink-2);
+      line-height: 1.8;
+    }
+
+    .synthese-body p { margin-bottom: 12px; }
+    .synthese-body p:last-child { margin-bottom: 0; }
+
+    .tendances-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      list-style: none;
+    }
+
+    .tendance-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .tendance-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--rule);
+      letter-spacing: -.02em;
+      flex-shrink: 0;
+      width: 32px;
+    }
+
+    .tendance-content strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .tendance-content p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .articles-grid { grid-template-columns: 1fr; }
+      .synthese-grid { grid-template-columns: 1fr; }
+      .synthese-cell.full { grid-column: auto; }
+      .sujet-banner-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <!-- Étoiles de fond dynamiques (canvas) -->
-  <canvas id="space-canvas"></canvas>
 
-  <!-- Planètes décoratives -->
-  <div class="planet planet-2"></div>
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Elijah<span>Dabo</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="entreprise.html">Entreprise</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="veille.html" class="active">Veille</a></li>
+        <li><a href="bilan.html">Bilan</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <!-- Loader -->
-  <div id="loader">
-    <div class="loader-container">
-      <div class="loader-rocket">
-        <i class="fas fa-rocket"></i>
+  <!-- ============================================================
+       PAGE HERO
+  ============================================================ -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <span class="section-label" style="margin-bottom:16px;">BTS SIO — SLAM</span>
+      <h1 class="page-hero-title">
+        Veille<br>
+        <span class="accent">Technologique</span>
+      </h1>
+      <p class="page-hero-sub">
+        Sujet : Cloud Computing — 8 articles sélectionnés entre novembre 2023 et avril 2025 à travers une veille active sur Feedly, Google Alerts et LinkedIn.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SUJET BANNER
+  ============================================================ -->
+  <div class="sujet-banner">
+    <div class="sujet-banner-inner">
+      <div>
+        <div class="sujet-label">Sujet de veille</div>
+        <div class="sujet-title">Cloud Computing</div>
       </div>
-      <div class="loader-text">Initialisation du système...</div>
-      <div class="loader-progress">
-        <div class="loader-progress-bar"></div>
+      <div class="sujet-tools">
+        <div class="sujet-tool">
+          <div class="sujet-tool-dot"></div>
+          Feedly
+        </div>
+        <div class="sujet-tool">
+          <div class="sujet-tool-dot"></div>
+          Google Alerts
+        </div>
+        <div class="sujet-tool">
+          <div class="sujet-tool-dot"></div>
+          LinkedIn
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Navigation principale -->
-  <header>
-    <nav>
-      <div class="logo">
-        <a href="index.html">
-          <span class="logo-text">Elijah<span class="highlight">Dabo</span></span>
+  <!-- ============================================================
+       01 — ARTICLES
+  ============================================================ -->
+  <section class="section" id="articles">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div class="section-title-block">
+          <span class="section-label" style="margin-bottom:8px;">Sélection</span>
+          <h2 class="section-title">Articles</h2>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="veille-controls">
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="2025">2025</button>
+          <button class="filter-btn" data-filter="2024">2024</button>
+          <button class="filter-btn" data-filter="2023">2023</button>
+        </div>
+        <div class="veille-period">Nov. 2023 → Avr. 2025</div>
+      </div>
+
+      <!-- Articles grid -->
+      <div class="articles-grid" id="articles-grid">
+
+        <!-- 01 — Le Monde / Juin 2024 -->
+        <div class="article-card" data-year="2024">
+          <div class="article-card-top">
+            <div class="article-num">01</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2024">2024</span>
+              <div class="article-date">Juin 2024</div>
+            </div>
+          </div>
+          <div class="article-source">Le Monde</div>
+          <h3 class="article-title">Derrière l'IA, la déferlante des data centers</h3>
+          <p class="article-body">
+            L'essor massif de l'intelligence artificielle tire une demande sans précédent en infrastructure cloud. Le Monde décrypte comment les géants du numérique multiplient les centres de données à travers le monde, avec des conséquences directes sur la consommation énergétique et l'empreinte carbone du secteur. Un éclairage indispensable sur la face cachée de l'IA générative.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">Infrastructure</span>
+              <span class="article-tag">Data Centers</span>
+              <span class="article-tag">IA</span>
+              <span class="article-tag">Énergie</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 02 — IT for Business / Avr 2025 -->
+        <div class="article-card" data-year="2025">
+          <div class="article-card-top">
+            <div class="article-num">02</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2025">2025</span>
+              <div class="article-date">Avr. 2025</div>
+            </div>
+          </div>
+          <div class="article-source">IT for Business</div>
+          <h3 class="article-title">Google Cloud Next 2025 : les annonces infrastructures et IA</h3>
+          <p class="article-body">
+            Compte-rendu détaillé du Google Cloud Next 2025, conférence annuelle de Google dédiée à son cloud. Au programme : nouveaux services d'infrastructure, intégration poussée de l'IA dans les offres cloud, et partenariats stratégiques. L'article analyse les implications pour les entreprises qui s'appuient sur Google Cloud Platform dans leur transformation numérique.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">Google Cloud</span>
+              <span class="article-tag">GCP</span>
+              <span class="article-tag">IA</span>
+              <span class="article-tag">Conférence</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 03 — DataCamp / Mars 2025 -->
+        <div class="article-card" data-year="2025">
+          <div class="article-card-top">
+            <div class="article-num">03</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2025">2025</span>
+              <div class="article-date">Mars 2025</div>
+            </div>
+          </div>
+          <div class="article-source">DataCamp</div>
+          <h3 class="article-title">Infrastructure du cloud et de l'IA 2025</h3>
+          <p class="article-body">
+            Vue d'ensemble sur l'état de l'infrastructure cloud en 2025, à l'heure où l'IA générative redessine les architectures. DataCamp passe en revue les nouvelles exigences en termes de GPU, de latence et de scalabilité. L'article présente également les différents modèles de déploiement (IaaS, PaaS, SaaS) et leur évolution face aux usages émergents de l'IA.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">Infrastructure</span>
+              <span class="article-tag">IA</span>
+              <span class="article-tag">GPU</span>
+              <span class="article-tag">IaaS / PaaS</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 04 — L'Usine Digitale / Avr 2025 -->
+        <div class="article-card" data-year="2025">
+          <div class="article-card-top">
+            <div class="article-num">04</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2025">2025</span>
+              <div class="article-date">Avr. 2025</div>
+            </div>
+          </div>
+          <div class="article-source">L'Usine Digitale</div>
+          <h3 class="article-title">Fuite de données chez Oracle & chiffrement de bout en bout</h3>
+          <p class="article-body">
+            Suite à une fuite de données révélée chez Oracle Cloud, L'Usine Digitale explore les enjeux de sécurité liés au cloud d'entreprise. L'article met en perspective l'importance du chiffrement de bout en bout, des audits réguliers et de la souveraineté des données — des préoccupations de plus en plus centrales pour les RSSI face à la concentration des données dans quelques hyperscalers.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">Sécurité</span>
+              <span class="article-tag">Oracle</span>
+              <span class="article-tag">Chiffrement</span>
+              <span class="article-tag">RGPD</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 05 — CERT-FR / Mars 2025 -->
+        <div class="article-card" data-year="2025">
+          <div class="article-card-top">
+            <div class="article-num">05</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2025">2025</span>
+              <div class="article-date">Mars 2025</div>
+            </div>
+          </div>
+          <div class="article-source">CERT-FR / ANSSI</div>
+          <h3 class="article-title">Cloud computing — Recommandations de l'ANSSI</h3>
+          <p class="article-body">
+            Le CERT-FR (ANSSI) publie ses recommandations actualisées pour l'usage sécurisé du cloud en entreprise. Le document couvre les bonnes pratiques de configuration, la gestion des identités et des accès (IAM), les stratégies de sauvegarde et la préparation aux incidents. Une référence incontournable pour toute organisation souhaitant adopter le cloud de manière sécurisée et conforme.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">ANSSI</span>
+              <span class="article-tag">Sécurité</span>
+              <span class="article-tag">IAM</span>
+              <span class="article-tag">Bonnes pratiques</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 06 — Le Monde Informatique / Nov 2023 -->
+        <div class="article-card" data-year="2023">
+          <div class="article-card-top">
+            <div class="article-num">06</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2023">2023</span>
+              <div class="article-date">Nov. 2023</div>
+            </div>
+          </div>
+          <div class="article-source">Le Monde Informatique</div>
+          <h3 class="article-title">Cloud computing — État des lieux et perspectives</h3>
+          <p class="article-body">
+            Article de fond sur l'état du marché cloud en fin d'année 2023. Le Monde Informatique dresse un panorama des grands fournisseurs (AWS, Azure, GCP), analyse les tendances de migration vers le cloud hybride et multi-cloud, et aborde les problématiques de coûts et d'optimisation des ressources. Un point de départ essentiel pour ma veille sur le sujet.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">AWS</span>
+              <span class="article-tag">Azure</span>
+              <span class="article-tag">Multi-cloud</span>
+              <span class="article-tag">Marché</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 07 — ESIOS / Nov 2023 -->
+        <div class="article-card" data-year="2023">
+          <div class="article-card-top">
+            <div class="article-num">07</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2023">2023</span>
+              <div class="article-date">Nov. 2023</div>
+            </div>
+          </div>
+          <div class="article-source">ESIOS</div>
+          <h3 class="article-title">Top 10 Cloud Computing Trends to Follow in 2023</h3>
+          <p class="article-body">
+            Synthèse des dix tendances majeures du cloud computing à surveiller en 2023. Parmi elles : la montée en puissance du cloud edge, l'adoption croissante des architectures serverless, l'essor du cloud souverain en Europe, et l'intégration progressive de l'IA dans les services cloud managés. Un article qui m'a permis de structurer ma compréhension du domaine dès le départ.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">Tendances</span>
+              <span class="article-tag">Edge Computing</span>
+              <span class="article-tag">Serverless</span>
+              <span class="article-tag">Souveraineté</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 08 — ITpro / Avr 2025 -->
+        <div class="article-card" data-year="2025">
+          <div class="article-card-top">
+            <div class="article-num">08</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2025">2025</span>
+              <div class="article-date">Avr. 2025</div>
+            </div>
+          </div>
+          <div class="article-source">ITpro</div>
+          <h3 class="article-title">Google Cloud Next 2025 : avancées majeures en IA et infrastructure</h3>
+          <p class="article-body">
+            Second compte-rendu du Google Cloud Next 2025, cette fois centré sur les avancées en intelligence artificielle et les nouvelles briques d'infrastructure. ITpro met en avant les annonces autour de Gemini (modèle IA de Google), l'extension des régions cloud en Europe et les nouveaux outils de développement serverless. Une perspective complémentaire à l'article d'IT for Business.
+          </p>
+          <div class="article-footer">
+            <div class="article-tags">
+              <span class="article-tag">Google Cloud</span>
+              <span class="article-tag">Gemini</span>
+              <span class="article-tag">Serverless</span>
+              <span class="article-tag">Europe</span>
+            </div>
+            <a href="#" class="article-link">
+              Lire
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /articles-grid -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       02 — SYNTHÈSE
+  ============================================================ -->
+  <section class="section section-alt" id="synthese">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div class="section-title-block">
+          <span class="section-label" style="margin-bottom:8px;">Analyse personnelle</span>
+          <h2 class="section-title">Synthèse</h2>
+        </div>
+      </div>
+
+      <div class="synthese-grid">
+        <div class="synthese-cell">
+          <h3>Pourquoi ce sujet</h3>
+          <div class="synthese-body">
+            <p>
+              J'ai choisi le Cloud Computing comme sujet de veille car c'est l'une des technologies les plus structurantes du développement logiciel aujourd'hui. En entreprise chez Flex, j'ai rapidement réalisé que comprendre les infrastructures cloud est devenu indispensable, même pour un développeur web junior.
+            </p>
+            <p>
+              La convergence entre cloud et intelligence artificielle, que j'ai observée tout au long de cette veille, illustre parfaitement à quel point ces deux domaines sont désormais indissociables. Chaque projet d'IA repose sur une infrastructure cloud robuste — et inversement, les fournisseurs cloud font de l'IA leur principale proposition de valeur.
+            </p>
+          </div>
+        </div>
+
+        <div class="synthese-cell">
+          <h3>Tendances identifiées</h3>
+          <ul class="tendances-list">
+            <li class="tendance-item">
+              <div class="tendance-num">01</div>
+              <div class="tendance-content">
+                <strong>Cloud & IA : une convergence totale</strong>
+                <p>Les hyperscalers intègrent l'IA comme service natif. AWS, Azure et GCP proposent des modèles fondateurs directement accessibles via API.</p>
+              </div>
+            </li>
+            <li class="tendance-item">
+              <div class="tendance-num">02</div>
+              <div class="tendance-content">
+                <strong>Souveraineté et RGPD</strong>
+                <p>La pression réglementaire européenne pousse vers des clouds souverains. Les questions de localisation des données deviennent stratégiques.</p>
+              </div>
+            </li>
+            <li class="tendance-item">
+              <div class="tendance-num">03</div>
+              <div class="tendance-content">
+                <strong>Sécurité renforcée</strong>
+                <p>Les failles récentes (Oracle, etc.) rappellent que le cloud n'est pas exempt de risques. La sécurité devient une priorité absolue des DSI.</p>
+              </div>
+            </li>
+            <li class="tendance-item">
+              <div class="tendance-num">04</div>
+              <div class="tendance-content">
+                <strong>Impact environnemental</strong>
+                <p>La multiplication des data centers pour soutenir l'IA soulève des questions sur la consommation énergétique et l'empreinte carbone du numérique.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="synthese-cell full" style="border-top: 2px solid var(--accent-dim);">
+          <h3>Ce que j'en retiens</h3>
+          <div class="synthese-body">
+            <p>
+              Cette veille m'a permis de dépasser la vision purement technique du cloud pour en comprendre les enjeux stratégiques, économiques et sociétaux. En tant que futur développeur, savoir comment fonctionne l'infrastructure sur laquelle tournent mes applications — et connaître ses contraintes de sécurité, de coûts et d'impact environnemental — me semble essentiel.
+            </p>
+            <p>
+              La tendance la plus marquante que j'ai observée sur cette période est sans doute la vitesse à laquelle l'IA a rebattu les cartes du cloud. En moins de deux ans, les priorités des fournisseurs cloud ont radicalement changé : GPU, inférence à la demande et modèles fondateurs sont devenus les nouveaux moteurs de croissance, reléguant au second plan les offres de stockage et de compute classiques.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT STRIP
+  ============================================================ -->
+  <div class="contact-strip">
+    <div class="contact-inner">
+      <h2 class="contact-title">
+        Mes<br>
+        <span class="accent">contact</span>
+      </h2>
+      <div class="contact-links">
+        <a href="mailto:elijahdabopro@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5.5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          elijahdabopro@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/elijah-dabo" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7v3.5M5.5 5.5v.01M8 7v3.5M8 8.5c0-1 .5-1.5 1.5-1.5s1.5.5 1.5 1.5v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          LinkedIn — Elijah Dabo
+        </a>
+        <a href="https://github.com/elijahdabo" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 00-1.897 11.693c.3.055.41-.13.41-.29v-1.02c-1.668.363-2.018-.805-2.018-.805-.272-.692-.665-.876-.665-.876-.544-.372.041-.365.041-.365.602.042.919.619.919.619.535.917 1.403.652 1.745.498.054-.387.209-.652.38-.802-1.332-.152-2.731-.666-2.731-2.962 0-.654.234-1.19.617-1.608-.062-.152-.268-.761.059-1.587 0 0 .503-.161 1.647.614A5.74 5.74 0 018 5.89a5.74 5.74 0 011.498.202c1.144-.775 1.647-.614 1.647-.614.327.826.121 1.435.059 1.587.384.419.617.954.617 1.608 0 2.303-1.402 2.809-2.737 2.957.215.185.407.55.407 1.11v1.644c0 .161.109.347.413.289A6 6 0 008 2z" fill="currentColor"/></svg>
+          GitHub — elijahdabo
         </a>
       </div>
-      <div class="nav-toggle" aria-label="Ouvrir la navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
-        <li><a href="entreprise.html"><i class="fas fa-building"></i> Entreprise</a></li>
-        <li><a href="realisations.html"><i class="fas fa-rocket"></i> Réalisations</a></li>
-        <li><a href="veille.html" class="active"><i class="fas fa-satellite"></i> Veille</a></li>
-        <li><a href="bilan.html"><i class="fas fa-flag-checkered"></i> Bilan</a></li>
-      </ul>
-      <button id="dark-mode-toggle" aria-label="Activer ou désactiver le mode sombre">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-      </button>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Section Hero -->
-    <section class="hero section">
-      <div class="hero-content">
-        <h1 class="glitch-text">Veille Technologique</h1>
-        <p class="hero-description">Découvrez ma veille technologique sur les tendances et innovations dans le domaine du Cloud Computing.</p>
-      </div>
-    </section>
-
-    <!-- Section Veille -->
-    <section class="section">
-      <div class="content-section">
-        <!-- Présentation du sujet de veille -->
-        <div class="veille-topic">
-          <h2>Le Cloud Computing</h2>
-          <p>Le Cloud Computing représente une révolution technologique majeure, transformant la manière dont les entreprises et les particuliers utilisent et accèdent aux ressources informatiques. Cette approche permet d'externaliser la puissance de calcul, le stockage de données et divers services via internet, offrant une flexibilité, une évolutivité et une accessibilité sans précédent.</p>
-          <p>Ma veille technologique sur ce sujet couvre la période de Novembre 2023 à Avril 2025, explorant les dernières innovations, les tendances émergentes et les défis du secteur.</p>
-        </div>
-        
-        <!-- Outils de veille utilisés -->
-        <div class="tools-section">
-          <h2>Outils de veille utilisés</h2>
-          <div class="tools-container">
-            <div class="tool-item">
-              <div class="tool-icon">
-                <i class="fas fa-rss"></i>
-              </div>
-              <h3>Feedly</h3>
-              <p>Centralisation de toute la veille thématique cloud.</p>
-            </div>
-            
-            <div class="tool-item">
-              <div class="tool-icon">
-                <i class="fas fa-bell"></i>
-              </div>
-              <h3>Google Alerts</h3>
-              <p>Réception automatique des nouvelles annonces par email.</p>
-            </div>
-            
-            <div class="tool-item">
-              <div class="tool-icon">
-                <i class="fab fa-linkedin"></i>
-              </div>
-              <h3>LinkedIn</h3>
-              <p>Suivi des posts d'experts et annonces d'entreprises en direct.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Section Articles de veille optimisée -->
-    <section class="section articles-section">
-      <h2 class="section-title">Articles de veille</h2>
-      
-      <!-- Filtres optimisés avec attributs d'accessibilité -->
-      <div class="filter-controls" role="tablist" aria-label="Filtres des articles">
-        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true" aria-pressed="true"><i class="fas fa-globe"></i> Tous les articles</button>
-        <button class="filter-btn" data-filter="2025" role="tab" aria-selected="false" aria-pressed="false"><i class="fas fa-calendar"></i> 2025</button>
-        <button class="filter-btn" data-filter="2024" role="tab" aria-selected="false" aria-pressed="false"><i class="fas fa-calendar"></i> 2024</button>
-        <button class="filter-btn" data-filter="2023" role="tab" aria-selected="false" aria-pressed="false"><i class="fas fa-calendar"></i> 2023</button>
-        <button class="filter-btn" data-sort="newest" role="tab" aria-selected="false" aria-pressed="false"><i class="fas fa-sort-amount-down"></i> Plus récents</button>
-        <button class="filter-btn" data-sort="oldest" role="tab" aria-selected="false" aria-pressed="false"><i class="fas fa-sort-amount-up"></i> Plus anciens</button>
-      </div>
-      
-      <!-- Section de résultats avec structure sémantique -->
-      <div class="veille-results-section" role="region" aria-live="polite">
-        <!-- Conteneur pour les cartes d'articles -->
-        <div class="veille-articles" id="veille-articles"></div>
-        
-        <!-- Indicateur de chargement -->
-        <div class="articles-loading" id="articles-loading">
-          <div class="loading-spinner">
-            <i class="fas fa-circle-notch fa-spin"></i>
-          </div>
-          <p>Chargement des articles...</p>
-        </div>
-      </div>
-      
-      <!-- Bouton "Charger plus" (optionnel pour pagination future) -->
-      <div class="load-more-container">
-        <button id="load-more-btn" class="btn-primary" style="display: none;">
-          <i class="fas fa-plus-circle"></i> Charger plus d'articles
-        </button>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-col">
-        <h3>Navigation</h3>
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="entreprise.html">Entreprise</a></li>
-          <li><a href="realisations.html">Réalisations</a></li>
-          <li><a href="veille.html">Veille</a></li>
-          <li><a href="bilan.html">Bilan</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Contact</h3>
-        <p><i class="fas fa-envelope"></i> dabo.elijah@gmail.com</p>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/elijah-dabo" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a href="https://github.com/elijahdabo" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        </div>
-      </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Elijah Dabo. Tous droits réservés.</p>
-      <a href="mentions-legales.html">Mentions légales</a>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">Elijah<span>Dabo</span></div>
+      <ul class="footer-nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="entreprise.html">Entreprise</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="veille.html">Veille</a></li>
+        <li><a href="bilan.html">Bilan</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+      </ul>
+      <div class="footer-copy">© 2025 Elijah Dabo</div>
     </div>
   </footer>
 
-  <!-- Script principal -->
-  <script src="js/main.js"></script>
-  <script src="js/image-handler.js"></script>
-  
-  <!-- Script optimisé pour la veille technologique -->
+  <!-- ============================================================
+       JS — Filtre par année
+  ============================================================ -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Forcer la fermeture du loader immédiatement
-      const loader = document.getElementById('loader');
-      if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(function() {
-          loader.style.display = 'none';
-        }, 500);
-      }
-      
-      // Données complètes des articles de veille
-      const veilleArticles = 
-      [
-  {
-    id: 1,
-    title: "Derrière l'IA, la déferlante des data centers",
-    date: "Juin 2024",
-    source: "Le Monde",
-    link: "https://www.lemonde.fr/economie/article/2024/06/14/derriere-l-ia-la-deferlante-des-data-centers_6239694_3234.html",
-    summary: "Analyse de l'impact de l'IA sur l'expansion des data centers, avec des investissements massifs des géants du cloud et des enjeux énergétiques majeurs.",
-    content: "L'essor de l'intelligence artificielle génère des besoins sans précédent en matière d'infrastructures de calcul et de stockage, poussant les géants du cloud à investir massivement dans leurs data centers.",
-    rating: 5.0,
-    year: "2024",
-    backgroundImage: "url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=500&auto=format&fit=crop')"
-  },
-  {
-    id: 3,
-    title: "Google Cloud Next 2025 : Les annonces infrastructures et Cyber",
-    date: "Avril 2025",
-    source: "IT for Business",
-    link: "https://www.itforbusiness.fr/google-cloud-next-2025-les-annonces-infrastructures-et-cyber-90362",
-    summary: "Compte-rendu des annonces de Google lors de sa conférence annuelle, avec un focus sur les infrastructures cloud et la cybersécurité.",
-    content: "La conférence Google Cloud Next 2025 a dévoilé des innovations majeures en matière d'infrastructures cloud et de cybersécurité.",
-    rating: 5.0,
-    year: "2025",
-    backgroundImage: "url('https://images.unsplash.com/photo-1551731409-43eb3e517a1a?q=80&w=500&auto=format&fit=crop')"
-  },
-  {
-    id: 5,
-    title: "Infrastructure du cloud et de l'IA 2025",
-    date: "Mars 2025",
-    source: "DataCamp",
-    link: "https://www.datacamp.com/fr/blog/top-cloud-conferences",
-    summary: "Présentation de la conférence sur l'infrastructure du cloud et de l'IA, mettant en avant les dernières innovations et tendances du secteur.",
-    content: "DataCamp fait le point sur les innovations attendues dans les infrastructures cloud et IA en 2025.",
-    rating: 4.0,
-    year: "2025",
-    backgroundImage: "url('https://images.unsplash.com/photo-1575068334921-8d5dbcbf6c6d?q=80&w=500&auto=format&fit=crop')"
-  },
-  {
-    id: 6,
-    title: "Fuite de données chez Oracle, chiffrement de bout en bout par Google",
-    date: "Avril 2025",
-    source: "L'Usine Digitale",
-    link: "https://www.usine-digitale.fr/cloud/",
-    summary: "Revue des principales actualités en cybersécurité, incluant des incidents majeurs et des avancées en matière de protection des données.",
-    content: "L'Usine Digitale fait le point sur la semaine avec des incidents de sécurité cloud et les réponses des fournisseurs.",
-    rating: 5.0,
-    year: "2025",
-    backgroundImage: "url('https://images.unsplash.com/photo-1478432780021-b8d273730d8c?q=80&w=500&auto=format&fit=crop')"
-  },
-  {
-    id: 7,
-    title: "CLOUD COMPUTING - CERT-FR - l'ANSSI",
-    date: "Mars 2025",
-    source: "CERT-FR",
-    link: "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2025-CTI-001.pdf",
-    summary: "Rapport de l'ANSSI sur les menaces et incidents liés au cloud computing, avec des recommandations pour renforcer la sécurité.",
-    content: "Ce rapport dresse un panorama des menaces ciblant les infrastructures cloud et propose des recommandations concrètes.",
-    rating: 5.0,
-    year: "2025",
-    backgroundImage: "url('https://images.unsplash.com/photo-1456428746267-a1756408f782?q=80&w=500&auto=format&fit=crop')"
-  },
-  {
-    id: 11,
-    title: "Cloud computing - Le Monde Informatique",
-    date: "Novembre 2023",
-    source: "Le Monde Informatique",
-    link: "https://www.lemondeinformatique.fr/cloud-computing-83-page-28.html",
-    summary: "Analyse des tendances du cloud computing en 2023, avec un focus sur les opportunités d'emploi dans le secteur IT.",
-    content: "Un aperçu des tendances majeures du cloud computing pour 2023 et de leur impact sur le marché de l'emploi IT.",
-    rating: 4.0,
-    year: "2023",
-    backgroundImage: "url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=500&auto=format&fit=crop')"
-  },
-  {
-    id: 13,
-    title: "Top 10 Cloud Computing Trends to Follow in 2023",
-    date: "Novembre 2023",
-    source: "ESDS",
-    link: "https://www.esds.co.in/blog/top-10-cloud-computing-trends-for-2023/",
-    summary: "Liste des dix principales tendances du cloud computing en 2023, avec des insights sur l'adoption et l'innovation.",
-    content: "ESDS dévoile les 10 tendances incontournables du cloud computing pour rester compétitif en 2023.",
-    rating: 3.0,
-    year: "2023",
-    backgroundImage: "url('https://images.unsplash.com/photo-1613665813427-5929e144e9d9?q=80&w=500&auto=format&fit=crop')"
-  },
-  {
-    id: 17,
-    title: "Google Cloud Next 2025 : avancées majeures en IA et infrastructure cloud",
-    date: "Avril 2025",
-    source: "ITPro",
-    link: "https://www.itpro.com/cloud/live/google-cloud-next-2025-all-the-news-and-updates-live",
-    summary: "Lors de la conférence Google Cloud Next 2025, Google a dévoilé l'Ironwood TPU et des outils comme Vertex AI Agent Engine pour renforcer l'intégration de l'IA dans le cloud.",
-    content: "La conférence annuelle Google Cloud Next 2025 a été marquée par des annonces majeures dans le domaine de l'IA appliquée au cloud.",
-    rating: 4.8,
-    year: "2025",
-    backgroundImage: "url('https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=500&auto=format&fit=crop')"
-  }
-]
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.article-card');
 
-      // Fonction pour générer les cartes d'articles avec optimisations
-      function generateArticleCards() {
-        const articlesContainer = document.getElementById('veille-articles');
-        if (!articlesContainer) return;
-        
-        // Vider le conteneur existant
-        articlesContainer.innerHTML = '';
-        
-        // Optimisation: créer un fragment pour éviter les reflows multiples
-        const fragment = document.createDocumentFragment();
-        
-        // Générer toutes les cartes
-        veilleArticles.forEach((article, index) => {
-          // Créer le HTML pour le rating avec étoiles
-          let ratingHTML = '';
-          const fullStars = Math.floor(article.rating);
-          const hasHalfStar = article.rating % 1 >= 0.5;
-          const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-          
-          for (let i = 0; i < fullStars; i++) {
-            ratingHTML += '<i class="fas fa-star"></i>';
-          }
-          if (hasHalfStar) {
-            ratingHTML += '<i class="fas fa-star-half-alt"></i>';
-          }
-          for (let i = 0; i < emptyStars; i++) {
-            ratingHTML += '<i class="far fa-star"></i>';
-          }
-          
-          // Créer la carte d'article avec accessibilité améliorée
-          const card = document.createElement('div');
-          card.className = 'veille-card';
-          card.dataset.id = article.id;
-          card.dataset.year = article.year;
-          card.style.animationDelay = `${index * 0.1}s`;
-          card.setAttribute('tabindex', '0'); // Rendre focusable pour accessibilité
-          card.setAttribute('role', 'article');
-          
-          // Définir l'image d'arrière-plan comme propriété CSS personnalisée
-          if (article.backgroundImage) {
-            card.style.setProperty('--card-bg-image', article.backgroundImage);
-          }
-          
-          card.innerHTML = `
-            <div class="veille-card-header">
-              <h3 class="veille-card-title">${article.title}</h3>
-              <div class="veille-card-meta">
-                <div class="veille-card-date">
-                  <i class="far fa-calendar-alt"></i> ${article.date}
-                </div>
-                <div class="veille-card-source">
-                  <i class="fas fa-globe"></i> ${article.source}
-                </div>
-              </div>
-            </div>
-            <div class="veille-card-content">
-              <p class="veille-card-summary">${article.summary}</p>
-              <div class="veille-card-footer">
-                <div class="veille-card-rating" title="Note: ${article.rating}/5">
-                  ${ratingHTML}
-                </div>
-                <a href="${article.link}" class="veille-card-btn" target="_blank" rel="noopener noreferrer" aria-label="En savoir plus sur ${article.title}">
-                  En savoir plus <i class="fas fa-external-link-alt"></i>
-                </a>
-              </div>
-            </div>
-          `;
-          
-          // Ajouter des écouteurs d'événements pour une meilleure expérience utilisateur
-          card.addEventListener('keydown', function(e) {
-            // Permettre l'ouverture du lien avec la touche Entrée quand la carte est focus
-            if (e.key === 'Enter') {
-              const link = this.querySelector('.veille-card-btn');
-              if (link) link.click();
-            }
-          });
-          
-          fragment.appendChild(card);
-        });
-        
-        // Ajouter toutes les cartes d'un coup pour éviter les reflows multiples
-        articlesContainer.appendChild(fragment);
-        
-        // Observer l'intersection pour animer les cartes lors du défilement
-        setupIntersectionObserver();
-      }
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-      // Fonction pour filtrer les articles avec optimisations
-      function filterArticles(filter, sort) {
-        const cards = document.querySelectorAll('.veille-card');
-        let visibleCards = Array.from(cards);
-        
-        // Masquer toutes les cartes d'abord
-        cards.forEach(card => {
-          card.style.display = 'none';
-        });
-        
-        // Filtrer par année
-        if (filter && filter !== 'all') {
-          visibleCards = visibleCards.filter(card => card.getAttribute('data-year') === filter);
-        }
-        
-        // Afficher les cartes filtrées avec une animation progressive
-        visibleCards.forEach((card, index) => {
-          // Réinitialiser les styles
-          card.style.animation = 'none';
-          card.offsetHeight; // Force reflow
-          
-          // Appliquer l'animation avec délai progressif
-          card.style.display = 'flex';
-          card.style.animationDelay = `${index * 0.08}s`;
-          card.style.animation = 'fadeInStaggered 0.5s ease forwards';
-        });
-        
-        // Trier les cartes visibles si nécessaire
-        if (sort) {
-          sortArticles(sort);
-        }
-        
-        // Afficher un message si aucun article ne correspond
-        const articlesContainer = document.getElementById('veille-articles');
-        if (visibleCards.length === 0 && articlesContainer) {
-          const noResults = document.createElement('div');
-          noResults.className = 'no-results';
-          noResults.innerHTML = '<i class="fas fa-search"></i><p>Aucun article ne correspond à ce filtre</p>';
-          articlesContainer.appendChild(noResults);
-        }
-      }
+        const filter = btn.dataset.filter;
 
-      // Fonction de tri des articles optimisée
-      function sortArticles(sortType) {
-        const container = document.getElementById('veille-articles');
-        if (!container) return;
-        
-        const cards = Array.from(container.querySelectorAll('.veille-card:not([style*="display: none"])'));
-        
-        // Map pour l'ordre des mois
-        const monthsOrder = {
-          'Janvier': 1, 'Février': 2, 'Mars': 3, 'Avril': 4, 'Mai': 5, 'Juin': 6,
-          'Juillet': 7, 'Août': 8, 'Septembre': 9, 'Octobre': 10, 'Novembre': 11, 'Décembre': 12
-        };
-        
-        // Extraire et mémoriser les dates pour éviter de répéter le parsing
-        const cardDates = new Map();
-        
         cards.forEach(card => {
-          const dateElement = card.querySelector('.veille-card-date');
-          if (dateElement) {
-            const dateText = dateElement.textContent.trim();
-            const monthMatch = dateText.match(/([A-Za-zÀ-ÿ]+)/);
-            const yearMatch = dateText.match(/(\d{4})/);
-            
-            const month = monthMatch ? monthsOrder[monthMatch[1]] || 0 : 0;
-            const year = yearMatch ? parseInt(yearMatch[1]) : 0;
-            
-            cardDates.set(card, { month, year });
-          }
+          const match = filter === 'all' || card.dataset.year === filter;
+          card.classList.toggle('hidden', !match);
         });
-        
-        // Trier en fonction de la direction
-        cards.sort((a, b) => {
-          const dateA = cardDates.get(a) || { year: 0, month: 0 };
-          const dateB = cardDates.get(b) || { year: 0, month: 0 };
-          
-          if (sortType === 'newest') {
-            // Plus récent d'abord
-            if (dateA.year !== dateB.year) {
-              return dateB.year - dateA.year;
-            }
-            return dateB.month - dateA.month;
-          } else {
-            // Plus ancien d'abord
-            if (dateA.year !== dateB.year) {
-              return dateA.year - dateB.year;
-            }
-            return dateA.month - dateB.month;
-          }
-        });
-        
-        // Réorganiser les cartes dans le container
-        cards.forEach(card => {
-          container.appendChild(card);
-        });
-        
-        // Animer avec un délai pour une meilleure expérience
-        cards.forEach((card, index) => {
-          card.style.animation = 'none';
-          card.offsetHeight; // Force reflow
-          card.style.animationDelay = `${index * 0.05}s`;
-          card.style.animation = 'fadeInStaggered 0.4s ease forwards';
-        });
-      }
-      
-      // Observer pour animer les cartes lors du défilement
-      function setupIntersectionObserver() {
-        if ('IntersectionObserver' in window) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const card = entry.target;
-                const index = Array.from(card.parentNode.children).indexOf(card);
-                card.style.animationDelay = `${index * 0.05}s`;
-                card.classList.add('animated');
-                observer.unobserve(card);
-              }
-            });
-          }, { threshold: 0.1, rootMargin: '0px 0px 100px 0px' });
-          
-          document.querySelectorAll('.veille-card').forEach(card => {
-            observer.observe(card);
-          });
-        }
-      }
-      
-      // Animation subtile des étoiles en arrière-plan
-      function createTwinklingStars() {
-        const section = document.querySelector('.articles-section');
-        if (!section) return;
-        
-        // Réduire le nombre d'étoiles sur mobile pour les performances
-        const isMobile = window.innerWidth < 768;
-        const starCount = isMobile ? 30 : 50;
-        
-        for (let i = 0; i < starCount; i++) {
-          const star = document.createElement('div');
-          star.className = 'twinkling-star';
-          star.style.top = `${Math.random() * 100}%`;
-          star.style.left = `${Math.random() * 100}%`;
-          star.style.animationDelay = `${Math.random() * 5}s`;
-          star.style.width = `${Math.random() * 2 + 1}px`;
-          star.style.height = star.style.width;
-          section.appendChild(star);
-        }
-      }
-      
-      // Gestion des filtres avec état actif
-      function setupFilters() {
-        document.querySelectorAll('.filter-btn').forEach(button => {
-          button.addEventListener('click', () => {
-            // Gestion de l'état actif des boutons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-              btn.classList.remove('active');
-              btn.setAttribute('aria-pressed', 'false');
-            });
-            button.classList.add('active');
-            button.setAttribute('aria-pressed', 'true');
-            
-            // Appliquer le filtre ou le tri
-            const filter = button.getAttribute('data-filter');
-            const sort = button.getAttribute('data-sort');
-            
-            filterArticles(filter, sort);
-          });
-        });
-      }
-      
-      // Initialisation
-      generateArticleCards();
-      setupFilters();
-      createTwinklingStars();
-      
-      // Optimisation pour la performance
-      window.addEventListener('load', function() {
-        // Vérifier les préférences de réduction de mouvement
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          document.querySelector('.articles-section').classList.add('reduced-motion');
-        }
       });
     });
   </script>
+
+<script src="js/main.js"></script>
 </body>
 </html>
