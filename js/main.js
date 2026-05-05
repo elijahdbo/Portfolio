@@ -208,7 +208,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
   const selectors = [
     '[data-animate]',
@@ -234,7 +234,8 @@
 
   document.querySelectorAll(selectors.join(',')).forEach((el, i) => {
     // Décalage en cascade pour les éléments dans la même grille
-    el.style.transitionDelay = `${(i % 4) * 0.07}s`;
+    const siblings = el.parentElement ? [...el.parentElement.children].indexOf(el) : 0;
+    el.style.transitionDelay = `${(siblings % 4) * 0.08}s`;
     observer.observe(el);
   });
 })();
