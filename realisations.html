@@ -9,383 +9,202 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* ---- Styles spécifiques realisations.html ---- */
-
-    /* Filter tabs */
-    .filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-    }
-
+    .filter-bar { display: flex; align-items: center; gap: 4px; margin-bottom: 48px; flex-wrap: wrap; }
     .filter-btn {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border-radius: 4px;
-      border: 1.5px solid var(--rule);
-      background: transparent;
-      color: var(--ink-2);
-      cursor: pointer;
-      transition: all .18s;
+      font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase; padding: 8px 18px;
+      border-radius: 4px; border: 1.5px solid var(--rule);
+      background: transparent; color: var(--ink-2); cursor: pointer; transition: all .18s;
     }
-    .filter-btn:hover {
-      border-color: var(--ink-4);
-      color: var(--ink);
-    }
-    .filter-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
+    .filter-btn:hover { border-color: var(--ink-4); color: var(--ink); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .filter-count { font-family: var(--font-mono); font-size: 10px; color: var(--ink-4); margin-left: auto; letter-spacing: .06em; }
 
-    .filter-count {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--ink-4);
-      margin-left: auto;
-      letter-spacing: .06em;
-    }
-
-    /* Project grid */
     .projets-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--rule);
-      border-radius: 8px;
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: var(--rule); border-radius: 8px; overflow: hidden;
     }
 
-    /* Project card */
     .projet-card {
-      background: var(--white);
-      cursor: pointer;
-      transition: background .18s;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
+      background: var(--white); cursor: pointer; transition: background .18s;
+      display: flex; flex-direction: column; position: relative; overflow: hidden;
     }
     .projet-card:hover { background: var(--paper); }
     .projet-card.hidden { display: none; }
-
-    .projet-card-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: var(--paper-2);
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
+    .projet-card-img-svg {
+      width: 100%; aspect-ratio: 16/9;
+      overflow: hidden; position: relative; flex-shrink: 0;
     }
-    .projet-card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .3s ease;
-    }
+    .projet-card-img-svg svg { width: 100%; height: 100%; display: block; transition: transform .3s ease; }
+    .projet-card:hover .projet-card-img-svg svg { transform: scale(1.04); }
+    .projet-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
     .projet-card:hover .projet-card-img img { transform: scale(1.04); }
+    .projet-card-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--paper-2); color: var(--ink-4); font-size: 32px; }
+    .projet-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .projet-card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .projet-cat-badge { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
+    .projet-cat-badge.scolaire { background: #EEF2FF; color: #4F46E5; }
+    .projet-cat-badge.professionnel { background: #F0FDF4; color: #16A34A; }
+    .projet-num { font-family: var(--font-mono); font-size: 10px; color: var(--ink-4); margin-left: auto; }
+    .projet-card-title { font-family: var(--font-display); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: .02em; color: var(--ink); margin-bottom: 8px; line-height: 1.1; }
+    .projet-card-desc { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.6; flex: 1; margin-bottom: 12px; }
 
-    .projet-card-img-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--paper-2);
-      color: var(--ink-4);
-      font-size: 32px;
+    .projet-card-info {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-top: 1px solid var(--rule); margin-bottom: 12px;
     }
+    .projet-info-item {
+      display: flex; align-items: center; gap: 5px;
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--ink-3); letter-spacing: .04em;
+    }
+    .projet-info-item svg { flex-shrink: 0; opacity: .6; }
 
-    .projet-card-body {
-      padding: 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .projet-card-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .projet-cat-badge {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 3px;
-    }
-    .projet-cat-badge.scolaire {
-      background: #EEF2FF;
-      color: #4F46E5;
-    }
-    .projet-cat-badge.professionnel {
-      background: #F0FDF4;
-      color: #16A34A;
-    }
-
-    .projet-num {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--ink-4);
-      margin-left: auto;
-    }
-
-    .projet-card-title {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 20px;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      color: var(--ink);
-      margin-bottom: 8px;
-      line-height: 1.1;
-    }
-
-    .projet-card-desc {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--ink-2);
-      line-height: 1.6;
-      flex: 1;
-      margin-bottom: 16px;
-    }
-
-    .projet-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: auto;
-    }
-
-    .projet-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--ink-3);
-      background: var(--paper-2);
-      border: 1px solid var(--rule);
-      padding: 2px 8px;
-      border-radius: 3px;
-    }
-
+    .projet-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+    .projet-tag { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); background: var(--paper-2); border: 1px solid var(--rule); padding: 2px 8px; border-radius: 3px; }
     .projet-card-arrow {
-      position: absolute;
-      bottom: 24px;
-      right: 24px;
-      width: 28px; height: 28px;
-      background: var(--accent-dim);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity .18s, background .18s;
+      position: absolute; bottom: 24px; right: 24px;
+      width: 28px; height: 28px; background: var(--accent-dim); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .18s, background .18s;
     }
     .projet-card:hover .projet-card-arrow { opacity: 1; }
-    .projet-card:hover .projet-card-arrow:hover { background: var(--accent); }
-    .projet-card:hover .projet-card-arrow:hover svg { color: #fff; }
-
-    /* Empty state */
-    .projets-empty {
-      display: none;
-      text-align: center;
-      padding: 80px 0;
-      color: var(--ink-4);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: .08em;
-      grid-column: 1 / -1;
-    }
 
     /* ============================================================
        MODAL
     ============================================================ */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(22,36,59,.7);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .22s ease;
+      position: fixed; inset: 0; background: rgba(22,36,59,.7);
+      backdrop-filter: blur(6px); z-index: 200; display: flex;
+      align-items: center; justify-content: center; padding: 24px;
+      opacity: 0; pointer-events: none; transition: opacity .22s ease;
     }
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
     .modal {
-      background: var(--white);
-      border-radius: 10px;
-      max-width: 760px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      transform: translateY(20px) scale(.98);
-      transition: transform .22s ease;
+      background: var(--white); border-radius: 10px; max-width: 760px;
+      width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
+      transform: translateY(20px) scale(.98); transition: transform .22s ease;
     }
-    .modal-overlay.open .modal {
-      transform: translateY(0) scale(1);
-    }
-
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
     .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 32px; height: 32px;
-      background: var(--paper-2);
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all .15s;
-      z-index: 10;
+      position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
+      background: var(--paper-2); border: 1px solid var(--rule); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      transition: all .15s; z-index: 10;
     }
     .modal-close:hover { background: var(--rule); }
+    .modal-img { width: 100%; aspect-ratio: 16/7; background: var(--paper-2); overflow: hidden; border-radius: 10px 10px 0 0; display: flex; align-items: stretch; }
+    .modal-img svg { width: 100%; height: 100%; display: block; }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+    .modal-body { padding: 32px; }
+    .modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+    .modal-title { font-family: var(--font-display); font-weight: 800; font-size: 36px; text-transform: uppercase; letter-spacing: -.01em; color: var(--ink); line-height: .95; }
+    .modal-badges { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
 
-    .modal-img {
-      width: 100%;
-      aspect-ratio: 16/7;
-      background: var(--paper-2);
-      overflow: hidden;
-      border-radius: 10px 10px 0 0;
+    .modal-meta-row {
+      display: flex; gap: 20px; margin-bottom: 20px;
+      padding: 12px 16px; background: var(--paper-2);
+      border-radius: 6px; border: 1px solid var(--rule);
     }
-    .modal-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .modal-img-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-    }
+    .modal-meta-item { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); }
+    .modal-meta-item svg { color: var(--accent); flex-shrink: 0; }
 
-    .modal-body {
-      padding: 32px;
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .modal-title {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 36px;
-      text-transform: uppercase;
-      letter-spacing: -.01em;
-      color: var(--ink);
-      line-height: .95;
-    }
-
-    .modal-badges {
-      display: flex;
-      gap: 6px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .modal-desc {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--ink-2);
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
-
-    .modal-section-title {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .modal-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 28px;
-    }
-
-    .modal-docs {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
+    .modal-desc { font-size: 14px; font-weight: 300; color: var(--ink-2); line-height: 1.8; margin-bottom: 24px; }
+    .modal-section-title { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+    .modal-docs { display: flex; flex-direction: column; gap: 8px; }
     .modal-doc-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .06em;
-      color: var(--ink-2);
-      background: var(--paper-2);
-      border: 1px solid var(--rule);
-      padding: 10px 14px;
-      border-radius: 5px;
-      transition: all .15s;
+      display: flex; align-items: center; gap: 10px; font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: .06em; color: var(--ink-2);
+      background: var(--paper-2); border: 1px solid var(--rule);
+      padding: 10px 14px; border-radius: 5px; transition: all .15s;
     }
-    .modal-doc-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-dim);
-    }
-    .modal-doc-link svg { flex-shrink: 0; }
+    .modal-doc-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
 
-    @media (max-width: 900px) {
-      .projets-grid { grid-template-columns: repeat(2, 1fr); }
+    /* ============================================================
+       SCREENSHOTS dans la modale
+    ============================================================ */
+    .modal-screenshots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
     }
+    .modal-screenshot-item {
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      aspect-ratio: 16/10;
+      background: var(--paper-2);
+      cursor: zoom-in;
+      transition: border-color .15s, transform .15s;
+      position: relative;
+    }
+    .modal-screenshot-item:hover { border-color: var(--accent); transform: scale(1.02); }
+    .modal-screenshot-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal-screenshot-item.portrait { aspect-ratio: 9/16; }
+    .modal-screenshot-item .screenshot-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(22,36,59,.75);
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(255,255,255,.8);
+      padding: 5px 8px;
+      opacity: 0; transition: opacity .15s;
+    }
+    .modal-screenshot-item:hover .screenshot-label { opacity: 1; }
+
+    /* ============================================================
+       LIGHTBOX
+    ============================================================ */
+    .lightbox-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.88);
+      backdrop-filter: blur(10px);
+      z-index: 400;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    .lightbox-overlay.open { opacity: 1; pointer-events: all; }
+    .lightbox-overlay img {
+      max-width: 90vw; max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.6);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 6px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      transition: background .15s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.2); }
+
+    @media (max-width: 900px) { .projets-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) {
       .projets-grid { grid-template-columns: 1fr; }
       .modal-body { padding: 20px; }
       .modal-title { font-size: 28px; }
+      .modal-meta-row { flex-wrap: wrap; gap: 12px; }
+      .modal-screenshots { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
   <nav class="nav" role="navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Elijah<span>Dabo</span></a>
       <button class="nav-burger" aria-label="Menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
+        <span></span><span></span><span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="entreprise.html">Entreprise</a></li>
@@ -396,321 +215,205 @@
     </div>
   </nav>
 
-  <!-- ============================================================
-       PAGE HERO
-  ============================================================ -->
   <section class="page-hero">
     <div class="page-hero-inner">
       <span class="section-label" style="margin-bottom:16px;">Portfolio</span>
-      <h1 class="page-hero-title">
-        Mes<br>
-        <span class="accent">Réalisations</span>
-      </h1>
-      <p class="page-hero-sub">
-        11 projets menés entre l'école et l'entreprise — interfaces, applications web, scripts d'automatisation et outils métiers.
-      </p>
+      <h1 class="page-hero-title">Mes<br><span class="accent">Réalisations</span></h1>
+      <p class="page-hero-sub">10 projets menés entre l'école et l'entreprise — interfaces, applications web, scripts d'automatisation et outils métiers.</p>
     </div>
   </section>
 
-  <!-- ============================================================
-       PROJETS
-  ============================================================ -->
   <section class="section" id="projets">
     <div class="container">
-
-      <!-- Filter bar -->
       <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">Tous</button>
         <button class="filter-btn" data-filter="scolaire">Scolaires</button>
         <button class="filter-btn" data-filter="professionnel">Professionnels</button>
-        <span class="filter-count" id="filter-count">11 projets</span>
+        <span class="filter-count" id="filter-count">10 projets</span>
       </div>
 
-      <!-- Grid -->
+      <!-- SVG illustrations stockées en templates cachés -->
+      <div style="display:none">
+        <template id="svg-textadventure"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#1a1f2e"/><rect x="20" y="20" width="280" height="140" rx="6" fill="#0d1219" stroke="#2563C9" stroke-width="1.5"/><circle cx="36" cy="36" r="5" fill="#ff5f57"/><circle cx="52" cy="36" r="5" fill="#febc2e"/><circle cx="68" cy="36" r="5" fill="#28c840"/><rect x="30" y="52" width="6" height="10" rx="1" fill="#2563C9"/><text x="42" y="62" font-family="monospace" font-size="10" fill="#7A90A8">Vous êtes dans la Forêt des Âmes...</text><text x="30" y="80" font-family="monospace" font-size="10" fill="#7A90A8">&gt; Que faites-vous ?</text><text x="30" y="96" font-family="monospace" font-size="9" fill="#3D5068">1. Avancer vers le temple</text><text x="30" y="110" font-family="monospace" font-size="9" fill="#3D5068">2. Fuir vers le village</text><text x="30" y="124" font-family="monospace" font-size="9" fill="#3D5068">3. Utiliser le Hamon</text><rect x="30" y="138" width="80" height="12" rx="2" fill="#2563C9" opacity=".15"/><text x="34" y="148" font-family="monospace" font-size="9" fill="#2563C9">_ choix : </text><rect x="110" y="138" width="6" height="12" rx="1" fill="#2563C9" opacity=".8"/></svg></template>
+        <template id="svg-jojolegion"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1b" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0a2e"/><stop offset="100%" stop-color="#0d1a3a"/></linearGradient></defs><rect width="320" height="180" fill="url(#g1b)"/><rect width="320" height="28" fill="rgba(0,0,0,.4)"/><text x="14" y="18" font-family="sans-serif" font-size="10" font-weight="bold" fill="#C9A227">JOJO</text><text x="42" y="18" font-family="sans-serif" font-size="10" font-weight="bold" fill="white">LEGION</text><rect x="14" y="40" width="58" height="78" rx="4" fill="rgba(255,255,255,.06)" stroke="rgba(201,162,39,.3)" stroke-width="1"/><rect x="18" y="44" width="50" height="50" rx="3" fill="rgba(201,162,39,.1)"/><text x="43" y="75" text-anchor="middle" font-size="22">⭐</text><text x="43" y="106" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.7)">Jotaro</text><rect x="80" y="40" width="58" height="78" rx="4" fill="rgba(255,255,255,.06)" stroke="rgba(201,162,39,.3)" stroke-width="1"/><text x="109" y="75" text-anchor="middle" font-size="22">💎</text><text x="109" y="106" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.7)">Giorno</text><rect x="146" y="40" width="58" height="78" rx="4" fill="rgba(255,255,255,.06)" stroke="rgba(201,162,39,.3)" stroke-width="1"/><text x="175" y="75" text-anchor="middle" font-size="22">🌸</text><text x="175" y="106" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.7)">Josuke</text></svg></template>
+        <template id="svg-gestepi"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#F2F2ED"/><rect width="320" height="32" fill="#16243B"/><text x="14" y="20" font-family="sans-serif" font-size="10" font-weight="bold" fill="white">GestEPI</text><rect x="220" y="8" width="80" height="16" rx="3" fill="#2563C9"/><text x="260" y="19" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">+ Ajouter EPI</text><rect x="14" y="44" width="292" height="16" rx="2" fill="#E2E8EF"/><text x="22" y="55" font-family="sans-serif" font-size="7" fill="#7A90A8">NOM</text><text x="120" y="55" font-family="sans-serif" font-size="7" fill="#7A90A8">CONTRÔLE</text><text x="200" y="55" font-family="sans-serif" font-size="7" fill="#7A90A8">ÉTAT</text><rect x="14" y="62" width="292" height="22" fill="white"/><text x="22" y="76" font-family="sans-serif" font-size="8" fill="#16243B">Casque P1</text><rect x="200" y="66" width="36" height="12" rx="3" fill="#D1FAE5"/><text x="218" y="75" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#059669">✓ OK</text><rect x="14" y="86" width="292" height="22" fill="#FFF7ED"/><text x="22" y="100" font-family="sans-serif" font-size="8" fill="#16243B">Harnais A3</text><rect x="200" y="90" width="48" height="12" rx="3" fill="#FED7AA"/><text x="224" y="99" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#C2410C">⚠ Alerte</text></svg></template>
+        <template id="svg-nimbus"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2744"/><stop offset="100%" stop-color="#2d3f6b"/></linearGradient></defs><rect width="320" height="180" fill="url(#sky2)"/><circle cx="270" cy="35" r="18" fill="#F8E7A0" opacity=".9"/><rect x="0" y="120" width="320" height="60" fill="#0d1a2e"/><rect x="0" y="118" width="320" height="4" fill="#8B7355"/><rect x="40" y="85" width="200" height="40" rx="6" fill="#8B2FC9"/><text x="160" y="72" text-anchor="middle" font-family="serif" font-size="9" fill="#F8E7A0">✦ NIMBUS RAILWAY ✦</text></svg></template>
+        <template id="svg-joticket"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="jo2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#002395"/><stop offset="100%" stop-color="#0052CC"/></linearGradient></defs><rect width="320" height="180" fill="url(#jo2)"/><circle cx="100" cy="65" r="18" fill="none" stroke="#0085C7" stroke-width="5" opacity=".8"/><circle cx="136" cy="65" r="18" fill="none" stroke="#F4C300" stroke-width="5" opacity=".8"/><circle cx="172" cy="65" r="18" fill="none" stroke="black" stroke-width="5" opacity=".8"/><circle cx="118" cy="82" r="18" fill="none" stroke="#009F3D" stroke-width="5" opacity=".8"/><circle cx="154" cy="82" r="18" fill="none" stroke="#DF0024" stroke-width="5" opacity=".8"/><rect x="60" y="105" width="200" height="60" rx="6" fill="white" opacity=".95"/><text x="78" y="121" font-family="sans-serif" font-size="8" font-weight="bold" fill="#002395">PARIS 2024</text><text x="78" y="134" font-family="sans-serif" font-size="7" fill="#3D5068">Athlétisme — 100m</text></svg></template>
+        <template id="svg-optim"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#F2F2ED"/><text x="14" y="24" font-family="sans-serif" font-size="8" fill="#7A90A8" font-weight="500">AVANT</text><text x="170" y="24" font-family="sans-serif" font-size="8" fill="#2563C9" font-weight="500">APRÈS</text><rect x="14" y="100" width="22" height="70" rx="2" fill="#FCA5A5"/><rect x="42" y="80" width="22" height="90" rx="2" fill="#FCA5A5"/><rect x="70" y="60" width="22" height="110" rx="2" fill="#FCA5A5"/><line x1="160" y1="20" x2="160" y2="170" stroke="#E2E8EF" stroke-width="1.5" stroke-dasharray="4,3"/><rect x="170" y="130" width="22" height="40" rx="2" fill="#93C5FD"/><rect x="198" y="110" width="22" height="60" rx="2" fill="#60A5FA"/><rect x="226" y="90" width="22" height="80" rx="2" fill="#3B82F6"/><rect x="282" y="75" width="22" height="95" rx="2" fill="#2563C9"/><text x="155" y="84" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#2563C9">-42%</text></svg></template>
+        <template id="svg-sondages"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#FAFAF7"/><rect x="20" y="15" width="170" height="150" rx="6" fill="white" stroke="#E2E8EF" stroke-width="1.5"/><rect x="20" y="15" width="170" height="28" rx="6" fill="#16243B"/><text x="105" y="33" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="bold">Sondage Utilisateurs</text><circle cx="235" cy="75" r="38" fill="#EEF2FF"/><path d="M235,75 L235,37 A38,38 0 0,1 268,94 Z" fill="#2563C9"/><path d="M235,75 L268,94 A38,38 0 0,1 202,94 Z" fill="#60A5FA"/><path d="M235,75 L202,94 A38,38 0 0,1 235,37 Z" fill="#BFDBFE"/><text x="235" y="79" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="bold" fill="#16243B">68%</text></svg></template>
+        <template id="svg-sectionuser"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#1a1f2e"/><rect x="100" y="10" width="120" height="160" rx="14" fill="#16243B" stroke="#2563C9" stroke-width="1.5"/><circle cx="128" cy="52" r="12" fill="#2563C9" opacity=".3" stroke="#2563C9" stroke-width="1.5"/><text x="128" y="56" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#2563C9">E</text><text x="148" y="48" font-family="sans-serif" font-size="8" font-weight="bold" fill="white">Elijah D.</text><rect x="108" y="78" width="104" height="20" rx="3" fill="rgba(37,99,201,.1)"/><text x="133" y="91" font-family="sans-serif" font-size="7" fill="#B8C5D0">Marc Lambert</text><rect x="120" y="152" width="80" height="14" rx="4" fill="#2563C9"/><text x="160" y="162" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">+ Utilisateur</text></svg></template>
+        <template id="svg-rgpd"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#0d1a2e"/><path d="M160,20 L210,42 L210,100 C210,132 160,155 160,155 C160,155 110,132 110,100 L110,42 Z" fill="rgba(37,99,201,.15)" stroke="#2563C9" stroke-width="2"/><rect x="145" y="82" width="30" height="26" rx="4" fill="#2563C9"/><path d="M151,82 L151,74 C151,67 169,67 169,74 L169,82" fill="none" stroke="#2563C9" stroke-width="3" stroke-linecap="round"/><circle cx="160" cy="95" r="4" fill="white"/><text x="160" y="170" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" letter-spacing="4" fill="#2563C9" opacity=".7">R G P D</text></svg></template>
+        <template id="svg-refonte"><svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#F2F2ED"/><text x="58" y="18" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7A90A8">AVANT</text><rect x="20" y="25" width="76" height="140" rx="10" fill="#3a3a3a" stroke="#555" stroke-width="1.5"/><rect x="26" y="35" width="64" height="110" rx="4" fill="#1a1a1a"/><path d="M108,90 L152,90" stroke="#2563C9" stroke-width="2" stroke-linecap="round"/><path d="M144,84 L152,90 L144,96" fill="none" stroke="#2563C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="222" y="18" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#2563C9" font-weight="bold">APRÈS</text><rect x="164" y="25" width="76" height="140" rx="10" fill="#16243B" stroke="#2563C9" stroke-width="1.5"/><rect x="170" y="35" width="64" height="22" rx="4" fill="#2563C9"/><text x="202" y="50" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white" font-weight="bold">Flex</text></svg></template>
+      </div>
+
       <div class="projets-grid" id="projets-grid">
 
         <!-- 01 — TextAdventure -->
         <div class="projet-card" data-cat="scolaire" data-id="textadventure">
-          <div class="projet-card-img">
-            <img src="assets/documents/textadventure/textadventure.png" alt="TextAdventure"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>🎮</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-textadventure"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge scolaire">Scolaire</span>
-              <span class="projet-num">#01</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge scolaire">Scolaire</span><span class="projet-num">#01</span></div>
             <h3 class="projet-card-title">TextAdventure</h3>
-            <p class="projet-card-desc">Jeu d'aventure textuel en Python inspiré de l'univers manga. Navigation par choix, système de stats et fin multiple.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Python</span>
-              <span class="projet-tag">Jeu</span>
-              <span class="projet-tag">Manga</span>
-              <span class="projet-tag">Script</span>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>01/01/24 – 05/01/24</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>1 participant</span>
             </div>
+            <p class="projet-card-desc">Jeu d'aventure textuel en Python inspiré de l'univers manga. Navigation par choix, système de stats et fins multiples.</p>
+            <div class="projet-tags"><span class="projet-tag">Python</span><span class="projet-tag">Jeu</span><span class="projet-tag">Manga</span><span class="projet-tag">Script</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
         <!-- 02 — JojoLegion -->
         <div class="projet-card" data-cat="scolaire" data-id="jojolegion">
-          <div class="projet-card-img">
-            <img src="assets/documents/jojolegion/aperçu jojo.png" alt="JojoLegion"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>⚔️</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-jojolegion"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge scolaire">Scolaire</span>
-              <span class="projet-num">#02</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge scolaire">Scolaire</span><span class="projet-num">#02</span></div>
             <h3 class="projet-card-title">JojoLegion</h3>
-            <p class="projet-card-desc">Site communautaire dédié à l'univers JoJo's Bizarre Adventure, développé en équipe avec Django, BDD relationnelle et interface soignée.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Django</span>
-              <span class="projet-tag">BDD</span>
-              <span class="projet-tag">HTML/CSS</span>
-              <span class="projet-tag">JS</span>
-              <span class="projet-tag">Travail d'équipe</span>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>12/01/25 – 12/02/25</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>4 participants</span>
             </div>
+            <p class="projet-card-desc">Site communautaire dédié à l'univers JoJo's Bizarre Adventure, développé en équipe avec Django, BDD relationnelle et interface soignée.</p>
+            <div class="projet-tags"><span class="projet-tag">Django</span><span class="projet-tag">BDD</span><span class="projet-tag">HTML/CSS</span><span class="projet-tag">JS</span><span class="projet-tag">Équipe</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
         <!-- 03 — GestEPI -->
         <div class="projet-card" data-cat="scolaire" data-id="gestepi">
-          <div class="projet-card-img">
-            <img src="assets/documents/gestepi/diagramme_cas_utilisation.png" alt="GestEPI"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>🦺</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-gestepi"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge scolaire">Scolaire</span>
-              <span class="projet-num">#03</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge scolaire">Scolaire</span><span class="projet-num">#03</span></div>
             <h3 class="projet-card-title">GestEPI</h3>
-            <p class="projet-card-desc">Application de gestion des Équipements de Protection Individuelle en React/TypeScript. Modélisation ER, automatisation des alertes de contrôle.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">React</span>
-              <span class="projet-tag">TypeScript</span>
-              <span class="projet-tag">Gestion</span>
-              <span class="projet-tag">ER</span>
-              <span class="projet-tag">Automatisation</span>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>01/01/25 – 13/04/25</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>1 participant</span>
             </div>
+            <p class="projet-card-desc">Application de gestion des Équipements de Protection Individuelle en React/TypeScript. Modélisation ER, automatisation des alertes de contrôle.</p>
+            <div class="projet-tags"><span class="projet-tag">React</span><span class="projet-tag">TypeScript</span><span class="projet-tag">Gestion</span><span class="projet-tag">ER</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
         <!-- 04 — Nimbus Railway -->
         <div class="projet-card" data-cat="scolaire" data-id="nimbus">
-          <div class="projet-card-img">
-            <img src="assets/documents/nimbus_railway/NR_Maquette.png" alt="Nimbus Railway"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>🚂</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-nimbus"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge scolaire">Scolaire</span>
-              <span class="projet-num">#04</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge scolaire">Scolaire</span><span class="projet-num">#04</span></div>
             <h3 class="projet-card-title">Nimbus Railway</h3>
-            <p class="projet-card-desc">Application de réservation de trains dans l'univers Harry Potter. Développée en JavaFX avec SceneBuilder, maquettage complet et planification agile.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">JavaFX</span>
-              <span class="projet-tag">Maquettage</span>
-              <span class="projet-tag">Harry Potter</span>
-              <span class="projet-tag">SceneBuilder</span>
-              <span class="projet-tag">Planification</span>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>01/01/25 – 12/04/25</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>3 participants</span>
             </div>
+            <p class="projet-card-desc">Application de réservation de trains dans l'univers Harry Potter. Développée en JavaFX avec SceneBuilder, maquettage complet et planification agile.</p>
+            <div class="projet-tags"><span class="projet-tag">JavaFX</span><span class="projet-tag">Maquettage</span><span class="projet-tag">Harry Potter</span><span class="projet-tag">SceneBuilder</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
         <!-- 05 — Projet JO Ticket -->
         <div class="projet-card" data-cat="scolaire" data-id="joticket">
-          <div class="projet-card-img">
-            <img src="assets/documents/projet_jo_ticket/Aperçu_Projet_Jo_Ticket.png" alt="JO Ticket"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>🏅</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-joticket"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge scolaire">Scolaire</span>
-              <span class="projet-num">#05</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge scolaire">Scolaire</span><span class="projet-num">#05</span></div>
             <h3 class="projet-card-title">Projet JO Ticket</h3>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>01/12/24 – 07/04/25</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>1 participant</span>
+            </div>
             <p class="projet-card-desc">Plateforme de billetterie pour les JO Paris 2024 avec Django. Authentification utilisateur, génération de QR codes, gestion des réservations.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Django</span>
-              <span class="projet-tag">QR Code</span>
-              <span class="projet-tag">Auth</span>
-              <span class="projet-tag">JO2024</span>
-            </div>
+            <div class="projet-tags"><span class="projet-tag">Django</span><span class="projet-tag">QR Code</span><span class="projet-tag">Auth</span><span class="projet-tag">JO2024</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
-        <!-- 06 — Génération Ticket JO -->
-        <div class="projet-card" data-cat="professionnel" data-id="genticket">
-          <div class="projet-card-img">
-            <div class="projet-card-img-placeholder">🎫</div>
-          </div>
-          <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge professionnel">Pro</span>
-              <span class="projet-num">#06</span>
-            </div>
-            <h3 class="projet-card-title">Génération Ticket JO</h3>
-            <p class="projet-card-desc">Script Python d'automatisation de génération de billets pour les JO. Création de QR codes uniques, export JSON sécurisé, cahier des charges complet.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Python</span>
-              <span class="projet-tag">Automatisation</span>
-              <span class="projet-tag">Sécurité</span>
-              <span class="projet-tag">QR Code</span>
-              <span class="projet-tag">JSON</span>
-            </div>
-          </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-
-        <!-- 07 — Optimisation logiciels -->
+        <!-- 06 — Optimisation logiciels -->
         <div class="projet-card" data-cat="professionnel" data-id="optim">
-          <div class="projet-card-img">
-            <img src="assets/documents/optimisation_logiciels/update flex 1.png" alt="Optimisation logiciels"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>⚙️</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-optim"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge professionnel">Pro</span>
-              <span class="projet-num">#07</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge professionnel">Pro</span><span class="projet-num">#06</span></div>
             <h3 class="projet-card-title">Optimisation logiciels</h3>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>23/11/23 – 22/12/23</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>2 participants</span>
+            </div>
             <p class="projet-card-desc">Analyse et optimisation des logiciels internes Flex. Identification des points de friction, amélioration des performances et de l'expérience utilisateur.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Optimisation</span>
-              <span class="projet-tag">Analyse</span>
-              <span class="projet-tag">UX</span>
-            </div>
+            <div class="projet-tags"><span class="projet-tag">Optimisation</span><span class="projet-tag">Analyse</span><span class="projet-tag">UX</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
-        <!-- 08 — Mission sondages -->
+        <!-- 07 — Mission sondages -->
         <div class="projet-card" data-cat="professionnel" data-id="sondages">
-          <div class="projet-card-img">
-            <img src="assets/documents/mission_de_sondages/maquette1.png" alt="Mission de sondages"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>📊</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-sondages"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge professionnel">Pro</span>
-              <span class="projet-num">#08</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge professionnel">Pro</span><span class="projet-num">#07</span></div>
             <h3 class="projet-card-title">Mission de sondages</h3>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>13/03/24 – 21/06/24</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>2 participants</span>
+            </div>
             <p class="projet-card-desc">Conception et déploiement de sondages utilisateurs via Google Forms. Analyse des données collectées, présentation des résultats et recommandations UX.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Google Forms</span>
-              <span class="projet-tag">Analyse</span>
-              <span class="projet-tag">UX</span>
-              <span class="projet-tag">Automatisation</span>
-            </div>
+            <div class="projet-tags"><span class="projet-tag">Google Forms</span><span class="projet-tag">Analyse</span><span class="projet-tag">UX</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
-        <!-- 09 — Section utilisateur -->
+        <!-- 08 — Section utilisateur -->
         <div class="projet-card" data-cat="professionnel" data-id="sectionuser">
-          <div class="projet-card-img">
-            <img src="assets/documents/section_utilisateur/Section_utilisateur.jpeg" alt="Section utilisateur"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>📱</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-sectionuser"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge professionnel">Pro</span>
-              <span class="projet-num">#09</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge professionnel">Pro</span><span class="projet-num">#08</span></div>
             <h3 class="projet-card-title">Dév. section utilisateur</h3>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>13/01/25 – 31/01/25</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>2 participants</span>
+            </div>
             <p class="projet-card-desc">Développement d'une section de gestion des utilisateurs pour une application mobile. Maquettage, modèle relationnel et intégration HTML/CSS/JS.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Mobile</span>
-              <span class="projet-tag">Design</span>
-              <span class="projet-tag">HTML/CSS</span>
-              <span class="projet-tag">JS</span>
-            </div>
+            <div class="projet-tags"><span class="projet-tag">Mobile</span><span class="projet-tag">Design</span><span class="projet-tag">HTML/CSS</span><span class="projet-tag">JS</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
-        <!-- 10 — Mise en conformité RGPD -->
+        <!-- 09 — RGPD -->
         <div class="projet-card" data-cat="professionnel" data-id="rgpd">
-          <div class="projet-card-img">
-            <div class="projet-card-img-placeholder">🔒</div>
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-rgpd"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge professionnel">Pro</span>
-              <span class="projet-num">#10</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge professionnel">Pro</span><span class="projet-num">#09</span></div>
             <h3 class="projet-card-title">Mise en conformité RGPD</h3>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>24/03/25 – 09/05/25</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>3 participants</span>
+            </div>
             <p class="projet-card-desc">Audit et mise en conformité RGPD des applications Flex. Identification des risques, rédaction de la documentation légale, implémentation des bonnes pratiques.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">RGPD</span>
-              <span class="projet-tag">Sécurité</span>
-              <span class="projet-tag">Documentation</span>
-              <span class="projet-tag">Données</span>
-            </div>
+            <div class="projet-tags"><span class="projet-tag">RGPD</span><span class="projet-tag">Sécurité</span><span class="projet-tag">Documentation</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
-        <!-- 11 — Refonte graphique -->
+        <!-- 10 — Refonte graphique -->
         <div class="projet-card" data-cat="professionnel" data-id="refonte">
-          <div class="projet-card-img">
-            <img src="assets/documents/refonte_graphique/screenshot_apres.png" alt="Refonte graphique"
-              onerror="this.parentElement.innerHTML='<div class=\'projet-card-img-placeholder\'>🎨</div>'">
-          </div>
+          <div class="projet-card-img projet-card-img-svg" id="card-img-refonte"></div>
           <div class="projet-card-body">
-            <div class="projet-card-meta">
-              <span class="projet-cat-badge professionnel">Pro</span>
-              <span class="projet-num">#11</span>
-            </div>
+            <div class="projet-card-meta"><span class="projet-cat-badge professionnel">Pro</span><span class="projet-num">#10</span></div>
             <h3 class="projet-card-title">Refonte graphique app mobile</h3>
-            <p class="projet-card-desc">Refonte complète de l'identité visuelle d'une application mobile. Nouvelle charte graphique, maquettes avant/après, amélioration de l'accessibilité.</p>
-            <div class="projet-tags">
-              <span class="projet-tag">Design</span>
-              <span class="projet-tag">Mobile</span>
-              <span class="projet-tag">Accessibilité</span>
-              <span class="projet-tag">Figma</span>
+            <div class="projet-card-info">
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>09/09/24 – 02/12/24</span>
+              <span class="projet-info-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>2 participants</span>
             </div>
+            <p class="projet-card-desc">Refonte complète de l'identité visuelle d'une application mobile. Nouvelle charte graphique, maquettes avant/après, amélioration de l'accessibilité.</p>
+            <div class="projet-tags"><span class="projet-tag">Design</span><span class="projet-tag">Mobile</span><span class="projet-tag">Accessibilité</span><span class="projet-tag">Figma</span></div>
           </div>
-          <div class="projet-card-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+          <div class="projet-card-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
-      </div><!-- /projets-grid -->
+      </div>
     </div>
   </section>
 
   <!-- ============================================================
-       MODAL OVERLAY
+       MODAL
   ============================================================ -->
   <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal" id="modal">
@@ -725,28 +428,44 @@
             <h2 class="modal-title" id="modal-title"></h2>
           </div>
         </div>
+        <div class="modal-meta-row" id="modal-meta"></div>
         <p class="modal-desc" id="modal-desc"></p>
+
+        <!-- Technologies -->
         <div id="modal-tags-block">
           <div class="modal-section-title">Technologies</div>
           <div class="modal-tags" id="modal-tags"></div>
         </div>
+
+        <!-- Documents téléchargeables -->
         <div id="modal-docs-block">
           <div class="modal-section-title" style="margin-top: 20px;">Documents associés</div>
           <div class="modal-docs" id="modal-docs"></div>
         </div>
+
+        <!-- Captures d'écran -->
+        <div id="modal-screenshots-block">
+          <div class="modal-section-title" style="margin-top: 20px;">Captures d'écran</div>
+          <div class="modal-screenshots" id="modal-screenshots"></div>
+        </div>
+
       </div>
     </div>
   </div>
 
   <!-- ============================================================
-       CONTACT STRIP
+       LIGHTBOX
   ============================================================ -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2l-10 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="Capture d'écran agrandie">
+  </div>
+
   <div class="contact-strip">
     <div class="contact-inner">
-      <h2 class="contact-title">
-        Mes<br>
-        <span class="accent">contact</span>
-      </h2>
+      <h2 class="contact-title">Mes<br><span class="accent">contacts</span></h2>
       <div class="contact-links">
         <a href="mailto:elijahdabopro@gmail.com" class="contact-link">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5.5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -764,9 +483,6 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">Elijah<span>Dabo</span></div>
@@ -782,234 +498,250 @@
     </div>
   </footer>
 
-  <!-- ============================================================
-       JS — Filtres + Modales
-  ============================================================ -->
   <script>
-    /* ---- DATA : détail des projets pour les modales ---- */
+    /* ============================================================
+       DONNÉES PROJETS
+       Pour ajouter des screenshots : remplis le tableau "screenshots"
+       avec { path: 'chemin/vers/image.png', label: 'Légende', portrait: false }
+       Pour les images portrait (mobile), mets portrait: true
+    ============================================================ */
     const PROJETS = {
       textadventure: {
-        title: 'TextAdventure',
-        cat: 'scolaire',
-        img: 'assets/documents/textadventure/textadventure.png',
-        emoji: '🎮',
-        desc: `Jeu d'aventure textuel développé en Python dans le cadre d'un projet scolaire. Le joueur incarne un personnage plongé dans un univers inspiré des mangas, avec des choix qui influencent le déroulement de l'histoire. Le projet intègre un système de stats, des embranchements narratifs multiples et plusieurs fins possibles selon les décisions prises. Ce projet m'a permis d'approfondir ma maîtrise de Python et de la logique algorithmique.`,
+        title: 'TextAdventure', cat: 'scolaire', emoji: '🎮',
+        dates: '01/01/24 – 05/01/24', participants: '1 participant',
+        desc: `Jeu d'aventure textuel développé en Python dans le cadre d'un projet scolaire. Le joueur incarne un personnage plongé dans un univers inspiré des mangas, avec des choix qui influencent le déroulement de l'histoire. Le projet intègre un système de stats, des embranchements narratifs multiples et plusieurs fins possibles selon les décisions prises.`,
         tags: ['Python', 'Jeu', 'Manga', 'Script', 'Algorithmique'],
         docs: [
-          { label: 'textadventure.png', path: 'assets/documents/textadventure/textadventure.png', type: 'image' },
-          { label: 'Cahier des charges', path: 'assets/documents/textadventure/cahier_des_charges.pdf', type: 'pdf' },
-          { label: 'README', path: 'assets/documents/textadventure/README.md', type: 'doc' },
+          { label: 'Cahier des charges', path: 'assets/documents/textadventure/Cahier_des_charges___textadventure.pdf', type: 'pdf' },
+          { label: 'README', path: 'assets/documents/textadventure/READMEtextadventure.md', type: 'doc' },
+        ],
+        screenshots: [
+          { path: 'assets/documents/textadventure/textadventure.png', label: 'Aperçu du code' },
         ]
       },
       jojolegion: {
-        title: 'JojoLegion',
-        cat: 'scolaire',
-        img: 'assets/documents/jojolegion/aperçu jojo.png',
-        emoji: '⚔️',
-        desc: `Site communautaire dédié à l'univers JoJo's Bizarre Adventure, développé en équipe dans le cadre d'un projet scolaire. L'application repose sur Django avec une base de données relationnelle complète (personnages, arcs narratifs, stands…). Interface HTML/CSS soignée, JavaScript pour les interactions dynamiques. Ce projet m'a appris à collaborer en équipe sur un même dépôt Git, à structurer une BDD complexe et à concevoir une identité visuelle cohérente avec un univers fictionnel fort.`,
+        title: 'JojoLegion', cat: 'scolaire', emoji: '⚔️',
+        dates: '12/01/25 – 12/02/25', participants: '4 participants',
+        desc: `Site communautaire dédié à l'univers JoJo's Bizarre Adventure, développé en équipe dans le cadre d'un projet scolaire. L'application repose sur Django avec une base de données relationnelle complète. Interface HTML/CSS soignée, JavaScript pour les interactions dynamiques.`,
         tags: ['Django', 'BDD', 'HTML/CSS', 'JavaScript', 'Travail d\'équipe', 'Git'],
         docs: [
-          { label: 'Aperçu projet', path: 'assets/documents/jojolegion/aperçu jojo.png', type: 'image' },
-          { label: 'Cahier des charges', path: 'assets/documents/jojolegion/cahier_des_charges.pdf', type: 'pdf' },
-          { label: 'Charte graphique', path: 'assets/documents/jojolegion/charte_graphique.pdf', type: 'pdf' },
-          { label: 'Schéma BDD', path: 'assets/documents/jojolegion/bdd.pdf', type: 'pdf' },
+          { label: 'Cahier des charges', path: 'assets/documents/jojolegion/Cahier_des_Charges_Jojolegion.pdf', type: 'pdf' },
+          { label: 'Charte graphique', path: 'assets/documents/jojolegion/charte_graphique_Finale_Jojolegion.pdf', type: 'pdf' },
+          { label: 'Diagramme BDD', path: 'assets/documents/jojolegion/Diagramme_de_base_de_donnees_Jojolegion.png', type: 'image' },
+        ],
+        screenshots: [
+          { path: 'assets/documents/jojolegion/apercu_jojo.png', label: 'Aperçu du site' },
         ]
       },
       gestepi: {
-        title: 'GestEPI',
-        cat: 'scolaire',
-        img: 'assets/documents/gestepi/diagramme_cas_utilisation.png',
-        emoji: '🦺',
-        desc: `Application web de gestion des Équipements de Protection Individuelle (EPI) développée en React avec TypeScript. L'objectif était de permettre à une entreprise de suivre l'état de ses équipements, leurs dates de contrôle et d'automatiser les alertes. Modélisation entité-relation complète, interface réactive et architecture de composants propre. Ce projet m'a permis de progresser significativement sur React/TypeScript et la gestion d'état.`,
-        tags: ['React', 'TypeScript', 'Gestion', 'ER', 'Automatisation', 'Alertes'],
-        docs: [
-          { label: 'Diagramme cas d\'utilisation', path: 'assets/documents/gestepi/diagramme_cas_utilisation.png', type: 'image' },
+        title: 'GestEPI', cat: 'scolaire', emoji: '🦺',
+        dates: '01/01/25 – 13/04/25', participants: '1 participant',
+        desc: `Application web de gestion des Équipements de Protection Individuelle (EPI) développée en React avec TypeScript. Suivi de l'état des équipements, dates de contrôle et alertes automatiques. Modélisation entité-relation complète.`,
+        tags: ['React', 'TypeScript', 'Gestion', 'ER', 'Automatisation'],
+        docs: [],
+        screenshots: [
+          { path: 'assets/documents/gestepi/diagramme_de_cas_utilisation_GestEPI.png', label: 'Diagramme cas d\'utilisation' },
         ]
       },
       nimbus: {
-        title: 'Nimbus Railway',
-        cat: 'scolaire',
-        img: 'assets/documents/nimbus_railway/NR_Maquette.png',
-        emoji: '🚂',
-        desc: `Application de réservation de trains dans l'univers magique de Harry Potter, développée en JavaFX avec SceneBuilder. Le projet couvrait l'intégralité du cycle de développement : de la maquette fonctionnelle à l'application finale, en passant par la planification agile (sprints, user stories). L'univers Harry Potter imposait une attention particulière à l'identité visuelle et à l'immersion thématique.`,
-        tags: ['JavaFX', 'Java', 'Maquettage', 'SceneBuilder', 'Agile', 'Harry Potter'],
+        title: 'Nimbus Railway', cat: 'scolaire', emoji: '🚂',
+        dates: '01/01/25 – 12/04/25', participants: '3 participants',
+        desc: `Application de réservation de trains dans l'univers magique de Harry Potter, développée en JavaFX avec SceneBuilder. Cycle complet : maquette fonctionnelle, développement et planification agile.`,
+        tags: ['JavaFX', 'Java', 'Maquettage', 'SceneBuilder', 'Agile'],
         docs: [
           { label: 'Maquette PDF', path: 'assets/documents/nimbus_railway/NR_Maquette.pdf', type: 'pdf' },
-          { label: 'README', path: 'assets/documents/nimbus_railway/README.md', type: 'doc' },
-          { label: 'Modèle relationnel', path: 'assets/documents/nimbus_railway/modele_relationnel.pdf', type: 'pdf' },
-        ]
+          { label: 'README', path: 'assets/documents/nimbus_railway/README (3).md', type: 'doc' },
+          { label: 'Modèle relationnel', path: 'assets/documents/nimbus_railway/Modele_Relationnel (1).md', type: 'doc' },
+        ],
+        screenshots: []
       },
       joticket: {
-        title: 'Projet JO Ticket',
-        cat: 'scolaire',
-        img: 'assets/documents/projet_jo_ticket/Aperçu_Projet_Jo_Ticket.png',
-        emoji: '🏅',
-        desc: `Plateforme de billetterie en ligne pour les Jeux Olympiques Paris 2024, développée avec Django. Le système intègre une authentification complète (inscription, connexion, sessions), la gestion des réservations par épreuves, et la génération de billets avec QR codes uniques. Projet qui m'a permis de maîtriser le cycle complet d'une application Django : modèles, vues, templates, authentification.`,
-        tags: ['Django', 'Python', 'QR Code', 'Authentification', 'Gestion BDD', 'JO2024'],
+        title: 'Projet JO Ticket', cat: 'scolaire', emoji: '🏅',
+        dates: '01/12/24 – 07/04/25', participants: '1 participant',
+        desc: `Plateforme de billetterie en ligne pour les Jeux Olympiques Paris 2024, développée avec Django. Authentification complète, gestion des réservations par épreuves, génération de billets avec QR codes uniques.`,
+        tags: ['Django', 'Python', 'QR Code', 'Authentification', 'JO2024'],
         docs: [
-          { label: 'Aperçu projet', path: 'assets/documents/projet_jo_ticket/Aperçu_Projet_Jo_Ticket.png', type: 'image' },
-          { label: 'README', path: 'assets/documents/projet_jo_ticket/README.md', type: 'doc' },
-          { label: 'Schéma BDD', path: 'assets/documents/projet_jo_ticket/schema.pdf', type: 'pdf' },
-        ]
-      },
-      genticket: {
-        title: 'Génération Ticket JO',
-        cat: 'professionnel',
-        img: null,
-        emoji: '🎫',
-        desc: `Script Python développé en entreprise pour automatiser la génération de billets pour les Jeux Olympiques. Chaque billet est associé à un QR code unique et chiffré, exporté en JSON sécurisé. Le script gère la création en lot, la validation des données et la prévention des doublons. Projet réalisé dans un contexte professionnel réel avec cahier des charges et documentation technique complète.`,
-        tags: ['Python', 'Automatisation', 'Sécurité', 'QR Code', 'JSON', 'Cryptographie'],
-        docs: [
-          { label: 'Script billetterie.py', path: 'assets/documents/generation_de_ticket_jo/billetterie.py', type: 'doc' },
-          { label: 'Cahier des charges', path: 'assets/documents/generation_de_ticket_jo/cahier_des_charges.pdf', type: 'pdf' },
-          { label: 'README', path: 'assets/documents/generation_de_ticket_jo/README.md', type: 'doc' },
+          { label: 'README', path: 'assets/documents/projet_jo_ticket/README_projet_JO_Ticket.md', type: 'doc' },
+        ],
+        screenshots: [
+          { path: 'assets/documents/projet_jo_ticket/Apercu_Projet_Jo_Ticket.png', label: 'Aperçu de l\'app' },
+          { path: 'assets/documents/projet_jo_ticket/Schema_Projet_JO.png', label: 'Schéma architecture' },
         ]
       },
       optim: {
-        title: 'Optimisation logiciels',
-        cat: 'professionnel',
-        img: 'assets/documents/optimisation_logiciels/update flex 1.png',
-        emoji: '⚙️',
-        desc: `Mission d'audit et d'optimisation des logiciels internes de Flex. Analyse des performances, identification des points de friction utilisateur, proposition et implémentation d'améliorations. Le travail a porté sur l'interface, la réduction des temps de chargement et la simplification de certains parcours utilisateurs critiques pour les opérateurs de transport.`,
+        title: 'Optimisation logiciels', cat: 'professionnel', emoji: '⚙️',
+        dates: '23/11/23 – 22/12/23', participants: '2 participants',
+        desc: `Mission d'audit et d'optimisation des logiciels internes de Flex. Analyse des performances, identification des points de friction utilisateur, proposition et implémentation d'améliorations.`,
         tags: ['Optimisation', 'Analyse', 'UX', 'Performance', 'Audit'],
-        docs: [
-          { label: 'Screenshot update 1', path: 'assets/documents/optimisation_logiciels/update flex 1.png', type: 'image' },
-          { label: 'Screenshot update 2', path: 'assets/documents/optimisation_logiciels/update flex 2.png', type: 'image' },
-          { label: 'Screenshot update 3', path: 'assets/documents/optimisation_logiciels/update flex 3.png', type: 'image' },
+        docs: [],
+        screenshots: [
+          { path: 'assets/documents/optimisation_logiciels/update flex (1).png', label: 'Comptes rendus' },
+          { path: 'assets/documents/optimisation_logiciels/update flex (2).png', label: 'Filtre rapports' },
+          { path: 'assets/documents/optimisation_logiciels/update flex (3).png', label: 'Envoi rappel' },
         ]
       },
       sondages: {
-        title: 'Mission de sondages',
-        cat: 'professionnel',
-        img: 'assets/documents/mission_de_sondages/maquette1.png',
-        emoji: '📊',
-        desc: `Conception et déploiement d'une mission de sondages auprès des utilisateurs internes de Flex. Création de formulaires Google Forms structurés, définition des indicateurs clés, collecte et analyse des données. Présentation des résultats aux parties prenantes avec recommandations concrètes pour améliorer les outils internes.`,
-        tags: ['Google Forms', 'Analyse de données', 'UX Research', 'Automatisation', 'Présentation'],
+        title: 'Mission de sondages', cat: 'professionnel', emoji: '📊',
+        dates: '13/03/24 – 21/06/24', participants: '2 participants',
+        desc: `Conception et déploiement d'une mission de sondages auprès des utilisateurs internes de Flex. Création de formulaires, collecte et analyse des données, présentation des résultats aux parties prenantes.`,
+        tags: ['Google Forms', 'Analyse de données', 'UX Research', 'Présentation'],
         docs: [
-          { label: 'Cahier des charges', path: 'assets/documents/mission_de_sondages/cahier_des_charges.pdf', type: 'pdf' },
-          { label: 'Maquette 1', path: 'assets/documents/mission_de_sondages/maquette1.png', type: 'image' },
-          { label: 'Maquette 2', path: 'assets/documents/mission_de_sondages/maquette2.png', type: 'image' },
-          { label: 'Screenshot résultats', path: 'assets/documents/mission_de_sondages/screenshot.png', type: 'image' },
+          { label: 'Cahier & Maquettes', path: 'assets/documents/mission_de_sondages/Cahier_Maquette_Sondages.docx', type: 'doc' },
+          { label: 'Message de lancement', path: 'assets/documents/mission_de_sondages/message_lancement_sondage.pdf', type: 'pdf' },
+        ],
+        screenshots: [
+          { path: 'assets/documents/mission_de_sondages/apercu_sondage1.png', label: 'Vue mission', portrait: true },
+          { path: 'assets/documents/mission_de_sondages/apercu_sondage2.png', label: 'Vue questionnaire', portrait: true },
         ]
       },
       sectionuser: {
-        title: 'Dév. section utilisateur',
-        cat: 'professionnel',
-        img: 'assets/documents/section_utilisateur/Section_utilisateur.jpeg',
-        emoji: '📱',
-        desc: `Développement d'une section complète de gestion des utilisateurs pour une application mobile de Flex. Le travail a couvert la conception des maquettes sur Figma, la définition du modèle relationnel de données, puis l'intégration HTML/CSS/JS. Interface pensée pour un usage mobile avec des interactions fluides et une ergonomie adaptée aux opérateurs terrain.`,
+        title: 'Dév. section utilisateur', cat: 'professionnel', emoji: '📱',
+        dates: '13/01/25 – 31/01/25', participants: '2 participants',
+        desc: `Développement d'une section complète de gestion des utilisateurs pour une application mobile de Flex. Maquettes Figma, modèle relationnel, intégration HTML/CSS/JS. Interface pensée pour usage mobile.`,
         tags: ['Mobile', 'Design', 'HTML/CSS', 'JavaScript', 'Figma', 'BDD'],
         docs: [
-          { label: 'Cahier des charges', path: 'assets/documents/section_utilisateur/cahier_des_charges.pdf', type: 'pdf' },
-          { label: 'Maquette', path: 'assets/documents/section_utilisateur/maquette.pdf', type: 'pdf' },
-          { label: 'Modèle relationnel', path: 'assets/documents/section_utilisateur/modele_relationnel.pdf', type: 'pdf' },
+          { label: 'Message de lancement', path: 'assets/documents/section_utilisateur/message_lancement_section_utilisateur.pdf', type: 'pdf' },
+        ],
+        screenshots: [
+          { path: 'assets/documents/section_utilisateur/apercu_section_u.png', label: 'Documents administratifs', portrait: true },
         ]
       },
       rgpd: {
-        title: 'Mise en conformité RGPD',
-        cat: 'professionnel',
-        img: null,
-        emoji: '🔒',
-        desc: `Mission de mise en conformité RGPD des applications de Flex. Audit complet des pratiques de collecte, stockage et traitement des données personnelles. Identification des risques, rédaction des politiques de confidentialité, mise en place des mécanismes de consentement et de suppression des données. Documentation technique et légale livrée à la direction.`,
-        tags: ['RGPD', 'Sécurité', 'Documentation', 'Audit', 'Données personnelles', 'Conformité'],
-        docs: []
+        title: 'Mise en conformité RGPD', cat: 'professionnel', emoji: '🔒',
+        dates: '24/03/25 – 09/05/25', participants: '3 participants',
+        desc: `Mission de mise en conformité RGPD des applications de Flex. Audit des pratiques de collecte et stockage de données, rédaction des politiques de confidentialité, mise en place des mécanismes de consentement.`,
+        tags: ['RGPD', 'Sécurité', 'Documentation', 'Audit', 'Données personnelles'],
+        docs: [],
+        screenshots: []
       },
       refonte: {
-        title: 'Refonte graphique app mobile',
-        cat: 'professionnel',
-        img: 'assets/documents/refonte_graphique/screenshot_apres.png',
-        emoji: '🎨',
-        desc: `Refonte complète de l'identité visuelle d'une application mobile de Flex utilisée par les opérateurs de transport. Définition d'une nouvelle charte graphique (couleurs, typographie, icônes), création des maquettes avant/après sur Figma, amélioration de l'accessibilité (contrastes, tailles de cible tactile). Le projet a significativement modernisé l'image de l'outil et amélioré la satisfaction utilisateur.`,
+        title: 'Refonte graphique app mobile', cat: 'professionnel', emoji: '🎨',
+        dates: '09/09/24 – 02/12/24', participants: '2 participants',
+        desc: `Refonte complète de l'identité visuelle d'une application mobile de Flex utilisée par les opérateurs de transport. Nouvelle charte graphique, maquettes avant/après sur Figma, amélioration de l'accessibilité.`,
         tags: ['Design', 'Mobile', 'Figma', 'Accessibilité', 'Charte graphique', 'UX/UI'],
         docs: [
-          { label: 'Cahier des charges', path: 'assets/documents/refonte_graphique/cahier_des_charges.pdf', type: 'pdf' },
-          { label: 'Charte graphique', path: 'assets/documents/refonte_graphique/charte_graphique.pdf', type: 'pdf' },
-          { label: 'Screenshot avant', path: 'assets/documents/refonte_graphique/screenshot_avant.png', type: 'image' },
-          { label: 'Screenshot après', path: 'assets/documents/refonte_graphique/screenshot_apres.png', type: 'image' },
+          { label: 'Cahier & Maquettes', path: 'assets/documents/refonte_graphique/Cahier_Maquette_Refonte.docx', type: 'doc' },
+          { label: 'Charte graphique', path: 'assets/documents/refonte_graphique/charte_graphique_flex-flux.pdf', type: 'pdf' },
+        ],
+        screenshots: [
+          { path: 'assets/documents/refonte_graphique/ancien visuel appli.jpg', label: 'Avant', portrait: true },
+          { path: 'assets/documents/refonte_graphique/nouveau visu refonte.png', label: 'Après', portrait: true },
         ]
       },
     };
 
-    /* ---- ICONS DOC ---- */
+    /* ============================================================
+       ICÔNES DOCUMENTS
+    ============================================================ */
     const iconPdf = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 5h5M4.5 7.5h5M4.5 10h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`;
     const iconImg = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1 9l3-3 2 2 2-2.5 3 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="5" r="1" fill="currentColor"/></svg>`;
     const iconDoc = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 5h5M4.5 7.5h5M4.5 10h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`;
+    function getDocIcon(type) { if (type==='pdf') return iconPdf; if (type==='image') return iconImg; return iconDoc; }
 
-    function getDocIcon(type) {
-      if (type === 'pdf') return iconPdf;
-      if (type === 'image') return iconImg;
-      return iconDoc;
-    }
+    /* ============================================================
+       INJECTER LES SVG DANS LES CARDS
+    ============================================================ */
+    const svgIds = ['textadventure','jojolegion','gestepi','nimbus','joticket','optim','sondages','sectionuser','rgpd','refonte'];
+    svgIds.forEach(id => {
+      const tmpl = document.getElementById('svg-' + id);
+      const container = document.getElementById('card-img-' + id);
+      if (tmpl && container) container.appendChild(tmpl.content.cloneNode(true));
+    });
 
-    /* ---- FILTER ---- */
+    /* ============================================================
+       FILTRE
+    ============================================================ */
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.projet-card');
     const countEl = document.getElementById('filter-count');
-
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         const filter = btn.dataset.filter;
         let visible = 0;
-
         cards.forEach(card => {
           const match = filter === 'all' || card.dataset.cat === filter;
           card.classList.toggle('hidden', !match);
           if (match) visible++;
         });
-
         countEl.textContent = `${visible} projet${visible > 1 ? 's' : ''}`;
       });
     });
 
-    /* ---- MODAL ---- */
-    const overlay   = document.getElementById('modal-overlay');
-    const modalEl   = document.getElementById('modal');
-    const closeBtn  = document.getElementById('modal-close');
-    const modalImg  = document.getElementById('modal-img');
-    const modalTitle = document.getElementById('modal-title');
-    const modalBadges = document.getElementById('modal-badges');
-    const modalDesc  = document.getElementById('modal-desc');
-    const modalTags  = document.getElementById('modal-tags');
-    const modalDocs  = document.getElementById('modal-docs');
-    const modalDocsBlock = document.getElementById('modal-docs-block');
+    /* ============================================================
+       MODAL
+    ============================================================ */
+    const overlay       = document.getElementById('modal-overlay');
+    const closeBtn      = document.getElementById('modal-close');
+    const modalImg      = document.getElementById('modal-img');
+    const modalTitle    = document.getElementById('modal-title');
+    const modalBadges   = document.getElementById('modal-badges');
+    const modalMeta     = document.getElementById('modal-meta');
+    const modalDesc     = document.getElementById('modal-desc');
+    const modalTags     = document.getElementById('modal-tags');
+    const modalDocs     = document.getElementById('modal-docs');
+    const modalDocsBlock        = document.getElementById('modal-docs-block');
+    const modalScreenshots      = document.getElementById('modal-screenshots');
+    const modalScreenshotsBlock = document.getElementById('modal-screenshots-block');
 
     function openModal(id) {
-      const p = PROJETS[id];
-      if (!p) return;
+      const p = PROJETS[id]; if (!p) return;
 
-      // Image
-      if (p.img) {
-        modalImg.innerHTML = `<img src="${p.img}" alt="${p.title}" onerror="this.parentElement.innerHTML='<div class=\'modal-img-placeholder\'>${p.emoji}</div>'">`;
+      // Image hero de la modale (SVG)
+      const tmpl = document.getElementById('svg-' + id);
+      if (tmpl) {
+        const clone = tmpl.content.cloneNode(true);
+        const svgEl = clone.querySelector('svg');
+        if (svgEl) svgEl.style.cssText = 'width:100%;height:100%;display:block;';
+        modalImg.innerHTML = '';
+        modalImg.appendChild(clone);
       } else {
         modalImg.innerHTML = `<div class="modal-img-placeholder">${p.emoji}</div>`;
       }
 
-      // Badge
+      // Badge + titre
       const badgeClass = p.cat === 'scolaire' ? 'scolaire' : 'professionnel';
       const badgeLabel = p.cat === 'scolaire' ? 'Scolaire' : 'Professionnel';
       modalBadges.innerHTML = `<span class="projet-cat-badge ${badgeClass}">${badgeLabel}</span>`;
-
-      // Title & desc
       modalTitle.textContent = p.title;
-      modalDesc.textContent = p.desc;
 
-      // Tags
+      // Méta (dates + participants)
+      modalMeta.innerHTML = `
+        <span class="modal-meta-item">
+          <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 1v2M8 1v2M1 5h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          ${p.dates}
+        </span>
+        <span class="modal-meta-item">
+          <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 10c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          ${p.participants}
+        </span>`;
+
+      // Description + tags
+      modalDesc.textContent = p.desc;
       modalTags.innerHTML = p.tags.map(t => `<span class="tech-tag"><span class="dot"></span>${t}</span>`).join('');
 
-      // Docs
+      // Documents
       if (p.docs && p.docs.length > 0) {
         modalDocsBlock.style.display = 'block';
         modalDocs.innerHTML = p.docs.map(d =>
-          `<a href="${d.path}" target="_blank" class="modal-doc-link" download>
-            ${getDocIcon(d.type)}
-            ${d.label}
-          </a>`
+          `<a href="${d.path}" target="_blank" class="modal-doc-link" download>${getDocIcon(d.type)}${d.label}</a>`
         ).join('');
       } else {
         modalDocsBlock.style.display = 'none';
+      }
+
+      // Screenshots
+      if (p.screenshots && p.screenshots.length > 0) {
+        modalScreenshotsBlock.style.display = 'block';
+        modalScreenshots.innerHTML = p.screenshots.map(s => `
+          <div class="modal-screenshot-item${s.portrait ? ' portrait' : ''}" onclick="event.stopPropagation(); openLightbox('${s.path}')">
+            <img src="${s.path}" alt="${s.label}" onerror="this.parentElement.style.display='none'">
+            <span class="screenshot-label">${s.label}</span>
+          </div>`
+        ).join('');
+      } else {
+        modalScreenshotsBlock.style.display = 'none';
       }
 
       overlay.classList.add('open');
@@ -1021,21 +753,62 @@
       document.body.style.overflow = '';
     }
 
-    cards.forEach(card => {
-      card.addEventListener('click', () => openModal(card.dataset.id));
-    });
-
+    cards.forEach(card => card.addEventListener('click', () => openModal(card.dataset.id)));
     closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeModal();
-    });
+    /* ============================================================
+       LIGHTBOX
+    ============================================================ */
+    const lightbox      = document.getElementById('lightbox');
+    const lightboxImg   = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+    function openLightbox(src) {
+      // Supprimer toute lightbox existante
+      const existing = document.getElementById('lb-dynamic');
+      if (existing) existing.remove();
+
+      // Créer la lightbox directement dans body (évite tout stacking context parent)
+      const lb = document.createElement('div');
+      lb.id = 'lb-dynamic';
+      lb.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out;';
+
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.cssText = 'max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.6);object-fit:contain;cursor:default;';
+
+      const closeX = document.createElement('button');
+      closeX.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2l-10 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>';
+      closeX.style.cssText = 'position:absolute;top:20px;right:20px;width:36px;height:36px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;';
+
+      function closeLb() { lb.remove(); }
+      lb.addEventListener('click', closeLb);
+      img.addEventListener('click', e => e.stopPropagation());
+      closeX.addEventListener('click', closeLb);
+
+      lb.appendChild(img);
+      lb.appendChild(closeX);
+      document.body.appendChild(lb);
+    }
+    lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+    // Escape ferme lightbox en priorité, sinon la modale
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        const dynLb = document.getElementById('lb-dynamic');
+        if (dynLb) {
+          dynLb.remove();
+        } else if (lightbox.classList.contains('open')) {
+          lightbox.classList.remove('open');
+        } else {
+          closeModal();
+        }
+      }
     });
   </script>
 
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

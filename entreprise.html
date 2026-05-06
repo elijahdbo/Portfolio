@@ -9,16 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* ---- Styles spécifiques entreprise.html ---- */
-
-    /* Hero entreprise — layout 2 colonnes */
     .entreprise-hero-inner {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 60px;
       align-items: end;
     }
-
     .company-badge {
       display: inline-flex;
       align-items: center;
@@ -40,8 +36,6 @@
       background: #22c55e;
       box-shadow: 0 0 0 3px rgba(34,197,94,.2);
     }
-
-    /* Contexte équipe */
     .equipe-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -50,13 +44,11 @@
       border-radius: 8px;
       overflow: hidden;
     }
-
     .equipe-cell {
       background: var(--white);
       padding: 28px 24px;
       text-align: center;
     }
-
     .equipe-num {
       font-family: var(--font-display);
       font-weight: 900;
@@ -67,7 +59,6 @@
       margin-bottom: 4px;
     }
     .equipe-num span { color: var(--accent); }
-
     .equipe-label {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -75,8 +66,6 @@
       text-transform: uppercase;
       color: var(--ink-3);
     }
-
-    /* Organigramme SI simplifié */
     .si-org {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -85,10 +74,7 @@
       border-radius: 8px;
       overflow: hidden;
     }
-    .si-org-cell {
-      background: var(--white);
-      padding: 32px;
-    }
+    .si-org-cell { background: var(--white); padding: 32px; }
     .si-org-cell.full { grid-column: 1 / -1; }
     .si-org-cell-label {
       font-family: var(--font-mono);
@@ -114,8 +100,6 @@
       color: var(--ink-2);
       line-height: 1.7;
     }
-
-    /* Missions liste */
     .missions-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -124,7 +108,6 @@
       border-radius: 8px;
       overflow: hidden;
     }
-
     .mission-item {
       background: var(--white);
       padding: 32px;
@@ -132,7 +115,6 @@
       gap: 20px;
       align-items: flex-start;
     }
-
     .mission-num {
       font-family: var(--font-display);
       font-weight: 900;
@@ -143,7 +125,6 @@
       flex-shrink: 0;
       user-select: none;
     }
-
     .mission-content h3 {
       font-family: var(--font-display);
       font-weight: 700;
@@ -153,15 +134,12 @@
       color: var(--ink);
       margin-bottom: 8px;
     }
-
     .mission-content p {
       font-size: 13px;
       font-weight: 300;
       color: var(--ink-2);
       line-height: 1.65;
     }
-
-    /* Apprentissages — 2 colonnes */
     .apprentissages-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -170,12 +148,7 @@
       border-radius: 8px;
       overflow: hidden;
     }
-
-    .apprentissage-cell {
-      background: var(--white);
-      padding: 36px 32px;
-    }
-
+    .apprentissage-cell { background: var(--white); padding: 36px 32px; }
     .apprentissage-cell h3 {
       font-family: var(--font-display);
       font-weight: 700;
@@ -187,14 +160,7 @@
       padding-bottom: 16px;
       border-bottom: 1px solid var(--rule);
     }
-
-    .apprentissage-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      list-style: none;
-    }
-
+    .apprentissage-list { display: flex; flex-direction: column; gap: 12px; list-style: none; }
     .apprentissage-list li {
       display: flex;
       gap: 12px;
@@ -203,7 +169,6 @@
       color: var(--ink-2);
       line-height: 1.5;
     }
-
     .apprentissage-list li::before {
       content: '';
       display: block;
@@ -213,14 +178,7 @@
       flex-shrink: 0;
       margin-top: 6px;
     }
-
-    /* Clients partenaires */
-    .partenaires-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
+    .partenaires-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .partenaire-tag {
       display: inline-flex;
       align-items: center;
@@ -235,33 +193,17 @@
       border-radius: 4px;
       transition: all .15s;
     }
-    .partenaire-tag:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-dim);
-    }
-    .partenaire-tag .dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: .7;
-    }
-
-    /* Env technique — colonnes */
+    .partenaire-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+    .partenaire-tag .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .7; }
     .env-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 2px;
       background: var(--rule);
       border-radius: 8px;
       overflow: hidden;
     }
-
-    .env-cell {
-      background: var(--white);
-      padding: 32px;
-    }
-
+    .env-cell { background: var(--white); padding: 32px; }
     .env-cell-label {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -272,56 +214,14 @@
       margin-bottom: 16px;
       display: block;
     }
-
-    /* SI image block */
-    .si-image-block {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .si-image-header {
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--rule);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .si-image-header-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-    }
-    .si-image-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--ink-3);
-    }
-    .si-image-body {
-      padding: 28px;
-      min-height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--paper-2);
-    }
-    .si-image-body img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
-    .si-image-placeholder {
-      text-align: center;
-      color: var(--ink-4);
-    }
-    .si-image-placeholder p {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .08em;
-      margin-top: 8px;
-    }
-
+    .si-image-block { background: var(--white); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+    .si-image-header { padding: 16px 24px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 8px; }
+    .si-image-header-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .si-image-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+    .si-image-body { padding: 28px; min-height: 200px; display: flex; align-items: center; justify-content: center; background: var(--paper-2); }
+    .si-image-body img { max-width: 100%; height: auto; border-radius: 4px; }
+    .si-image-placeholder { text-align: center; color: var(--ink-4); }
+    .si-image-placeholder p { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; margin-top: 8px; }
     @media (max-width: 900px) {
       .entreprise-hero-inner { grid-template-columns: 1fr; }
       .equipe-grid { grid-template-columns: repeat(2, 1fr); }
@@ -335,15 +235,12 @@
 </head>
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
   <nav class="nav" role="navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Elijah<span>Dabo</span></a>
+      <a href="index.html" class="nav-logo">Port<span>folio</span></a>
       <button class="nav-burger" aria-label="Menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
+        <span></span><span></span><span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="entreprise.html" class="active">Entreprise</a></li>
@@ -354,9 +251,6 @@
     </div>
   </nav>
 
-  <!-- ============================================================
-       PAGE HERO
-  ============================================================ -->
   <section class="page-hero">
     <div class="page-hero-inner">
       <div class="entreprise-hero-inner">
@@ -367,7 +261,7 @@
             <span class="accent">d'accueil</span>
           </h1>
           <p class="page-hero-sub">
-            Depuis 2023, j'effectue mon alternance chez Flex — filiale Flex-Flux — spécialisée dans les services numériques liés au transport public en Île-de-France.
+            Depuis 2023, j'alterne chez Flex — filiale Flex-Flux — spécialisée dans les outils numériques pour le transport public en Île-de-France.
           </p>
         </div>
         <div style="padding-bottom: 8px;">
@@ -380,9 +274,7 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       01 — PRÉSENTATION FLEX
-  ============================================================ -->
+  <!-- 01 — PRÉSENTATION -->
   <section class="section" id="presentation">
     <div class="container">
       <div class="section-header">
@@ -392,8 +284,6 @@
           <h2 class="section-title">Présentation</h2>
         </div>
       </div>
-
-      <!-- Chiffres clés -->
       <div class="info-row">
         <div class="info-cell">
           <div class="info-cell-label">Entreprise</div>
@@ -416,31 +306,19 @@
           <div class="info-cell-sub">IDFM, SNCF, RATP…</div>
         </div>
       </div>
-
-      <!-- Description + clients -->
       <div class="profil-grid">
         <div class="profil-text">
-          <p>
-            Flex est une filiale de Flex-Flux bénéficiant d'une autonomie juridique, administrative et financière complète. L'entreprise s'est positionnée comme un acteur spécialisé dans les services numériques à destination des opérateurs de transport public en Île-de-France.
-          </p>
-          <p>
-            Son cœur de métier : concevoir et opérer des outils logiciels permettant aux transporteurs de mieux gérer leurs ressources humaines, leurs plannings opérationnels et leurs processus métiers — de l'affectation des conducteurs au suivi des incidents terrain.
-          </p>
-          <p>
-            Grâce à cette spécialisation, Flex collabore avec les plus grands noms du secteur : IDFM (Île-de-France Mobilités), Transdev, SNCF et RATP font partie de son portefeuille de partenaires et clients.
-          </p>
+          <p>Flex est une filiale de Flex-Flux, autonome juridiquement et financièrement. Elle conçoit des outils logiciels pour les opérateurs de transport public en Île-de-France : gestion des plannings, des ressources humaines, suivi des incidents.</p>
+          <p>Parmi ses clients : IDFM, Transdev, SNCF et RATP. Un positionnement précis, avec de vrais enjeux métiers.</p>
           <div class="highlight-box">
-            <p>Une entreprise à taille humaine qui offre une autonomie réelle dès le premier jour d'alternance — idéal pour monter en compétences rapidement.</p>
+            <p>38 personnes, une équipe technique resserrée — idéal pour prendre des responsabilités rapidement.</p>
           </div>
         </div>
-
         <div>
           <div class="mission-card">
             <div class="mission-icon">🚌</div>
             <h3>Clients & Partenaires</h3>
-            <p style="margin-bottom: 20px;">
-              Flex intervient auprès des principaux acteurs du transport public francilien.
-            </p>
+            <p style="margin-bottom: 20px;">Les grands acteurs du transport francilien.</p>
             <div class="partenaires-list">
               <span class="partenaire-tag"><span class="dot"></span>IDFM</span>
               <span class="partenaire-tag"><span class="dot"></span>Transdev</span>
@@ -449,26 +327,13 @@
               <span class="partenaire-tag"><span class="dot"></span>Keolis</span>
               <span class="partenaire-tag"><span class="dot"></span>Île-de-France Mobilités</span>
             </div>
-
             <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule);">
               <span class="stack-cat-label">Domaines couverts</span>
               <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
-                <div class="checklist-item">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Planification opérationnelle
-                </div>
-                <div class="checklist-item">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Gestion des ressources humaines
-                </div>
-                <div class="checklist-item">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Suivi et gestion des incidents
-                </div>
-                <div class="checklist-item">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Automatisation des processus métiers
-                </div>
+                <div class="checklist-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Planification opérationnelle</div>
+                <div class="checklist-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestion des ressources humaines</div>
+                <div class="checklist-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Suivi des incidents</div>
+                <div class="checklist-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#2563C9" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="#2563C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Automatisation métier</div>
               </div>
             </div>
           </div>
@@ -477,9 +342,7 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       02 — MON RÔLE & MISSIONS
-  ============================================================ -->
+  <!-- 02 — MON RÔLE & MISSIONS -->
   <section class="section section-alt" id="missions">
     <div class="container">
       <div class="section-header">
@@ -489,95 +352,60 @@
           <h2 class="section-title">Mon rôle & missions</h2>
         </div>
       </div>
-
-      <!-- Contexte équipe -->
       <div class="equipe-grid" style="margin-bottom: 40px;">
-        <div class="equipe-cell">
-          <div class="equipe-num">2</div>
-          <div class="equipe-label">Développeurs web</div>
-        </div>
-        <div class="equipe-cell">
-          <div class="equipe-num">1</div>
-          <div class="equipe-label">Designer</div>
-        </div>
-        <div class="equipe-cell">
-          <div class="equipe-num">1</div>
-          <div class="equipe-label">Marketing digital</div>
-        </div>
-        <div class="equipe-cell">
-          <div class="equipe-num">38</div>
-          <div class="equipe-label">Employés au total</div>
-        </div>
+        <div class="equipe-cell"><div class="equipe-num">2</div><div class="equipe-label">Développeurs web</div></div>
+        <div class="equipe-cell"><div class="equipe-num">1</div><div class="equipe-label">Designer</div></div>
+        <div class="equipe-cell"><div class="equipe-num">1</div><div class="equipe-label">Marketing digital</div></div>
+        <div class="equipe-cell"><div class="equipe-num">38</div><div class="equipe-label">Employés au total</div></div>
       </div>
-
-      <!-- Missions -->
       <div class="missions-grid">
         <div class="mission-item">
           <div class="mission-num">01</div>
           <div class="mission-content">
-            <h3>Conception & développement d'outils</h3>
-            <p>
-              Participation à la conception et au développement d'outils logiciels internes et clients. Création d'interfaces utilisateurs modernes, développement de modules fonctionnels et maintenance applicative en collaboration avec le chef de projet.
-            </p>
+            <h3>Développement d'outils</h3>
+            <p>Conception et développement d'outils internes : interfaces utilisateurs, modules fonctionnels, maintenance en collaboration avec le chef de projet.</p>
           </div>
         </div>
-
         <div class="mission-item">
           <div class="mission-num">02</div>
           <div class="mission-content">
-            <h3>Automatisation de processus</h3>
-            <p>
-              Développement de scripts et outils d'automatisation pour les processus opérationnels : gestion des affectations conducteurs, suivi des incidents, génération de rapports et billets. Réduction des tâches manuelles répétitives.
-            </p>
+            <h3>Automatisation</h3>
+            <p>Scripts Python pour automatiser les tâches répétitives : affectations, suivi des incidents, génération de rapports et de billets.</p>
           </div>
         </div>
-
         <div class="mission-item">
           <div class="mission-num">03</div>
           <div class="mission-content">
-            <h3>Refonte & optimisation d'applications</h3>
-            <p>
-              Participation à la refonte graphique d'une application mobile existante. Modernisation de l'identité visuelle, amélioration de l'expérience utilisateur, mise à jour des logiciels internes pour améliorer leurs performances.
-            </p>
+            <h3>Refonte & optimisation</h3>
+            <p>Refonte graphique d'une app mobile, modernisation de l'identité visuelle et mise à jour des logiciels internes.</p>
           </div>
         </div>
-
         <div class="mission-item">
           <div class="mission-num">04</div>
           <div class="mission-content">
             <h3>Sécurité & conformité</h3>
-            <p>
-              Contribution à la mise en conformité RGPD des applications de l'entreprise. Audit des pratiques, rédaction de documentation, et implémentation des bonnes pratiques de sécurité applicative.
-            </p>
+            <p>Mise en conformité RGPD, audit des pratiques et implémentation des bonnes pratiques de sécurité.</p>
           </div>
         </div>
-
         <div class="mission-item">
           <div class="mission-num">05</div>
           <div class="mission-content">
-            <h3>Sondages & UX Research</h3>
-            <p>
-              Conception et déploiement d'une mission de sondages auprès des utilisateurs internes. Création de formulaires, analyse des données recueillies, présentation des résultats aux parties prenantes.
-            </p>
+            <h3>UX Research</h3>
+            <p>Sondages utilisateurs via Google Forms, analyse des résultats et présentation des recommandations.</p>
           </div>
         </div>
-
         <div class="mission-item">
           <div class="mission-num">06</div>
           <div class="mission-content">
-            <h3>Développement section utilisateur</h3>
-            <p>
-              Développement d'une section dédiée à la gestion des utilisateurs dans une application mobile. Conception des maquettes, développement des interfaces, intégration du modèle relationnel de données.
-            </p>
+            <h3>Section utilisateur</h3>
+            <p>Développement d'une section de gestion des utilisateurs : maquettes, modèle relationnel, intégration HTML/CSS/JS.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       03 — ENVIRONNEMENT TECHNIQUE
-  ============================================================ -->
+  <!-- 03 — ENVIRONNEMENT TECHNIQUE -->
   <section class="section" id="technique">
     <div class="container">
       <div class="section-header">
@@ -587,7 +415,6 @@
           <h2 class="section-title">Environnement technique</h2>
         </div>
       </div>
-
       <div class="env-grid">
         <div class="env-cell">
           <span class="env-cell-label">Code</span>
@@ -609,22 +436,11 @@
             <li class="tech-tag"><span class="dot"></span>Logiciels internes</li>
           </ul>
         </div>
-        <div class="env-cell">
-          <span class="env-cell-label">Méthodes</span>
-          <ul class="tech-list">
-            <li class="tech-tag"><span class="dot"></span>Agile / SCRUM</li>
-            <li class="tech-tag"><span class="dot"></span>Code Review</li>
-            <li class="tech-tag"><span class="dot"></span>UX / UI Design</li>
-            <li class="tech-tag"><span class="dot"></span>RGPD</li>
-          </ul>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       04 — MA PLACE DANS LE SI
-  ============================================================ -->
+  <!-- 04 — MA PLACE DANS LE SI -->
   <section class="section section-alt" id="si">
     <div class="container">
       <div class="section-header">
@@ -634,32 +450,25 @@
           <h2 class="section-title">Ma place dans le SI</h2>
         </div>
       </div>
-
-      <div class="si-org" style="margin-bottom: 40px;">
+      <div class="si-org" style="margin-bottom: 40px; grid-template-columns: repeat(3, 1fr);">
         <div class="si-org-cell">
-          <span class="si-org-cell-label">Niveau Direction</span>
+          <span class="si-org-cell-label">Direction</span>
           <div class="si-org-title">Direction Générale</div>
-          <p class="si-org-body">
-            Pilotage stratégique de l'entreprise. Définit les priorités produit et les orientations technologiques en lien avec les besoins clients.
-          </p>
+          <p class="si-org-body">Pilotage stratégique et orientation produit.</p>
         </div>
         <div class="si-org-cell">
-          <span class="si-org-cell-label">Niveau Projet</span>
+          <span class="si-org-cell-label">Projet</span>
           <div class="si-org-title">Chef de Projet</div>
-          <p class="si-org-body">
-            Coordination des équipes de développement, gestion des sprints Agile, et liaison directe avec les clients. Interlocuteur principal des développeurs.
-          </p>
+          <p class="si-org-body">Coordination des équipes, gestion des sprints, lien avec les clients.</p>
         </div>
         <div class="si-org-cell">
-          <span class="si-org-cell-label">Niveau Technique — Ma position</span>
-          <div class="si-org-title">Équipe Technique (Dev + Design)</div>
-          <p class="si-org-body">
-            2 développeurs web, 1 designer, 1 marketing digital. J'interviens sur la conception et le développement des outils en étroite collaboration avec le designer et sous la supervision du chef de projet.
-          </p>
+          <span class="si-org-cell-label">Ma position</span>
+          <div class="si-org-title">Équipe Technique</div>
+          <p class="si-org-body">2 devs web, 1 designer, 1 marketing. J'interviens sur la conception et le développement en lien direct avec le designer et le chef de projet.</p>
         </div>
         <div class="si-org-cell full" style="border-top: 2px solid var(--accent-dim);">
-          <span class="si-org-cell-label">Infrastructure SI</span>
-          <div class="si-org-title">Schéma du Système d'Information</div>
+          <span class="si-org-cell-label">Schéma SI</span>
+          <div class="si-org-title">Système d'Information — Flex</div>
           <div class="si-image-block" style="margin-top: 16px;">
             <div class="si-image-header">
               <div class="si-image-header-dot" style="background: #ff5f57;"></div>
@@ -668,10 +477,8 @@
               <span class="si-image-title" style="margin-left: 8px;">Schéma SI — Flex</span>
             </div>
             <div class="si-image-body">
-              <img
-                src="assets/documents/images/Capture d'écran 2025-04-14 074311.png"
-                alt="Schéma du système d'information Flex"
-                onerror="this.parentElement.innerHTML = '<div class=\'si-image-placeholder\'><svg width=\'48\' height=\'48\' viewBox=\'0 0 48 48\' fill=\'none\'><rect x=\'4\' y=\'4\' width=\'40\' height=\'40\' rx=\'4\' stroke=\'#B8C5D0\' stroke-width=\'2\'/><path d=\'M16 20h16M16 24h10M16 28h12\' stroke=\'#B8C5D0\' stroke-width=\'2\' stroke-linecap=\'round\'/></svg><p>Schéma à intégrer :<br>assets/documents/images/Capture d\'écran 2025-04-14 074311.png</p></div>'"
+              <img src="assets/documents/images/Capture d'écran 2025-04-14 074311.png" alt="Schéma du système d'information Flex"
+                onerror="this.parentElement.innerHTML = '<div class=\'si-image-placeholder\'><svg width=\'48\' height=\'48\' viewBox=\'0 0 48 48\' fill=\'none\'><rect x=\'4\' y=\'4\' width=\'40\' height=\'40\' rx=\'4\' stroke=\'#B8C5D0\' stroke-width=\'2\'/><path d=\'M16 20h16M16 24h10M16 28h12\' stroke=\'#B8C5D0\' stroke-width=\'2\' stroke-linecap=\'round\'/></svg><p>Schéma à intégrer</p></div>'"
               />
             </div>
           </div>
@@ -680,9 +487,7 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       05 — CE QUE J'AI APPRIS
-  ============================================================ -->
+  <!-- 05 — CE QUE J'AI APPRIS -->
   <section class="section" id="apprentissages">
     <div class="container">
       <div class="section-header">
@@ -692,48 +497,39 @@
           <h2 class="section-title">Ce que j'ai appris</h2>
         </div>
       </div>
-
       <div class="apprentissages-grid">
         <div class="apprentissage-cell">
           <h3>Compétences techniques</h3>
           <ul class="apprentissage-list">
-            <li>Maîtrise approfondie de Python et Django pour le développement back-end</li>
-            <li>Renforcement des compétences HTML/CSS/JavaScript pour des interfaces modernes</li>
-            <li>Utilisation professionnelle de Git/GitHub pour la gestion de version collaborative</li>
-            <li>Conception de bases de données relationnelles et modélisation Merise</li>
-            <li>Développement de scripts d'automatisation Python (génération QR codes, JSON)</li>
-            <li>Pratique de la méthode Agile/SCRUM en contexte réel d'équipe</li>
-            <li>Application des bonnes pratiques RGPD dans une application en production</li>
+            <li>Python et Django pour le développement back-end</li>
+            <li>HTML/CSS/JS pour des interfaces modernes</li>
+            <li>Git/GitHub en contexte collaboratif</li>
+            <li>Bases de données relationnelles et modélisation Merise</li>
+            <li>Scripts d'automatisation Python</li>
+            <li>Application du RGPD en production</li>
           </ul>
         </div>
         <div class="apprentissage-cell">
           <h3>Compétences humaines & pro</h3>
           <ul class="apprentissage-list">
-            <li>Autonomie et prise d'initiative : gérer ses tâches de manière indépendante</li>
-            <li>Communication avec des interlocuteurs non-techniques (client, chef de projet)</li>
-            <li>Rigueur dans la documentation et la transmission du travail</li>
-            <li>Ambiance de travail collaborative dans une équipe resserrée et dynamique</li>
-            <li>Capacité à recevoir et intégrer des retours clients dans un cycle itératif</li>
-            <li>Gestion des priorités dans un environnement à fort rythme de production</li>
+            <li>Autonomie et prise d'initiative au quotidien</li>
+            <li>Communication avec des interlocuteurs non-techniques</li>
+            <li>Rigueur dans la documentation et les livrables</li>
+            <li>Travail en équipe dans une structure resserrée</li>
+            <li>Intégration des retours clients en cycle itératif</li>
+            <li>Gestion des priorités sous contrainte de délais</li>
           </ul>
         </div>
       </div>
-
       <div class="highlight-box" style="margin-top: 40px; max-width: 700px;">
-        <p>Cette alternance chez Flex m'a permis de transformer mes connaissances théoriques en compétences concrètes, dans un environnement professionnel stimulant où chaque projet laisse une trace réelle dans le produit final.</p>
+        <p>Deux ans chez Flex, c'est ce qui a réellement transformé mes connaissances théoriques en compétences opérationnelles de développeur.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       CONTACT STRIP
-  ============================================================ -->
   <div class="contact-strip">
     <div class="contact-inner">
-      <h2 class="contact-title">
-        Mes<br>
-        <span class="accent">contact</span>
-      </h2>
+      <h2 class="contact-title">Mes<br><span class="accent">contacts</span></h2>
       <div class="contact-links">
         <a href="mailto:elijahdabopro@gmail.com" class="contact-link">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5.5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -751,9 +547,6 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">Elijah<span>Dabo</span></div>

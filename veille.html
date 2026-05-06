@@ -9,382 +9,140 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* ---- Styles spécifiques veille.html ---- */
+    .sujet-banner { background: var(--ink); padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .sujet-banner-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .sujet-label { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .sujet-title { font-family: var(--font-display); font-weight: 900; font-size: clamp(28px, 3vw, 40px); text-transform: uppercase; letter-spacing: -.01em; color: #fff; line-height: 1; }
+    .sujet-tools { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sujet-tool { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; color: rgba(255,255,255,.55); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); padding: 8px 14px; border-radius: 4px; }
+    .sujet-tool-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: .8; flex-shrink: 0; }
 
-    /* Sujet banner */
-    .sujet-banner {
-      background: var(--ink);
-      padding: 32px 0;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-
-    .sujet-banner-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .sujet-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-
-    .sujet-title {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(28px, 3vw, 40px);
-      text-transform: uppercase;
-      letter-spacing: -.01em;
-      color: #fff;
-      line-height: 1;
-    }
-
-    .sujet-tools {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .sujet-tool {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .08em;
-      color: rgba(255,255,255,.55);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.1);
-      padding: 8px 14px;
-      border-radius: 4px;
-    }
-
-    .sujet-tool-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: .8;
-      flex-shrink: 0;
-    }
-
-    /* Filter + period info */
-    .veille-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    .pourquoi-block {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 32px 36px;
       margin-bottom: 48px;
-      flex-wrap: wrap;
     }
-
-    .filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border-radius: 4px;
-      border: 1.5px solid var(--rule);
-      background: transparent;
-      color: var(--ink-2);
-      cursor: pointer;
-      transition: all .18s;
-    }
-    .filter-btn:hover {
-      border-color: var(--ink-4);
-      color: var(--ink);
-    }
-    .filter-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-
-    .veille-period {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink-4);
-    }
-
-    /* Articles grid */
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      background: var(--rule);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    /* Article card */
-    .article-card {
-      background: var(--white);
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      transition: background .18s;
-      cursor: default;
-      position: relative;
-    }
-    .article-card:hover { background: var(--paper); }
-    .article-card.hidden { display: none; }
-
-    .article-card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .article-num {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: 56px;
-      line-height: 1;
-      color: var(--rule);
-      letter-spacing: -.03em;
-      flex-shrink: 0;
-      user-select: none;
-    }
-
-    .article-meta-right {
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    .article-year-badge {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 3px;
-      border: 1px solid var(--rule);
-      color: var(--ink-3);
-      background: var(--paper-2);
-    }
-    .article-year-badge.y2025 {
-      background: #EEF2FF;
-      border-color: #C7D2FE;
-      color: #4F46E5;
-    }
-    .article-year-badge.y2024 {
-      background: #F0FDF4;
-      border-color: #BBF7D0;
-      color: #16A34A;
-    }
-    .article-year-badge.y2023 {
-      background: #FFF7ED;
-      border-color: #FED7AA;
-      color: #C2410C;
-    }
-
-    .article-date {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--ink-4);
-      letter-spacing: .06em;
-      margin-top: 4px;
-    }
-
-    .article-source {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .article-title {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 20px;
-      text-transform: uppercase;
-      letter-spacing: .01em;
-      color: var(--ink);
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    .article-body {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--ink-2);
-      line-height: 1.7;
-      flex: 1;
-      margin-bottom: 20px;
-    }
-
-    .article-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 16px;
-      border-top: 1px solid var(--rule);
-      margin-top: auto;
-    }
-
-    .article-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .article-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--ink-3);
-      background: var(--paper-2);
-      border: 1px solid var(--rule);
-      padding: 2px 8px;
-      border-radius: 3px;
-    }
-
-    .article-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      flex-shrink: 0;
-      transition: gap .15s;
-    }
-    .article-link:hover { gap: 10px; }
-
-    /* Synthèse section */
-    .synthese-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: var(--rule);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .synthese-cell {
-      background: var(--white);
-      padding: 36px 32px;
-    }
-
-    .synthese-cell.full {
-      grid-column: 1 / -1;
-    }
-
-    .synthese-cell h3 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 20px;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      color: var(--ink);
-      margin-bottom: 16px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .synthese-body {
+    .pourquoi-block p {
       font-size: 14px;
       font-weight: 300;
       color: var(--ink-2);
       line-height: 1.8;
+      margin-bottom: 10px;
     }
+    .pourquoi-block p:last-child { margin-bottom: 0; }
 
-    .synthese-body p { margin-bottom: 12px; }
-    .synthese-body p:last-child { margin-bottom: 0; }
+    .veille-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
+    .filter-bar { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .filter-btn { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 18px; border-radius: 4px; border: 1.5px solid var(--rule); background: transparent; color: var(--ink-2); cursor: pointer; transition: all .18s; }
+    .filter-btn:hover { border-color: var(--ink-4); color: var(--ink); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
+    .sort-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 8px 16px; border-radius: 4px;
+      border: 1.5px solid var(--rule); background: transparent;
+      color: var(--ink-2); cursor: pointer; transition: all .18s;
+    }
+    .sort-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .sort-btn.asc .sort-arrow { transform: rotate(180deg); }
+    .sort-arrow { transition: transform .2s ease; display: inline-flex; }
+    .veille-period { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-4); }
+
+    .articles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--rule); border-radius: 8px; overflow: hidden; }
+    .article-card { background: var(--white); padding: 32px; display: flex; flex-direction: column; transition: background .18s; position: relative; }
+    .article-card:hover { background: var(--paper); }
+    .article-card.hidden { display: none; }
+
+    .article-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .article-num { font-family: var(--font-display); font-weight: 900; font-size: 56px; line-height: 1; color: var(--rule); letter-spacing: -.03em; flex-shrink: 0; user-select: none; }
+    .article-meta-right { text-align: right; flex-shrink: 0; }
+    .article-year-badge { display: inline-block; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; border: 1px solid var(--rule); color: var(--ink-3); background: var(--paper-2); }
+    .article-year-badge.y2026 { background: #F5F3FF; border-color: #DDD6FE; color: #7C3AED; }
+    .article-year-badge.y2025 { background: #EEF2FF; border-color: #C7D2FE; color: #4F46E5; }
+    .article-year-badge.y2024 { background: #F0FDF4; border-color: #BBF7D0; color: #16A34A; }
+    .article-year-badge.y2023 { background: #FFF7ED; border-color: #FED7AA; color: #C2410C; }
+    .article-date { font-family: var(--font-mono); font-size: 10px; color: var(--ink-4); letter-spacing: .06em; margin-top: 4px; }
+    .article-note { display: flex; align-items: center; gap: 3px; margin-top: 6px; justify-content: flex-end; }
+    .star { font-size: 12px; line-height: 1; color: var(--ink-4); }
+    .star.filled { color: #F59E0B; }
+
+    .article-source { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .article-title { font-family: var(--font-display); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: .01em; color: var(--ink); line-height: 1.1; margin-bottom: 12px; }
+    .article-body { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.7; flex: 1; margin-bottom: 20px; }
+    .article-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--rule); margin-top: auto; }
+    .article-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .article-tag { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); background: var(--paper-2); border: 1px solid var(--rule); padding: 2px 8px; border-radius: 3px; }
+    .article-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; transition: gap .15s; }
+    .article-link:hover { gap: 10px; }
+
+    .synthese-grid { display: flex; flex-direction: column; gap: 2px; }
+    .synthese-tendances {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 40px 48px;
+    }
+    .synthese-tendances h3 {
+      font-family: var(--font-display); font-weight: 700; font-size: 20px;
+      text-transform: uppercase; letter-spacing: .02em; color: var(--ink);
+      margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--rule);
+    }
     .tendances-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 48px;
       list-style: none;
     }
-
-    .tendance-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
+    .tendance-item { display: flex; gap: 16px; align-items: flex-start; }
     .tendance-num {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 28px;
-      line-height: 1;
-      color: var(--rule);
-      letter-spacing: -.02em;
-      flex-shrink: 0;
-      width: 32px;
+      font-family: var(--font-display); font-weight: 900; font-size: 32px;
+      line-height: 1; color: var(--rule); letter-spacing: -.02em;
+      flex-shrink: 0; width: 36px;
     }
-
     .tendance-content strong {
-      display: block;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: .02em;
-      color: var(--ink);
-      margin-bottom: 2px;
+      display: block; font-family: var(--font-display); font-weight: 700;
+      font-size: 15px; text-transform: uppercase; letter-spacing: .02em;
+      color: var(--ink); margin-bottom: 4px;
     }
+    .tendance-content p { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.65; margin: 0; }
 
-    .tendance-content p {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--ink-2);
-      line-height: 1.6;
-      margin: 0;
+    .synthese-retiens {
+      background: var(--ink);
+      border-radius: 8px;
+      padding: 40px 48px;
     }
+    .synthese-retiens h3 {
+      font-family: var(--font-display); font-weight: 700; font-size: 20px;
+      text-transform: uppercase; letter-spacing: .02em; color: #fff;
+      margin-bottom: 20px; padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .synthese-retiens p { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.6); line-height: 1.85; margin-bottom: 12px; }
+    .synthese-retiens p:last-child { margin-bottom: 0; }
+    .synthese-retiens strong { color: #fff; font-weight: 500; }
 
     @media (max-width: 900px) {
       .articles-grid { grid-template-columns: 1fr; }
-      .synthese-grid { grid-template-columns: 1fr; }
-      .synthese-cell.full { grid-column: auto; }
+      .tendances-list { grid-template-columns: 1fr; }
+      .synthese-tendances, .synthese-retiens { padding: 28px 24px; }
       .sujet-banner-inner { flex-direction: column; align-items: flex-start; }
+      .veille-controls { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
   <nav class="nav" role="navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Elijah<span>Dabo</span></a>
+      <a href="index.html" class="nav-logo">Port<span>folio</span></a>
       <button class="nav-burger" aria-label="Menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
+        <span></span><span></span><span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="entreprise.html">Entreprise</a></li>
@@ -395,25 +153,14 @@
     </div>
   </nav>
 
-  <!-- ============================================================
-       PAGE HERO
-  ============================================================ -->
   <section class="page-hero">
     <div class="page-hero-inner">
       <span class="section-label" style="margin-bottom:16px;">BTS SIO — SLAM</span>
-      <h1 class="page-hero-title">
-        Veille<br>
-        <span class="accent">Technologique</span>
-      </h1>
-      <p class="page-hero-sub">
-        Sujet : Cloud Computing — 8 articles sélectionnés entre novembre 2023 et avril 2025 à travers une veille active sur Feedly, Google Alerts et LinkedIn.
-      </p>
+      <h1 class="page-hero-title">Veille<br><span class="accent">Technologique</span></h1>
+      <p class="page-hero-sub">Cloud Computing — 8 articles suivis entre novembre 2023 et mai 2026.</p>
     </div>
   </section>
 
-  <!-- ============================================================
-       SUJET BANNER
-  ============================================================ -->
   <div class="sujet-banner">
     <div class="sujet-banner-inner">
       <div>
@@ -421,284 +168,225 @@
         <div class="sujet-title">Cloud Computing</div>
       </div>
       <div class="sujet-tools">
-        <div class="sujet-tool">
-          <div class="sujet-tool-dot"></div>
-          Feedly
-        </div>
-        <div class="sujet-tool">
-          <div class="sujet-tool-dot"></div>
-          Google Alerts
-        </div>
-        <div class="sujet-tool">
-          <div class="sujet-tool-dot"></div>
-          LinkedIn
-        </div>
+        <div class="sujet-tool"><div class="sujet-tool-dot"></div>Feedly</div>
+        <div class="sujet-tool"><div class="sujet-tool-dot"></div>Google Alerts</div>
+        <div class="sujet-tool"><div class="sujet-tool-dot"></div>LinkedIn</div>
       </div>
     </div>
   </div>
 
-  <!-- ============================================================
-       01 — ARTICLES
-  ============================================================ -->
-  <section class="section" id="articles">
+  <!-- 01 — POURQUOI CE SUJET -->
+  <section class="section" id="pourquoi">
     <div class="container">
       <div class="section-header">
         <div class="section-number">01</div>
+        <div class="section-title-block">
+          <span class="section-label" style="margin-bottom:8px;">Contexte</span>
+          <h2 class="section-title">Pourquoi ce sujet</h2>
+        </div>
+      </div>
+      <div class="pourquoi-block">
+        <p>
+          J'ai choisi le Cloud Computing parce que c'est l'infrastructure sur laquelle reposent toutes les applications développées aujourd'hui. En alternance chez Flex, j'ai rapidement compris que même en tant que développeur web, ignorer le cloud, c'est ignorer l'environnement réel de déploiement.
+        </p>
+        <p>
+          Ce qui m'a le plus marqué sur cette période : la souveraineté numérique est devenue un véritable enjeu stratégique. Réglementations européennes, rachat de VMware, fragilité géopolitique des data centers — le cloud n'est ni neutre ni invulnérable. Cette veille documente cette prise de conscience.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — ARTICLES -->
+  <section class="section section-alt" id="articles">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">02</div>
         <div class="section-title-block">
           <span class="section-label" style="margin-bottom:8px;">Sélection</span>
           <h2 class="section-title">Articles</h2>
         </div>
       </div>
 
-      <!-- Controls -->
       <div class="veille-controls">
         <div class="filter-bar">
           <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="2026">2026</button>
           <button class="filter-btn" data-filter="2025">2025</button>
           <button class="filter-btn" data-filter="2024">2024</button>
           <button class="filter-btn" data-filter="2023">2023</button>
         </div>
-        <div class="veille-period">Nov. 2023 → Avr. 2025</div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="sort-btn" id="sort-note-btn" title="Trier par note">
+            <svg class="sort-arrow" width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M2 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Note
+          </button>
+          <div class="veille-period">Nov. 2023 → Mai 2026</div>
+        </div>
       </div>
 
-      <!-- Articles grid -->
       <div class="articles-grid" id="articles-grid">
 
-        <!-- 01 — Le Monde / Juin 2024 -->
-        <div class="article-card" data-year="2024">
+        <!-- 01 — 2023 — CIO Online / Broadcom VMware -->
+        <div class="article-card" data-year="2023" data-note="4">
           <div class="article-card-top">
             <div class="article-num">01</div>
             <div class="article-meta-right">
-              <span class="article-year-badge y2024">2024</span>
-              <div class="article-date">Juin 2024</div>
+              <span class="article-year-badge y2023">2023</span>
+              <div class="article-date">Nov. 2023</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span></div>
             </div>
           </div>
-          <div class="article-source">Le Monde</div>
-          <h3 class="article-title">Derrière l'IA, la déferlante des data centers</h3>
-          <p class="article-body">
-            L'essor massif de l'intelligence artificielle tire une demande sans précédent en infrastructure cloud. Le Monde décrypte comment les géants du numérique multiplient les centres de données à travers le monde, avec des conséquences directes sur la consommation énergétique et l'empreinte carbone du secteur. Un éclairage indispensable sur la face cachée de l'IA générative.
-          </p>
+          <div class="article-source">CIO Online</div>
+          <h3 class="article-title">Rachat de VMware par Broadcom : quelle stratégie adopter ?</h3>
+          <p class="article-body">En novembre 2023, Broadcom finalise le rachat de VMware pour 69 milliards de dollars. Fin des licences perpétuelles, passage forcé aux abonnements, portefeuille réduit à 4 offres — les DSI doivent revoir toute leur stratégie de virtualisation. L'article détaille les leviers disponibles : migration vers open source, architectures hybrides, négociations de renouvellement.</p>
           <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">Infrastructure</span>
-              <span class="article-tag">Data Centers</span>
-              <span class="article-tag">IA</span>
-              <span class="article-tag">Énergie</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="article-tags"><span class="article-tag">VMware</span><span class="article-tag">Broadcom</span><span class="article-tag">Virtualisation</span><span class="article-tag">Licences</span></div>
+            <a href="https://www.cio-online.com/actualites/publi-info/rachat-de-vmware-par-broadcom-quelle-strategie-adopter-1067.html" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </div>
 
-        <!-- 02 — IT for Business / Avr 2025 -->
-        <div class="article-card" data-year="2025">
+        <!-- 02 — 2023 — Usine Digitale / S3NS SecNumCloud -->
+        <div class="article-card" data-year="2023" data-note="3">
           <div class="article-card-top">
             <div class="article-num">02</div>
             <div class="article-meta-right">
-              <span class="article-year-badge y2025">2025</span>
-              <div class="article-date">Avr. 2025</div>
-            </div>
-          </div>
-          <div class="article-source">IT for Business</div>
-          <h3 class="article-title">Google Cloud Next 2025 : les annonces infrastructures et IA</h3>
-          <p class="article-body">
-            Compte-rendu détaillé du Google Cloud Next 2025, conférence annuelle de Google dédiée à son cloud. Au programme : nouveaux services d'infrastructure, intégration poussée de l'IA dans les offres cloud, et partenariats stratégiques. L'article analyse les implications pour les entreprises qui s'appuient sur Google Cloud Platform dans leur transformation numérique.
-          </p>
-          <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">Google Cloud</span>
-              <span class="article-tag">GCP</span>
-              <span class="article-tag">IA</span>
-              <span class="article-tag">Conférence</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 03 — DataCamp / Mars 2025 -->
-        <div class="article-card" data-year="2025">
-          <div class="article-card-top">
-            <div class="article-num">03</div>
-            <div class="article-meta-right">
-              <span class="article-year-badge y2025">2025</span>
-              <div class="article-date">Mars 2025</div>
-            </div>
-          </div>
-          <div class="article-source">DataCamp</div>
-          <h3 class="article-title">Infrastructure du cloud et de l'IA 2025</h3>
-          <p class="article-body">
-            Vue d'ensemble sur l'état de l'infrastructure cloud en 2025, à l'heure où l'IA générative redessine les architectures. DataCamp passe en revue les nouvelles exigences en termes de GPU, de latence et de scalabilité. L'article présente également les différents modèles de déploiement (IaaS, PaaS, SaaS) et leur évolution face aux usages émergents de l'IA.
-          </p>
-          <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">Infrastructure</span>
-              <span class="article-tag">IA</span>
-              <span class="article-tag">GPU</span>
-              <span class="article-tag">IaaS / PaaS</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- 04 — L'Usine Digitale / Avr 2025 -->
-        <div class="article-card" data-year="2025">
-          <div class="article-card-top">
-            <div class="article-num">04</div>
-            <div class="article-meta-right">
-              <span class="article-year-badge y2025">2025</span>
-              <div class="article-date">Avr. 2025</div>
+              <span class="article-year-badge y2023">2023</span>
+              <div class="article-date">Nov. 2023</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span><span class="star">★</span></div>
             </div>
           </div>
           <div class="article-source">L'Usine Digitale</div>
-          <h3 class="article-title">Fuite de données chez Oracle & chiffrement de bout en bout</h3>
-          <p class="article-body">
-            Suite à une fuite de données révélée chez Oracle Cloud, L'Usine Digitale explore les enjeux de sécurité liés au cloud d'entreprise. L'article met en perspective l'importance du chiffrement de bout en bout, des audits réguliers et de la souveraineté des données — des préoccupations de plus en plus centrales pour les RSSI face à la concentration des données dans quelques hyperscalers.
-          </p>
+          <h3 class="article-title">S3NS et le label SecNumCloud : une question de temps ?</h3>
+          <p class="article-body">Le directeur général de S3NS, joint-venture Thales × Google Cloud, est « intimement persuadé » d'obtenir la qualification SecNumCloud de l'ANSSI. Cet article pose les bases du débat sur le cloud de confiance hybride et la souveraineté numérique française — un sujet qui va occuper toute la période de ma veille.</p>
           <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">Sécurité</span>
-              <span class="article-tag">Oracle</span>
-              <span class="article-tag">Chiffrement</span>
-              <span class="article-tag">RGPD</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="article-tags"><span class="article-tag">S3NS</span><span class="article-tag">SecNumCloud</span><span class="article-tag">Souveraineté</span><span class="article-tag">ANSSI</span></div>
+            <a href="https://www.usine-digitale.fr/article/15-11-2023-l-octroi-du-label-secnumcloud-n-est-plus-qu-une-question-de-temps-pour-s3ns.N2194888" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </div>
 
-        <!-- 05 — CERT-FR / Mars 2025 -->
-        <div class="article-card" data-year="2025">
+        <!-- 03 — 2024 — Forrester / EU Data Act -->
+        <div class="article-card" data-year="2024" data-note="5">
+          <div class="article-card-top">
+            <div class="article-num">03</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2024">2024</span>
+              <div class="article-date">Mai 2024</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div>
+            </div>
+          </div>
+          <div class="article-source">Forrester</div>
+          <h3 class="article-title">EU Data Act : quelles conséquences pour votre entreprise ?</h3>
+          <p class="article-body">En vigueur depuis janvier 2024, le Data Act européen donne aux utilisateurs d'appareils connectés le droit d'accéder à leurs données et de les transférer vers des tiers. Il impose aussi aux fournisseurs cloud de faciliter le changement de prestataire et de bloquer les accès gouvernementaux extra-européens illégaux. Un tournant réglementaire majeur pour toutes les entreprises utilisant le cloud.</p>
+          <div class="article-footer">
+            <div class="article-tags"><span class="article-tag">Data Act</span><span class="article-tag">UE</span><span class="article-tag">Portabilité</span><span class="article-tag">Réglementation</span></div>
+            <a href="https://www.forrester.com/blogs/eu-data-quelles-consequences-pour-vous-et-votre-entreprise/" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+
+        <!-- 04 — 2024 — Inria / France 2030 PEPR Cloud -->
+        <div class="article-card" data-year="2024" data-note="4">
+          <div class="article-card-top">
+            <div class="article-num">04</div>
+            <div class="article-meta-right">
+              <span class="article-year-badge y2024">2024</span>
+              <div class="article-date">Avr. 2024</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span></div>
+            </div>
+          </div>
+          <div class="article-source">Inria</div>
+          <h3 class="article-title">France 2030 : lancement du programme de recherche sur les technologies cloud</h3>
+          <p class="article-body">Co-piloté par le CEA et Inria, le PEPR Cloud bénéficie de 51 millions d'euros sur 7 ans pour développer des infrastructures cloud performantes, sécurisées et frugales. L'objectif : garantir une double souveraineté technologique et d'exploitation, et favoriser le transfert vers l'industrie des innovations françaises sur le cloud.</p>
+          <div class="article-footer">
+            <div class="article-tags"><span class="article-tag">France 2030</span><span class="article-tag">Recherche</span><span class="article-tag">Souveraineté</span><span class="article-tag">Inria</span></div>
+            <a href="https://www.inria.fr/fr/france-2030-programme-recherche-technologies-cloud" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+
+        <!-- 05 — 2025 — ANSSI / État de la menace cloud -->
+        <div class="article-card" data-year="2025" data-note="5">
           <div class="article-card-top">
             <div class="article-num">05</div>
             <div class="article-meta-right">
               <span class="article-year-badge y2025">2025</span>
-              <div class="article-date">Mars 2025</div>
+              <div class="article-date">Fév. 2025</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div>
             </div>
           </div>
-          <div class="article-source">CERT-FR / ANSSI</div>
-          <h3 class="article-title">Cloud computing — Recommandations de l'ANSSI</h3>
-          <p class="article-body">
-            Le CERT-FR (ANSSI) publie ses recommandations actualisées pour l'usage sécurisé du cloud en entreprise. Le document couvre les bonnes pratiques de configuration, la gestion des identités et des accès (IAM), les stratégies de sauvegarde et la préparation aux incidents. Une référence incontournable pour toute organisation souhaitant adopter le cloud de manière sécurisée et conforme.
-          </p>
+          <div class="article-source">ANSSI / CERT-FR</div>
+          <h3 class="article-title">L'ANSSI publie son état de la menace sur le cloud computing</h3>
+          <p class="article-body">L'ANSSI dresse une cartographie complète des cybermenaces visant les environnements cloud : ransomwares, espionnage étatique, attaques DDoS, latéralisation depuis les SI hybrides. 31% des compromissions sont dues à des erreurs de configuration. Le rapport formule des recommandations claires pour fournisseurs et clients, et pousse vers les offres SecNumCloud pour les données sensibles.</p>
           <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">ANSSI</span>
-              <span class="article-tag">Sécurité</span>
-              <span class="article-tag">IAM</span>
-              <span class="article-tag">Bonnes pratiques</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="article-tags"><span class="article-tag">ANSSI</span><span class="article-tag">Cybersécurité</span><span class="article-tag">Menaces</span><span class="article-tag">SecNumCloud</span></div>
+            <a href="https://cyber.gouv.fr/actualites/lanssi-publie-son-%C3%A9tat-de-la-menace-sur-le-cloud-computing/" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </div>
 
-        <!-- 06 — Le Monde Informatique / Nov 2023 -->
-        <div class="article-card" data-year="2023">
+        <!-- 06 — 2025 — WEnvision / FinOps FOCUS -->
+        <div class="article-card" data-year="2025" data-note="3">
           <div class="article-card-top">
             <div class="article-num">06</div>
             <div class="article-meta-right">
-              <span class="article-year-badge y2023">2023</span>
-              <div class="article-date">Nov. 2023</div>
+              <span class="article-year-badge y2025">2025</span>
+              <div class="article-date">Juin 2025</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span><span class="star">★</span></div>
             </div>
           </div>
-          <div class="article-source">Le Monde Informatique</div>
-          <h3 class="article-title">Cloud computing — État des lieux et perspectives</h3>
-          <p class="article-body">
-            Article de fond sur l'état du marché cloud en fin d'année 2023. Le Monde Informatique dresse un panorama des grands fournisseurs (AWS, Azure, GCP), analyse les tendances de migration vers le cloud hybride et multi-cloud, et aborde les problématiques de coûts et d'optimisation des ressources. Un point de départ essentiel pour ma veille sur le sujet.
-          </p>
+          <div class="article-source">WEnvision</div>
+          <h3 class="article-title">FinOps 2025 — FOCUS : opportunité ou nuage de fumée ?</h3>
+          <p class="article-body">FOCUS (FinOps Open Cost and Usage Specification) est un standard commun entre cloud providers pour normaliser les données de coûts. L'article analyse son potentiel pour les environnements multi-cloud hybrides : comparaison de workloads sans conversion manuelle, interopérabilité avec les outils FinOps, automatisation des traitements. Un socle utile, mais dont l'extension aux infrastructures on-premise reste à construire.</p>
           <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">AWS</span>
-              <span class="article-tag">Azure</span>
-              <span class="article-tag">Multi-cloud</span>
-              <span class="article-tag">Marché</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="article-tags"><span class="article-tag">FinOps</span><span class="article-tag">FOCUS</span><span class="article-tag">Multi-cloud</span><span class="article-tag">Coûts</span></div>
+            <a href="https://www.wenvision.com/fr/articles/finops2025-focus-opportunite-ou-nuage-de-fumee/" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </div>
 
-        <!-- 07 — ESIOS / Nov 2023 -->
-        <div class="article-card" data-year="2023">
+        <!-- 07 — 2026 — ZDNet / AWS Moyen-Orient -->
+        <div class="article-card" data-year="2026" data-note="5">
           <div class="article-card-top">
             <div class="article-num">07</div>
             <div class="article-meta-right">
-              <span class="article-year-badge y2023">2023</span>
-              <div class="article-date">Nov. 2023</div>
+              <span class="article-year-badge y2026">2026</span>
+              <div class="article-date">Mars 2026</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div>
             </div>
           </div>
-          <div class="article-source">ESIOS</div>
-          <h3 class="article-title">Top 10 Cloud Computing Trends to Follow in 2023</h3>
-          <p class="article-body">
-            Synthèse des dix tendances majeures du cloud computing à surveiller en 2023. Parmi elles : la montée en puissance du cloud edge, l'adoption croissante des architectures serverless, l'essor du cloud souverain en Europe, et l'intégration progressive de l'IA dans les services cloud managés. Un article qui m'a permis de structurer ma compréhension du domaine dès le départ.
-          </p>
+          <div class="article-source">ZDNet France</div>
+          <h3 class="article-title">AWS Moyen-Orient : 31 services à l'arrêt et un rétablissement qui se compte en mois</h3>
+          <p class="article-body">En mars 2026, des drones ont endommagé physiquement les data centers AWS des Émirats arabes unis et de Bahreïn, mettant hors ligne plus de 100 services cloud dont EC2, S3 et Lambda. Une première dans l'histoire du cloud : AWS a conseillé à ses clients de migrer vers d'autres régions, sans date de rétablissement. Un rappel brutal que le cloud repose sur des bâtiments, dans des pays qui peuvent entrer en guerre.</p>
           <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">Tendances</span>
-              <span class="article-tag">Edge Computing</span>
-              <span class="article-tag">Serverless</span>
-              <span class="article-tag">Souveraineté</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="article-tags"><span class="article-tag">AWS</span><span class="article-tag">Résilience</span><span class="article-tag">Géopolitique</span><span class="article-tag">Data center</span></div>
+            <a href="https://www.zdnet.fr/actualites/aws-moyen-orient-31-services-a-larret-et-un-retablissement-qui-se-compte-en-mois-494583.htm" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </div>
 
-        <!-- 08 — ITpro / Avr 2025 -->
-        <div class="article-card" data-year="2025">
+        <!-- 08 — 2026 — numerique.gouv.fr / Transition cloud état -->
+        <div class="article-card" data-year="2026" data-note="4">
           <div class="article-card-top">
             <div class="article-num">08</div>
             <div class="article-meta-right">
-              <span class="article-year-badge y2025">2025</span>
-              <div class="article-date">Avr. 2025</div>
+              <span class="article-year-badge y2026">2026</span>
+              <div class="article-date">Mars 2026</div>
+              <div class="article-note"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span></div>
             </div>
           </div>
-          <div class="article-source">ITpro</div>
-          <h3 class="article-title">Google Cloud Next 2025 : avancées majeures en IA et infrastructure</h3>
-          <p class="article-body">
-            Second compte-rendu du Google Cloud Next 2025, cette fois centré sur les avancées en intelligence artificielle et les nouvelles briques d'infrastructure. ITpro met en avant les annonces autour de Gemini (modèle IA de Google), l'extension des régions cloud en Europe et les nouveaux outils de développement serverless. Une perspective complémentaire à l'article d'IT for Business.
-          </p>
+          <div class="article-source">numerique.gouv.fr (DINUM)</div>
+          <h3 class="article-title">État de la transition cloud : 70 % de commandes vers des offres européennes souveraines</h3>
+          <p class="article-body">Bilan 2025 de la doctrine « Cloud au centre » : 84 millions d'euros de commandes sur le marché « Nuage public », en hausse de 62%, dont 70% vers des fournisseurs européens. Les offres SecNumCloud progressent de 20% en volume. La DINUM annonce une nouvelle phase : mutualisation des SI ministériels, migration vers le cloud de confiance et déploiement souverain de l'IA avec Mistral AI.</p>
           <div class="article-footer">
-            <div class="article-tags">
-              <span class="article-tag">Google Cloud</span>
-              <span class="article-tag">Gemini</span>
-              <span class="article-tag">Serverless</span>
-              <span class="article-tag">Europe</span>
-            </div>
-            <a href="#" class="article-link">
-              Lire
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="article-tags"><span class="article-tag">DINUM</span><span class="article-tag">Cloud souverain</span><span class="article-tag">État</span><span class="article-tag">SecNumCloud</span></div>
+            <a href="https://www.numerique.gouv.fr/sinformer/espace-presse/etat-transition-cloud-offres-europeennes-souveraines/" target="_blank" rel="noopener" class="article-link">Lire <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5h7M5 1.5l3.5 3.5L5 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </div>
 
-      </div><!-- /articles-grid -->
+      </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       02 — SYNTHÈSE
-  ============================================================ -->
-  <section class="section section-alt" id="synthese">
+  <!-- 03 — SYNTHÈSE -->
+  <section class="section" id="synthese">
     <div class="container">
       <div class="section-header">
-        <div class="section-number">02</div>
+        <div class="section-number">03</div>
         <div class="section-title-block">
           <span class="section-label" style="margin-bottom:8px;">Analyse personnelle</span>
           <h2 class="section-title">Synthèse</h2>
@@ -706,77 +394,53 @@
       </div>
 
       <div class="synthese-grid">
-        <div class="synthese-cell">
-          <h3>Pourquoi ce sujet</h3>
-          <div class="synthese-body">
-            <p>
-              J'ai choisi le Cloud Computing comme sujet de veille car c'est l'une des technologies les plus structurantes du développement logiciel aujourd'hui. En entreprise chez Flex, j'ai rapidement réalisé que comprendre les infrastructures cloud est devenu indispensable, même pour un développeur web junior.
-            </p>
-            <p>
-              La convergence entre cloud et intelligence artificielle, que j'ai observée tout au long de cette veille, illustre parfaitement à quel point ces deux domaines sont désormais indissociables. Chaque projet d'IA repose sur une infrastructure cloud robuste — et inversement, les fournisseurs cloud font de l'IA leur principale proposition de valeur.
-            </p>
-          </div>
-        </div>
-
-        <div class="synthese-cell">
+        <div class="synthese-tendances">
           <h3>Tendances identifiées</h3>
           <ul class="tendances-list">
             <li class="tendance-item">
               <div class="tendance-num">01</div>
               <div class="tendance-content">
-                <strong>Cloud & IA : une convergence totale</strong>
-                <p>Les hyperscalers intègrent l'IA comme service natif. AWS, Azure et GCP proposent des modèles fondateurs directement accessibles via API.</p>
+                <strong>Souveraineté numérique en action</strong>
+                <p>La France et l'Europe ont concrètement agi : doctrine « Cloud au centre », PEPR Cloud, qualification SecNumCloud de S3NS, offres souveraines en forte hausse dans la commande publique.</p>
               </div>
             </li>
             <li class="tendance-item">
               <div class="tendance-num">02</div>
               <div class="tendance-content">
-                <strong>Souveraineté et RGPD</strong>
-                <p>La pression réglementaire européenne pousse vers des clouds souverains. Les questions de localisation des données deviennent stratégiques.</p>
+                <strong>Réglementation européenne offensive</strong>
+                <p>Le Data Act impose portabilité et interopérabilité. Combiné au RGPD et à NIS2, il crée un cadre juridique qui pousse les entreprises vers des architectures cloud plus ouvertes et moins dépendantes.</p>
               </div>
             </li>
             <li class="tendance-item">
               <div class="tendance-num">03</div>
               <div class="tendance-content">
-                <strong>Sécurité renforcée</strong>
-                <p>Les failles récentes (Oracle, etc.) rappellent que le cloud n'est pas exempt de risques. La sécurité devient une priorité absolue des DSI.</p>
+                <strong>Cybersécurité cloud : une urgence</strong>
+                <p>L'ANSSI documente l'explosion des attaques ciblant le cloud. 31% des compromissions viennent d'erreurs de configuration. Le cloud n'est pas plus sûr par défaut — il demande une approche de sécurité rigoureuse.</p>
               </div>
             </li>
             <li class="tendance-item">
               <div class="tendance-num">04</div>
               <div class="tendance-content">
-                <strong>Impact environnemental</strong>
-                <p>La multiplication des data centers pour soutenir l'IA soulève des questions sur la consommation énergétique et l'empreinte carbone du numérique.</p>
+                <strong>Fragilité géopolitique du cloud</strong>
+                <p>L'incident AWS au Moyen-Orient rappelle que le cloud repose sur du béton et des câbles. La géopolitique peut mettre hors ligne des régions entières, forçant les entreprises à repenser leur résilience multi-régions.</p>
               </div>
             </li>
           </ul>
         </div>
 
-        <div class="synthese-cell full" style="border-top: 2px solid var(--accent-dim);">
+        <div class="synthese-retiens">
           <h3>Ce que j'en retiens</h3>
-          <div class="synthese-body">
-            <p>
-              Cette veille m'a permis de dépasser la vision purement technique du cloud pour en comprendre les enjeux stratégiques, économiques et sociétaux. En tant que futur développeur, savoir comment fonctionne l'infrastructure sur laquelle tournent mes applications — et connaître ses contraintes de sécurité, de coûts et d'impact environnemental — me semble essentiel.
-            </p>
-            <p>
-              La tendance la plus marquante que j'ai observée sur cette période est sans doute la vitesse à laquelle l'IA a rebattu les cartes du cloud. En moins de deux ans, les priorités des fournisseurs cloud ont radicalement changé : GPU, inférence à la demande et modèles fondateurs sont devenus les nouveaux moteurs de croissance, reléguant au second plan les offres de stockage et de compute classiques.
-            </p>
-          </div>
+          <p>Cette veille m'a permis de dépasser la vision purement technique du cloud pour en comprendre les enjeux stratégiques et géopolitiques. Savoir sur quelle infrastructure fonctionnent mes applications, et connaître ses contraintes de sécurité et d'impact environnemental, me semble essentiel en tant que développeur.</p>
+          <p>La tendance la plus marquante : <strong>la France a réellement agi</strong>. Le PEPR Cloud, la doctrine « Cloud au centre », la qualification de S3NS — ce ne sont plus des discours, ce sont des budgets et des certifications. 70 % des commandes publiques cloud vont désormais vers des fournisseurs européens.</p>
+          <p>En tant que développeur, cela me concerne directement : déployer une application, c'est choisir où vivent ses données — et ce choix a des conséquences juridiques, sécuritaires et stratégiques bien au-delà du code.</p>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================
-       CONTACT STRIP
-  ============================================================ -->
   <div class="contact-strip">
     <div class="contact-inner">
-      <h2 class="contact-title">
-        Mes<br>
-        <span class="accent">contact</span>
-      </h2>
+      <h2 class="contact-title">Mes<br><span class="accent">contacts</span></h2>
       <div class="contact-links">
         <a href="mailto:elijahdabopro@gmail.com" class="contact-link">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5.5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -794,9 +458,6 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">Elijah<span>Dabo</span></div>
@@ -812,28 +473,53 @@
     </div>
   </footer>
 
-  <!-- ============================================================
-       JS — Filtre par année
-  ============================================================ -->
   <script>
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.article-card');
+    let currentYear = 'all';
+    let sortDir = 'none';
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        const filter = btn.dataset.filter;
-
-        cards.forEach(card => {
-          const match = filter === 'all' || card.dataset.year === filter;
-          card.classList.toggle('hidden', !match);
-        });
+        currentYear = btn.dataset.filter;
+        applyFiltersAndSort();
       });
     });
+
+    const sortBtn = document.getElementById('sort-note-btn');
+    sortBtn.addEventListener('click', () => {
+      if (sortDir === 'none' || sortDir === 'asc') {
+        sortDir = 'desc';
+        sortBtn.classList.remove('asc');
+      } else {
+        sortDir = 'asc';
+        sortBtn.classList.add('asc');
+      }
+      applyFiltersAndSort();
+    });
+
+    function applyFiltersAndSort() {
+      const grid = document.getElementById('articles-grid');
+      const allCards = [...grid.querySelectorAll('.article-card')];
+      allCards.forEach(card => {
+        const match = currentYear === 'all' || card.dataset.year === currentYear;
+        card.classList.toggle('hidden', !match);
+      });
+      if (sortDir !== 'none') {
+        const visibleCards = allCards.filter(c => !c.classList.contains('hidden'));
+        visibleCards.sort((a, b) => {
+          const noteA = parseInt(a.dataset.note);
+          const noteB = parseInt(b.dataset.note);
+          return sortDir === 'desc' ? noteB - noteA : noteA - noteB;
+        });
+        visibleCards.forEach(card => grid.appendChild(card));
+        allCards.filter(c => c.classList.contains('hidden')).forEach(card => grid.appendChild(card));
+      }
+    }
   </script>
 
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

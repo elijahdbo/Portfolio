@@ -9,9 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* ---- Styles spécifiques bilan.html ---- */
-
-    /* Parcours timeline — 3 étapes verticales */
     .parcours-timeline {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -20,7 +17,6 @@
       border-radius: 8px;
       overflow: hidden;
     }
-
     .parcours-step {
       background: var(--white);
       padding: 40px 32px;
@@ -28,19 +24,16 @@
       display: flex;
       flex-direction: column;
     }
-
     .parcours-step-num {
       font-family: var(--font-display);
       font-weight: 900;
       font-size: 100px;
-      line-height: 1;
+      line-height: .85;
       color: var(--rule);
       letter-spacing: -.04em;
       margin-bottom: 0;
       user-select: none;
-      line-height: .85;
     }
-
     .parcours-step-period {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -51,7 +44,6 @@
       margin-bottom: 10px;
       margin-top: 16px;
     }
-
     .parcours-step-title {
       font-family: var(--font-display);
       font-weight: 800;
@@ -62,7 +54,6 @@
       margin-bottom: 16px;
       line-height: 1.05;
     }
-
     .parcours-step-body {
       font-size: 14px;
       font-weight: 300;
@@ -71,18 +62,13 @@
       flex: 1;
       margin-bottom: 24px;
     }
-
     .parcours-step-skills {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
       margin-top: auto;
     }
-
-    /* Accent step highlight */
-    .parcours-step.highlight {
-      background: var(--ink);
-    }
+    .parcours-step.highlight { background: var(--ink); }
     .parcours-step.highlight .parcours-step-num { color: rgba(255,255,255,.08); }
     .parcours-step.highlight .parcours-step-period { color: var(--accent); }
     .parcours-step.highlight .parcours-step-title { color: #fff; }
@@ -92,8 +78,6 @@
       border-color: rgba(255,255,255,.12);
       color: rgba(255,255,255,.5);
     }
-
-    /* Perspectives section */
     .perspectives-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -102,29 +86,20 @@
       border-radius: 8px;
       overflow: hidden;
     }
-
     .perspective-card {
       background: var(--white);
       padding: 40px 36px;
       position: relative;
       overflow: hidden;
     }
-
     .perspective-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
-      width: 3px;
-      height: 100%;
+      width: 3px; height: 100%;
       background: var(--accent);
     }
-
-    .perspective-icon {
-      font-size: 32px;
-      margin-bottom: 20px;
-      display: block;
-    }
-
+    .perspective-icon { font-size: 32px; margin-bottom: 20px; display: block; }
     .perspective-card h3 {
       font-family: var(--font-display);
       font-weight: 800;
@@ -135,7 +110,6 @@
       margin-bottom: 14px;
       line-height: 1.05;
     }
-
     .perspective-card p {
       font-size: 14px;
       font-weight: 300;
@@ -144,15 +118,12 @@
       margin-bottom: 12px;
     }
     .perspective-card p:last-of-type { margin-bottom: 0; }
-
-    /* Réflexion section */
     .reflexion-layout {
       display: grid;
       grid-template-columns: 1fr 380px;
       gap: 60px;
       align-items: start;
     }
-
     .reflexion-text p {
       font-size: 16px;
       font-weight: 300;
@@ -161,26 +132,18 @@
       margin-bottom: 20px;
     }
     .reflexion-text p:last-child { margin-bottom: 0; }
-
-    .reflexion-text strong {
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    /* Chiffres bilan */
+    .reflexion-text strong { font-weight: 600; color: var(--ink); }
     .bilan-stats {
       background: var(--white);
       border: 1px solid var(--rule);
       border-radius: 8px;
       overflow: hidden;
     }
-
     .bilan-stat-item {
       padding: 24px 28px;
       border-bottom: 1px solid var(--rule);
     }
     .bilan-stat-item:last-child { border-bottom: none; }
-
     .bilan-stat-num {
       font-family: var(--font-display);
       font-weight: 900;
@@ -190,7 +153,6 @@
       letter-spacing: -.02em;
     }
     .bilan-stat-num span { color: var(--accent); }
-
     .bilan-stat-label {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -199,8 +161,6 @@
       color: var(--ink-3);
       margin-top: 4px;
     }
-
-    /* Quote */
     .quote-block {
       border-left: 3px solid var(--accent);
       padding: 20px 24px;
@@ -208,7 +168,6 @@
       border-radius: 0 6px 6px 0;
       margin-top: 32px;
     }
-
     .quote-block p {
       font-size: 15px !important;
       font-weight: 400 !important;
@@ -217,8 +176,6 @@
       line-height: 1.7 !important;
       margin: 0 !important;
     }
-
-    /* Compétences acquises grid */
     .competences-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -227,12 +184,7 @@
       border-radius: 8px;
       overflow: hidden;
     }
-
-    .competence-cell {
-      background: var(--white);
-      padding: 32px;
-    }
-
+    .competence-cell { background: var(--white); padding: 32px; }
     .competence-cell-label {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -243,14 +195,12 @@
       margin-bottom: 20px;
       display: block;
     }
-
     .competence-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
       list-style: none;
     }
-
     .competence-list li {
       display: flex;
       align-items: flex-start;
@@ -259,7 +209,6 @@
       color: var(--ink-2);
       line-height: 1.5;
     }
-
     .competence-list li::before {
       content: '';
       display: block;
@@ -269,7 +218,6 @@
       flex-shrink: 0;
       margin-top: 5px;
     }
-
     @media (max-width: 900px) {
       .parcours-timeline   { grid-template-columns: 1fr; }
       .perspectives-grid   { grid-template-columns: 1fr; }
@@ -280,15 +228,12 @@
 </head>
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
   <nav class="nav" role="navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Elijah<span>Dabo</span></a>
+      <a href="index.html" class="nav-logo">Port<span>folio</span></a>
       <button class="nav-burger" aria-label="Menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
+        <span></span><span></span><span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="entreprise.html">Entreprise</a></li>
@@ -299,9 +244,6 @@
     </div>
   </nav>
 
-  <!-- ============================================================
-       PAGE HERO
-  ============================================================ -->
   <section class="page-hero">
     <div class="page-hero-inner">
       <span class="section-label" style="margin-bottom:16px;">BTS SIO — SLAM · 2023–2025</span>
@@ -310,14 +252,12 @@
         <span class="accent">BTS</span>
       </h1>
       <p class="page-hero-sub">
-        Deux ans d'alternance, onze projets, des dizaines de compétences acquises. Un parcours non linéaire qui m'a conduit là où je voulais vraiment être.
+        Deux ans, dix projets, un vrai parcours. Voici ce que j'en retiens.
       </p>
     </div>
   </section>
 
-  <!-- ============================================================
-       01 — MON PARCOURS
-  ============================================================ -->
+  <!-- 01 — MON PARCOURS -->
   <section class="section" id="parcours">
     <div class="container">
       <div class="section-header">
@@ -329,63 +269,53 @@
       </div>
 
       <div class="parcours-timeline">
-
-        <!-- Étape 1 -->
         <div class="parcours-step">
           <div class="parcours-step-num">22</div>
           <div class="parcours-step-period">2022 — 2023</div>
           <h3 class="parcours-step-title">L'avant ESIEE-IT</h3>
           <p class="parcours-step-body">
-            Après l'obtention de mon Baccalauréat STMG, j'ai intégré directement le monde du travail. Cette période m'a été précieuse : elle m'a appris à m'adapter, à prendre des initiatives et à comprendre le fonctionnement concret d'une entreprise. Mais surtout, elle m'a permis de mieux cerner mes aspirations et de me réorienter vers l'informatique — un domaine qui m'avait toujours attiré mais que je n'avais pas encore osé pleinement explorer.
+            Bac STMG, puis une première expérience professionnelle. Cette période m'a permis de confirmer mon orientation vers l'informatique et de développer une vraie rigueur de travail.
           </p>
           <div class="parcours-step-skills">
             <span class="skill-pill">Rigueur</span>
             <span class="skill-pill">Autonomie</span>
             <span class="skill-pill">Initiative</span>
-            <span class="skill-pill">Réorientation</span>
           </div>
         </div>
 
-        <!-- Étape 2 -->
         <div class="parcours-step">
           <div class="parcours-step-num">23</div>
           <div class="parcours-step-period">2023 — 2024</div>
           <h3 class="parcours-step-title">Première année</h3>
           <p class="parcours-step-body">
-            Dès ma première année à l'ESIEE-IT, j'ai découvert ce qui me passionne vraiment dans le développement : le côté artistique et visuel. Concevoir des interfaces modernes, soigner chaque détail visuel, créer une expérience utilisateur fluide — c'est ce qui m'a captivé. En entreprise chez Flex, j'ai eu l'opportunité de contribuer à la refonte graphique d'une application mobile, apportant une identité visuelle entièrement nouvelle.
+            Découverte de ce qui me passionne vraiment : l'aspect visuel du développement. En alternance, j'ai contribué à la refonte graphique d'une application mobile — mon premier projet professionnel concret.
           </p>
           <div class="parcours-step-skills">
             <span class="skill-pill">UX / UI Design</span>
-            <span class="skill-pill">Maquettage</span>
             <span class="skill-pill">Figma</span>
             <span class="skill-pill">HTML / CSS</span>
           </div>
         </div>
 
-        <!-- Étape 3 — Highlight -->
         <div class="parcours-step highlight">
           <div class="parcours-step-num">24</div>
           <div class="parcours-step-period">2024 — 2025</div>
           <h3 class="parcours-step-title">Deuxième année</h3>
           <p class="parcours-step-body">
-            Année de consolidation et d'accélération technique. J'ai fortement progressé en HTML, CSS, JavaScript et Python, avec une appétence particulière pour la création d'interfaces modernes et interactives. Les projets complexes — JojoLegion, JO Ticket, Nimbus Railway, GestEPI — m'ont permis de maîtriser des frameworks complets (Django, React/TypeScript) et de collaborer en équipe sur des bases de code partagées via Git.
+            Les projets gagnent en complexité. Django, React, TypeScript, Git en équipe — je commence à maîtriser une stack complète et à livrer des applications fonctionnelles de bout en bout.
           </p>
           <div class="parcours-step-skills">
             <span class="skill-pill">Django</span>
             <span class="skill-pill">React</span>
             <span class="skill-pill">TypeScript</span>
             <span class="skill-pill">Python</span>
-            <span class="skill-pill">Git</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       02 — COMPÉTENCES ACQUISES
-  ============================================================ -->
+  <!-- 02 — COMPÉTENCES ACQUISES -->
   <section class="section section-alt" id="competences">
     <div class="container">
       <div class="section-header">
@@ -400,42 +330,40 @@
         <div class="competence-cell">
           <span class="competence-cell-label">Développement</span>
           <ul class="competence-list">
-            <li>Conception et développement d'applications web complètes (front + back)</li>
-            <li>Maîtrise de Python et Django pour des projets de production</li>
-            <li>Développement d'interfaces réactives en React / TypeScript</li>
-            <li>Gestion de bases de données relationnelles et modélisation Merise</li>
-            <li>Scripts d'automatisation Python (QR codes, JSON, traitement de données)</li>
-            <li>Versioning collaboratif avec Git et GitHub</li>
+            <li>Applications web complètes, front et back</li>
+            <li>Python et Django en contexte professionnel</li>
+            <li>React / TypeScript pour les interfaces réactives</li>
+            <li>Bases de données relationnelles et modélisation</li>
+            <li>Scripts d'automatisation Python</li>
+            <li>Versioning collaboratif avec Git</li>
           </ul>
         </div>
         <div class="competence-cell">
           <span class="competence-cell-label">Design & UX</span>
           <ul class="competence-list">
-            <li>Conception de maquettes fonctionnelles et prototypes interactifs sur Figma</li>
-            <li>Création de chartes graphiques et systèmes de design cohérents</li>
-            <li>Approche centrée utilisateur : entretiens, sondages, itérations</li>
-            <li>Maîtrise des principes d'accessibilité (contrastes, cibles tactiles)</li>
-            <li>Refonte complète d'applications mobiles existantes</li>
+            <li>Maquettes et prototypes sur Figma</li>
+            <li>Chartes graphiques et design systems</li>
+            <li>Approche centrée utilisateur</li>
+            <li>Principes d'accessibilité</li>
+            <li>Refonte d'applications mobiles</li>
           </ul>
         </div>
         <div class="competence-cell">
           <span class="competence-cell-label">Méthodes & Pro</span>
           <ul class="competence-list">
-            <li>Pratique de la méthode Agile / SCRUM en contexte réel d'équipe</li>
-            <li>Code review et bonnes pratiques de qualité logicielle</li>
-            <li>Application des principes RGPD en environnement de production</li>
-            <li>Rédaction de documentation technique (CDC, README, spécifications)</li>
+            <li>Méthode Agile / SCRUM en équipe réelle</li>
+            <li>Code review et qualité logicielle</li>
+            <li>Application du RGPD en production</li>
+            <li>Documentation technique (CDC, README)</li>
             <li>Communication avec des interlocuteurs non-techniques</li>
-            <li>Gestion des priorités dans un environnement professionnel exigeant</li>
+            <li>Gestion des priorités sous contrainte de délais</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       03 — PERSPECTIVES D'AVENIR
-  ============================================================ -->
+  <!-- 03 — PERSPECTIVES -->
   <section class="section" id="perspectives">
     <div class="container">
       <div class="section-header">
@@ -447,36 +375,26 @@
       </div>
 
       <div class="perspectives-grid">
-
         <div class="perspective-card">
           <span class="perspective-icon">🎨</span>
           <h3>Front-end & Design</h3>
           <p>
-            Ma passion pour les interfaces et l'expérience utilisateur est la boussole de mon orientation. Je souhaite approfondir mes compétences en développement front-end — animations avancées, performance web, design systems — tout en continuant à développer mon sens du détail visuel.
-          </p>
-          <p>
-            L'objectif à terme : être un développeur capable de couvrir l'espace entre le design et le code, produisant des interfaces à la fois techniquement solides et visuellement mémorables.
+            Le design et le code, c'est ce qui me motive le plus. Je souhaite aller plus loin : animations, performance web, design systems — et être en mesure de couvrir l'espace entre le designer et le développeur.
           </p>
         </div>
 
         <div class="perspective-card">
           <span class="perspective-icon">📋</span>
-          <h3>Gestion de projet & Management</h3>
+          <h3>Gestion de projet</h3>
           <p>
-            Ma curiosité ne se limite pas au code. J'ai développé au fil de cette alternance un intérêt réel pour la gestion de projet et le management d'équipe technique. Comprendre comment orchestrer un projet, prioriser les besoins et faire communiquer les équipes est une compétence que je veux cultiver.
-          </p>
-          <p>
-            Je me vois évoluer vers des responsabilités plus larges, à la croisée du développement et de la coordination de projet, dans un contexte où la dimension humaine est aussi importante que la dimension technique.
+            En alternance, j'ai réalisé que la dimension organisationnelle d'un projet m'intéresse aussi. À terme, je me vois évoluer vers des responsabilités plus larges — à la croisée du développement et de la coordination d'équipe.
           </p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       04 — RÉFLEXION PERSONNELLE
-  ============================================================ -->
+  <!-- 04 — RÉFLEXION PERSONNELLE -->
   <section class="section section-alt" id="reflexion">
     <div class="container">
       <div class="section-header">
@@ -490,20 +408,20 @@
       <div class="reflexion-layout">
         <div class="reflexion-text">
           <p>
-            Mon parcours n'a pas été linéaire. Après un bac STMG et une expérience professionnelle, me réorienter vers l'informatique était un choix délibéré — pas un plan B. C'est cette conviction qui m'a permis d'avancer avec constance, même lorsque les débuts ont été exigeants.
+            Mon parcours n'a pas été linéaire — et c'est très bien ainsi. Après un bac STMG et une première expérience professionnelle, me réorienter vers l'informatique était un choix délibéré, pas un plan B.
           </p>
           <p>
-            Ce BTS SIO option SLAM m'a donné bien plus qu'un diplôme. Il m'a donné une <strong>méthode de travail</strong>, une capacité à appréhender des projets complexes dans leur globalité, et la confiance de savoir que je peux concevoir, développer et livrer une application fonctionnelle de bout en bout.
+            Ce BTS m'a apporté une <strong>méthode de travail</strong> solide et la confiance de savoir que je suis capable de concevoir, développer et livrer une application de bout en bout.
           </p>
           <p>
-            L'alternance chez Flex a joué un rôle déterminant dans cette progression. Évoluer dans un environnement professionnel réel — avec des contraintes de délai, des besoins clients concrets et une équipe resserrée — m'a appris des choses que l'école seule ne peut pas enseigner : l'adaptation, l'initiative, la communication.
+            L'alternance chez Flex a été déterminante. Des délais réels, des clients concrets, une équipe réduite — c'est ce type d'environnement qui enseigne ce que l'école seule ne peut pas transmettre.
           </p>
           <p>
-            Ce portfolio lui-même est le reflet de ce que j'ai appris. Il a été conçu avec soin, en m'appuyant notamment sur des outils d'intelligence artificielle pour accélérer certaines phases de production — une approche que j'assume pleinement, car savoir utiliser les bons outils fait partie intégrante du métier de développeur aujourd'hui.
+            Ce portfolio, je l'ai construit avec soin. J'ai utilisé des outils d'IA pour accélérer certaines phases — et j'assume pleinement ce choix, car savoir utiliser les bons outils fait partie du métier de développeur.
           </p>
 
           <div class="quote-block">
-            <p>Ce n'est pas le chemin le plus court qui forge le mieux — c'est celui qu'on a vraiment choisi de prendre.</p>
+            <p>Ce n'est pas le chemin le plus court qui forge le mieux — c'est celui qu'on a vraiment choisi.</p>
           </div>
         </div>
 
@@ -514,7 +432,7 @@
               <div class="bilan-stat-label">En alternance chez Flex</div>
             </div>
             <div class="bilan-stat-item">
-              <div class="bilan-stat-num">11</div>
+              <div class="bilan-stat-num">10</div>
               <div class="bilan-stat-label">Projets réalisés</div>
             </div>
             <div class="bilan-stat-item">
@@ -532,19 +450,12 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================
-       CONTACT STRIP
-  ============================================================ -->
   <div class="contact-strip">
     <div class="contact-inner">
-      <h2 class="contact-title">
-        Mes<br>
-        <span class="accent">contact</span>
-      </h2>
+      <h2 class="contact-title">Mes<br><span class="accent">contacts</span></h2>
       <div class="contact-links">
         <a href="mailto:elijahdabopro@gmail.com" class="contact-link">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 5.5l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -555,16 +466,13 @@
           LinkedIn — Elijah Dabo
         </a>
         <a href="https://github.com/elijahdabo" target="_blank" rel="noopener" class="contact-link">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 00-1.897 11.693c.3.055.41-.13.41-.29v-1.02c-1.668.363-2.018-.805-2.018-.805-.272-.692-.665-.876-.665-.876-.544-.372.041-.365.041-.365.602.042.919.619.619.535.917 1.403.652 1.745.498.054-.387.209-.652.38-.802-1.332-.152-2.731-.666-2.731-2.962 0-.654.234-1.19.617-1.608-.062-.152-.268-.761.059-1.587 0 0 .503-.161 1.647.614A5.74 5.74 0 018 5.89a5.74 5.74 0 011.498.202c1.144-.775 1.647-.614 1.647-.614.327.826.121 1.435.059 1.587.384.419.617.954.617 1.608 0 2.303-1.402 2.809-2.737 2.957.215.185.407.55.407 1.11v1.644c0 .161.109.347.413.289A6 6 0 008 2z" fill="currentColor"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 00-1.897 11.693c.3.055.41-.13.41-.29v-1.02c-1.668.363-2.018-.805-2.018-.805-.272-.692-.665-.876-.665-.876-.544-.372.041-.365.041-.365.602.042.919.619.919.619.535.917 1.403.652 1.745.498.054-.387.209-.652.38-.802-1.332-.152-2.731-.666-2.731-2.962 0-.654.234-1.19.617-1.608-.062-.152-.268-.761.059-1.587 0 0 .503-.161 1.647.614A5.74 5.74 0 018 5.89a5.74 5.74 0 011.498.202c1.144-.775 1.647-.614 1.647-.614.327.826.121 1.435.059 1.587.384.419.617.954.617 1.608 0 2.303-1.402 2.809-2.737 2.957.215.185.407.55.407 1.11v1.644c0 .161.109.347.413.289A6 6 0 008 2z" fill="currentColor"/></svg>
           GitHub — elijahdabo
         </a>
       </div>
     </div>
   </div>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">Elijah<span>Dabo</span></div>
